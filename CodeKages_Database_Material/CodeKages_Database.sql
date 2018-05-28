@@ -12,6 +12,20 @@ CREATE TABLE IF NOT EXISTS `user` (
     userName VARCHAR(50) NOT NULL, 
     `password` VARCHAR(50) NOT NULL,  			-- Not sure how to add hash for password --
     PRIMARY KEY (UserID));
+    
+CREATE TABLE IF NOT EXISTS role (
+	roleID INT(11) NOT NULL AUTO_INCREMENT, 
+    roleType VARCHAR(30) NOT NULL, 
+    PRIMARY KEY (roleID));
+    
+CREATE TABLE IF NOT EXISTS user_role (
+	userID INT(11), 
+    roleID INT(11),
+    PRIMARY KEY (userID, roleID),
+    FOREIGN KEY (userID)
+		REFERENCES `user`(userID),
+	FOREIGN KEY (roleID)
+		REFERENCES role(roleID));
 
 CREATE TABLE IF NOT EXISTS staticPage (
 	staticPageID INT(11) NOT NULL AUTO_INCREMENT,
@@ -21,6 +35,11 @@ CREATE TABLE IF NOT EXISTS staticPage (
     FOREIGN KEY (userID) 
 		REFERENCES `user`(userID));
 	
+CREATE TABLE IF NOT EXISTS category (
+	categoryID INT(11) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) NOT NULL, 
+    description VARCHAR(100) NULL,
+    PRIMARY KEY (categoryID));
 
 CREATE TABLE IF NOT EXISTS post (
 	postID INT(11) NOT NULL AUTO_INCREMENT, 
@@ -37,12 +56,6 @@ CREATE TABLE IF NOT EXISTS post (
 		REFERENCES `user`(userID),
 	FOREIGN KEY (categoryID) 
 		REFERENCES category(categoryID));
-
-CREATE TABLE IF NOT EXISTS category (
-	categoryID INT(11) NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL, 
-    description VARCHAR(100) NULL,
-    PRIMARY KEY (categoryID));
 
 CREATE TABLE IF NOT EXISTS tag (
 	tagID INT(11) NOT NULL AUTO_INCREMENT, 
