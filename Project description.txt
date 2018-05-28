@@ -1,0 +1,186 @@
+Project Description:
+
+content management system
+
+2 types of users
+
+Admin
+	full management rights
+	can add static pages
+	can manage users
+
+ Contributor
+	can only add/edit personal blog posts
+		must be published by admin (both add and edit)
+
+Blog posts can expire
+	can be set by both admin and contributor
+
+Admin contributions are automatically approved
+
+Blog posts can have a category, but many tags
+	categories has many blog posts
+	tags can have many blog posts
+
+
+User
+pk:ID int
+firstName varchar
+lastName varchar
+Email varchar
+userName varchar 
+Password hash/varchar?
+
+Role
+pk: ID int
+roleType varchar
+
+UserRole
+pkfk: userID int
+pkfk: roleID int
+
+Static Page
+pk:ID int
+Fk:UserID int
+Content varchar(max)
+
+Post
+pk:ID int
+Fk:userID int
+Fk:categoryID int
+creationDate datetime
+publishDate datetime
+approvedDate datetime
+isApproved boolean
+Title varchar
+Content varchar
+
+Category
+Pk:ID
+Name varchar
+Description varchar
+
+Tag
+Pk:ID
+Name varchar
+
+Post_Tag
+PkFk:PostID
+PkF:TagID
+
+
+DTOS
+
+UserDTO
+Int userID;
+String firstName, lastName, email, userName, password;
+List<Role> roles;
+
+Role
+Int roleID;
+Sting role;
+
+StaticPageDTO
+Int staticID;
+String content;
+User user;
+
+BlogPostDTO
+Int postID;
+LocalDate creationDate, publishDate, approvedDate;
+Boolean isApproved;
+String title, content;
+Category category;
+User user;
+List<Tag> tags;
+
+CategoryDTO
+Int categoryID;
+String name, desc;
+
+TagDTO
+Int tagID;
+String name;
+
+
+DAOS
+
+userDAO
+addUser(User user);
+editUser(User user);
+deleteUser(int userID);
+getUserByUserID(int userID);
+getAllUsers();
+searchUser(…);
+[search: first name | last name ]
+
+staticPageDao
+addStaticPage(StaticPage page);
+editStaticPage(StaticPage page);
+deleteStaticPage(int staticPageID);
+getStaticPageByID(int staticPageID);
+getAllStaticPages();
+
+postPageDao
+addPost(Post post);
+editPost(Post post);
+deletePost(int postID);
+getPostByPostID(int postID);
+getAllPosts();
+searchPosts(…);
+[search: (user [firstname,lastname] | publish date | category | tag | title | content)]
+
+
+categoryDao
+addCategory(Category category);
+editCategory(Category category);
+deleteCategory(int categoryID);
+getCategoryByID(int categoryID);
+getAllCategories();
+searchCategories(…);
+[search: Name | description ]
+
+tagDao
+addTag(Tag tag);
+editTag(Tag tag);
+deleteTag(int tagID);
+getTagByID(int tagID);
+getTagByName(String name);
+getAllTags();
+[Search: tag name ]
+
+
+SERVICE
+
+userService
+dataValidation(); //for add and edit
+verifyIfUserExists(); //for id search and edit
+adminValidation(); //make sure user is admin
+searchValidation(); //make sure search terms are valid
+
+staticPageService
+dataValidation(); make sure page isn't empty
+verifyIfPageExists();
+adminValidation();
+
+BlogPostService
+dataValidation();
+verifyIfPostExists();
+adminValidation();
+searchValidation();
+
+CategoryService
+dataValidation();
+verifyIfCategoryExists();
+adminValidation();
+searchValidation();
+
+Tag
+dataValidation();
+verifyIfTagExists();
+adminValidation();
+searchValidation();
+
+
+
+

@@ -1,0 +1,3 @@
+/post?postID=?
+/search?[searchTerms]
+	needs to be expanded
