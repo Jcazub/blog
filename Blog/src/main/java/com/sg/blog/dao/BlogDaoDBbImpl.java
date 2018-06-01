@@ -5,6 +5,12 @@
  */
 package com.sg.blog.dao;
 
+import com.sg.blog.dto.Category;
+import com.sg.blog.dto.Post;
+import com.sg.blog.dto.Role;
+import com.sg.blog.dto.StaticPage;
+import com.sg.blog.dto.Tag;
+import com.sg.blog.dto.User;
 import java.util.List;
 
 /**
