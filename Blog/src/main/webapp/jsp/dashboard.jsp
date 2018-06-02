@@ -1,23 +1,13 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- 
+    Document   : dashboard
+    Created on : Jun 1, 2018, 7:04:06 PM
+    Author     : chxxch
+--%>
+
+<%@page contentType="text/html" pageEncoding="windows-1252"%>
 <!DOCTYPE html>
 <html>
-     
-<!--        <div class="container">
-            <h1>Spring MVC Application from Archetype</h1>
-            <hr/>
-            <div class="navbar">
-                <ul class="nav nav-tabs">
-                	<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-                	<li role="presentation"><a href="${pageContext.request.contextPath}/hello/sayhi">Hello Controller</a></li>
-                </ul>    
-            </div>
-            <h2>Home Page</h2>
-        </div>-->
-          
-<head>
+    <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,10 +63,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+        <li class="active"><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
         <!-- <li><a href="#">Projects</a></li> -->
-        <li><a href="${pageContext.request.contextPath}/dashboard.jsp">Contact</a></li>
+        <li><a href="#">Contact</a></li>
       </ul>
         
       <ul class="nav navbar-nav navbar-right">
@@ -102,19 +92,8 @@
       <p><a href="#">Link</a></p>
     </div>
       <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RECENT POSTS-->
-    <div class="col-sm-8 text-left"> 
-      <h4><small>RECENT POSTS</small></h4>
-      <hr>
-      <h2>Shuriken Training</h2>
-      <h5><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5>
-      <h5><span class="label label-danger">noobNinja</span> <span class="label label-primary">Ipsum</span></h5><br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <br><br>
-      
-      <h2>Officially Blogging</h2>
-      <h5><span class="glyphicon glyphicon-time"></span> Post by John Doe, Sep 24, 2015.</h5>
-      <h5><span class="label label-success">Lorem</span></h5><br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div class="well"> 
+       
     </div>
       <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RIGHT SIDE BAR-->
     <div class="col-sm-2 sidenav">
@@ -134,5 +113,3 @@
 
 </body>
 </html>
-
-
