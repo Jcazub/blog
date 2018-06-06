@@ -13,16 +13,7 @@ import java.util.List;
  */
 public class BlogDaoDBbImpl{
 
-    //User SQL
-    private static final String INSERT_USER = "insert into Users values (?,?,?,?,?)";
     
-    private static final String DELETE_USER = "delete from Users where UserID = ?";
-    
-    private static final String EDIT_USER = "update Users set firstName = ?, lastName = ?, email = ?, userName = ?, password = ? where UserID = ?";
-    
-    private static final String SELECT_USER = "select * from Users where UserID = ?";
-    
-    private static final String SELECT_ALL_USERS = "select * from Users";
     
     //Category SQL
     private static final String INSERT_CATEGORY = "insert into Categories values (?,?)";
@@ -89,5 +80,16 @@ public class BlogDaoDBbImpl{
     private static final String SELECT_REQUEST_TYPE = "select * from RequestTypes where RequestTypeID = ?";
     
     private static final String SELECT_ALL_REQUEST_REQUEST_TYPES = "select * from RequestTypes";
+    
+    //Request SQL
+    private static final String INSERT_REQUEST = "insert into Requests values (?,?,?,?,?,?,?,?,?,?)";
+    
+    private static final String DELETE_REQUEST = "delete from Requests where BlogID = ?";
+    
+    private static final String EDIT_REQUEST = "update Request set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, isApproved = ?, title = ?, content = ?, requestTypeID = ? where BlogID = ?";
+    
+    private static final String SELECT_REQUEST = "select * from Requests where BlogID = ?";
+    
+    private static final String SELECT_ALL_REQUESTS = "select * from Requests";
     
 }

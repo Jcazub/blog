@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class Blog {
 
-    int postID;
+    int blogID;
     LocalDate creationDate, publishDate, approvedDate;
     Boolean isApproved;
     String title, content;
@@ -23,12 +23,12 @@ public class Blog {
     User user;
     List<Tag> tags;
 
-    public int getPostID() {
-        return postID;
+    public int getBlogID() {
+        return blogID;
     }
 
-    public void setPostID(int postID) {
-        this.postID = postID;
+    public void setBlogID(int blogID) {
+        this.blogID = blogID;
     }
 
     public LocalDate getCreationDate() {
@@ -106,16 +106,16 @@ public class Blog {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + this.postID;
-        hash = 83 * hash + Objects.hashCode(this.creationDate);
-        hash = 83 * hash + Objects.hashCode(this.publishDate);
-        hash = 83 * hash + Objects.hashCode(this.approvedDate);
-        hash = 83 * hash + Objects.hashCode(this.isApproved);
-        hash = 83 * hash + Objects.hashCode(this.title);
-        hash = 83 * hash + Objects.hashCode(this.content);
-        hash = 83 * hash + Objects.hashCode(this.category);
-        hash = 83 * hash + Objects.hashCode(this.user);
-        hash = 83 * hash + Objects.hashCode(this.tags);
+        hash = 79 * hash + this.blogID;
+        hash = 79 * hash + Objects.hashCode(this.creationDate);
+        hash = 79 * hash + Objects.hashCode(this.publishDate);
+        hash = 79 * hash + Objects.hashCode(this.approvedDate);
+        hash = 79 * hash + Objects.hashCode(this.isApproved);
+        hash = 79 * hash + Objects.hashCode(this.title);
+        hash = 79 * hash + Objects.hashCode(this.content);
+        hash = 79 * hash + Objects.hashCode(this.category);
+        hash = 79 * hash + Objects.hashCode(this.user);
+        hash = 79 * hash + Objects.hashCode(this.tags);
         return hash;
     }
 
@@ -131,7 +131,7 @@ public class Blog {
             return false;
         }
         final Blog other = (Blog) obj;
-        if (this.postID != other.postID) {
+        if (this.blogID != other.blogID) {
             return false;
         }
         if (!Objects.equals(this.title, other.title)) {
@@ -164,4 +164,5 @@ public class Blog {
         return true;
     }
 
+    
 }

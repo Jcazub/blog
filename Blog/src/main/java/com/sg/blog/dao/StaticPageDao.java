@@ -5,10 +5,19 @@
  */
 package com.sg.blog.dao;
 
+import com.sg.blog.model.StaticPage;
+import java.util.List;
+
 /**
  *
  * @author Jesse
  */
 public interface StaticPageDao {
+    
+    public StaticPage addStaticPage(StaticPage page);
+    public StaticPage editStaticPage(StaticPage page);
+    public void deleteStaticPage(int pageID);
+    public StaticPage getStaticPageByID(int pageID);
+    public List<StaticPage> getAllStaticPages();
     
 }

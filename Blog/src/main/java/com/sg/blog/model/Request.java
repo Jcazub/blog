@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class Request {
     
-    int postID;
+    int blogID;
     LocalDate creationDate, publishDate, approvedDate;
     Boolean isApproved;
     String title, content;
@@ -24,12 +24,12 @@ public class Request {
     List<Tag> tags;
     RequestType requestType;
 
-    public int getPostID() {
-        return postID;
+    public int getBlogID() {
+        return blogID;
     }
 
-    public void setPostID(int postID) {
-        this.postID = postID;
+    public void setBlogID(int blogID) {
+        this.blogID = blogID;
     }
 
     public LocalDate getCreationDate() {
@@ -115,7 +115,7 @@ public class Request {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + this.postID;
+        hash = 97 * hash + this.blogID;
         hash = 97 * hash + Objects.hashCode(this.creationDate);
         hash = 97 * hash + Objects.hashCode(this.publishDate);
         hash = 97 * hash + Objects.hashCode(this.approvedDate);
@@ -141,7 +141,7 @@ public class Request {
             return false;
         }
         final Request other = (Request) obj;
-        if (this.postID != other.postID) {
+        if (this.blogID != other.blogID) {
             return false;
         }
         if (!Objects.equals(this.title, other.title)) {
