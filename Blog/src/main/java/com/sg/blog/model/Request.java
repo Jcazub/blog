@@ -13,8 +13,8 @@ import java.util.Objects;
  *
  * @author Jesse
  */
-public class Blog {
-
+public class Request {
+    
     int postID;
     LocalDate creationDate, publishDate, approvedDate;
     Boolean isApproved;
@@ -22,6 +22,7 @@ public class Blog {
     Category category;
     User user;
     List<Tag> tags;
+    RequestType requestType;
 
     public int getPostID() {
         return postID;
@@ -103,19 +104,28 @@ public class Blog {
         this.tags = tags;
     }
 
+    public RequestType getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(RequestType requestType) {
+        this.requestType = requestType;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + this.postID;
-        hash = 83 * hash + Objects.hashCode(this.creationDate);
-        hash = 83 * hash + Objects.hashCode(this.publishDate);
-        hash = 83 * hash + Objects.hashCode(this.approvedDate);
-        hash = 83 * hash + Objects.hashCode(this.isApproved);
-        hash = 83 * hash + Objects.hashCode(this.title);
-        hash = 83 * hash + Objects.hashCode(this.content);
-        hash = 83 * hash + Objects.hashCode(this.category);
-        hash = 83 * hash + Objects.hashCode(this.user);
-        hash = 83 * hash + Objects.hashCode(this.tags);
+        int hash = 5;
+        hash = 97 * hash + this.postID;
+        hash = 97 * hash + Objects.hashCode(this.creationDate);
+        hash = 97 * hash + Objects.hashCode(this.publishDate);
+        hash = 97 * hash + Objects.hashCode(this.approvedDate);
+        hash = 97 * hash + Objects.hashCode(this.isApproved);
+        hash = 97 * hash + Objects.hashCode(this.title);
+        hash = 97 * hash + Objects.hashCode(this.content);
+        hash = 97 * hash + Objects.hashCode(this.category);
+        hash = 97 * hash + Objects.hashCode(this.user);
+        hash = 97 * hash + Objects.hashCode(this.tags);
+        hash = 97 * hash + Objects.hashCode(this.requestType);
         return hash;
     }
 
@@ -130,7 +140,7 @@ public class Blog {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Blog other = (Blog) obj;
+        final Request other = (Request) obj;
         if (this.postID != other.postID) {
             return false;
         }
@@ -161,7 +171,12 @@ public class Blog {
         if (!Objects.equals(this.tags, other.tags)) {
             return false;
         }
+        if (!Objects.equals(this.requestType, other.requestType)) {
+            return false;
+        }
         return true;
     }
-
+    
+    
+    
 }
