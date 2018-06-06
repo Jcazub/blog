@@ -5,6 +5,11 @@
  */
 package com.sg.blog.dao;
 
+import com.sg.blog.model.Category;
+import com.sg.blog.model.Role;
+import com.sg.blog.model.StaticPage;
+import com.sg.blog.model.Tag;
+import com.sg.blog.model.User;
 import java.util.List;
 
 /**
@@ -36,12 +41,12 @@ public interface BlogDao {
     public List<StaticPage> getAllStaticPages();
     
     //Post
-    public Post addPost(Post post);
-    public Post editPost(Post post);
+    public Blog addPost(Blog post);
+    public Blog editPost(Blog post);
     public void deletePost(int postID);
-    public Post getPostByPostID(int postID);
-    public List<Post> getAllPosts();
-    public List<Post> searchPosts();                    //need to include the parameters for this method
+    public Blog getPostByPostID(int postID);
+    public List<Blog> getAllPosts();
+    public List<Blog> searchPosts();                    //need to include the parameters for this method
     
     //Category
     public Category addCategory(Category category);

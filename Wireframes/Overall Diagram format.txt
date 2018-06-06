@@ -1,0 +1,10 @@
+Spring->Controller:
+Controller->Service:
+Service->Dao:
+Dao->JDBC:
+JDBC->Mapper:
+Mapper->JDBC:
+JDBC->Dao:
+Dao->Service:
+Service->Controller:
+Controller->Spring:
