@@ -5,8 +5,12 @@
  */
 package com.sg.blog.dao;
 
+import com.sg.blog.model.Blog;
 import com.sg.blog.model.Category;
+import com.sg.blog.model.Request;
+import com.sg.blog.model.SearchTerm;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,7 +22,9 @@ public interface CategoryDao {
     public Category editCategory(Category category);
     public void deleteCategory(int categoryID);
     public Category getCategoryByID(int categoryID);
+    public Category getCategoryByBlog(Blog blog);
+    public Category getCategoryByRequest(Request request);
     public List<Category> getAllCategories();
-    public List<Category> seachCategories();            //need to include the parameters for this method
+    public List<Category> seachCategories(Map<SearchTerm, String> criteria);
     
 }

@@ -5,8 +5,13 @@
  */
 package com.sg.blog.dao;
 
+import com.sg.blog.model.Blog;
+import com.sg.blog.model.Request;
+import com.sg.blog.model.SearchTerm;
+import com.sg.blog.model.StaticPage;
 import com.sg.blog.model.User;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,7 +23,10 @@ public interface UserDao {
     public User editUser(User user);
     public void deleteUser(int userID);
     public User getUserByID(int userID);
+    public User getUserForStaticPage(StaticPage staticPage);
+    public User getUserForBlog(Blog blog);
+    public User getUserForRequest(Request request);
     public List<User> getAllUsers();
-    public List<User> searchUser();                     //need to include the parameters for this method
+    public List<User> searchUser(Map<SearchTerm, String> criteria);
     
 }

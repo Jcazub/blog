@@ -6,6 +6,7 @@
 package com.sg.blog.dao;
 
 import com.sg.blog.model.Role;
+import com.sg.blog.model.User;
 import java.util.List;
 
 /**
@@ -18,6 +19,8 @@ public interface RoleDao {
     public Role editRole(Role role);
     public void deleteRole(int roleID);
     public Role getRoleByID(int roleID);
+    public Role getRoleByName(String roleName);
+    public List<Role> getRolesByUser(User user);
     public List<Role> getAllRoles();
     
 }

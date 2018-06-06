@@ -6,7 +6,9 @@
 package com.sg.blog.dao;
 
 import com.sg.blog.model.Blog;
+import com.sg.blog.model.SearchTerm;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,6 +21,6 @@ public interface BlogDao {
     public void deleteBlog(int blogID);
     public Blog getBlogByBlogID(int blogID);
     public List<Blog> getAllBlogs();
-    public List<Blog> searchBlogs();                    //need to include the parameters for this method
+    public List<Blog> searchBlogs(Map<SearchTerm, String> criteria);
     
 }

@@ -5,6 +5,7 @@
  */
 package com.sg.blog.dao;
 
+import com.sg.blog.model.Request;
 import com.sg.blog.model.RequestType;
 import java.util.List;
 
@@ -18,6 +19,8 @@ public interface RequestTypeDao {
     public RequestType editRequestType(RequestType requestType);
     public void deleteRequestType(int requestTypeID);
     public RequestType getRequestTypeByRequestTypeID(int requestTypeID);
+    public RequestType getRequestTypeByName(String requestName);
+    public RequestType getRequestTypeByRequest(Request request);
     public List<RequestType> getAllRequestTypes();
     
 }
