@@ -113,7 +113,7 @@
         <constructor-arg ref="roleDao"/>
     </bean>
     
-    <bean id="userService"
+    <bean id="userServiceimpl"
           class="com.sg.blog.service.Impl.UserServiceImpl">
         <constructor-arg ref="userDao"/>
         <constructor-arg ref="roleDao"/>

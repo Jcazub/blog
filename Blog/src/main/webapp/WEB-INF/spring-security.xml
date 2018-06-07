@@ -32,22 +32,22 @@
         
         <!--Post related -->
         <intercept-url pattern="/createPost" 
-                       access="ADMIN" />
+                       access="ROLE_ADMIN" />
         <intercept-url pattern="/deletePost" 
-                       access="ADMIN" />
+                       access="ROLE_ADMIN" />
         <intercept-url pattern="/displayEditPost" 
-                       access="ADMIN" />
+                       access="ROLE_ADMIN" />
         <intercept-url pattern="/editPost" 
-                       access="ADMIN" /> 
+                       access="ROLE_ADMIN" /> 
          
         
         <intercept-url pattern="/**" 
-                       access="CONTRIBUTOR" />
+                       access="ROLE_USER" />
     </http>
     <authentication-manager>
         <authentication-provider>
             <password-encoder ref="encoder"/>
-            <jdbc-user-service id="userDService"
+            <jdbc-user-service id="userService"
                                data-source-ref="dataSource"
                                users-by-username-query=
  "select username, password from users where username=?"
