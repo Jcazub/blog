@@ -18,6 +18,8 @@
     </head>
 
     <body>
+
+
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -27,7 +29,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                        <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -53,7 +55,7 @@
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>  
-                    
+
                 </div>
             </div>
         </nav>
@@ -64,33 +66,14 @@
                 | <a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
             </h4>
         </c:if>
-        
-        <!-- NAV END -->
-        
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LEFT SIDE BAR--> 
-        <!-- <div class="container text-center">    
-            <div class="row">
-                <div class="col-sm-2 well">
-                    <div class="well">
-                        <p><a href="#">My Profile</a></p>
-                    </div>
-                    <div class="well">
-                        <p><a href="#">Interest</a></p>
 
-                    </div>
-                    <div class="alert alert-success fade in">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                        <p><strong>New</strong></p>
-                        posts pending approval!
-                    </div>
-                </div>
-        -->
+        <!-- NAV END -->
+  
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RECENT POSTS-->
         <div class="col-sm-6 col-sm-offset-3 text-center"> 
             <div class="well">
                 <h4><small>RECENT POSTS</small></h4>
                 <hr>
-
                 <c:forEach var="currentBlog" items="${posts}" >
                     <h2>${currentBlog.title}</h2>
                     <h5><span class="glyphicon glyphicon-time"></span> Post by ${currentBlog.user.userName}, ${currentBlog.publishDate}.</h5>
@@ -100,18 +83,21 @@
                     <p>${currentBlog.content}</p>
                     <br><br>
                 </c:forEach>
-
             </div>
+           
         </div>
-        
+        <br>
+         <footer class="container-fluid text-center">
+                <p>	&copy; codeKages </p>
+            </footer>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
+       
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RIGHT SIDE BAR-->
 
 
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-<!--        <footer class="container-fluid text-center">
-            <p>Footer Text</p>
-        </footer>-->
-        
+
+
+
 
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
