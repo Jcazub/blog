@@ -2,6 +2,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -36,16 +37,28 @@
                         <li role="presentation">
                         <li><a href="#">About</a>
                         </li>
-                        <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/dashboard">
-                                Dashboard
-                            </a>
-                        </li>
+                        <sec:authorize access="hasRole('ROLE_USER')">
+                            <li role="presentation">
+                                <a href="${pageContext.request.contextPath}/dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
+                        </sec:authorize>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <c:choose>
+                            <c:when test="${pageContext.request.userPrincipal.name != null}">
+                                <li role="presentation">
+                                <li><a href="${pageContext.request.contextPath}/dashboard">Hello : ${pageContext.request.userPrincipal.name}</a>
+                                </li>
+                                <li><a href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                </c:otherwise>
+                            </c:choose>
                     </ul>
 
                     <!-- top search -->
@@ -61,15 +74,10 @@
         </nav>
         <br>
 
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <h4>Hello : ${pageContext.request.userPrincipal.name}
-                | <a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
-            </h4>
-        </c:if>
+
 
         <!-- NAV END -->
-  
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RECENT POSTS-->
+      
         <div class="col-sm-6 col-sm-offset-3 text-center"> 
             <div class="well">
                 <h4><small>RECENT POSTS</small></h4>
@@ -84,15 +92,17 @@
                     <br><br>
                 </c:forEach>
             </div>
-           
+
         </div>
+
         <br>
-         <footer class="container-fluid text-center">
-                <p>	&copy; codeKages </p>
-            </footer>
+<!--        <footer class="container-fluid text-center">
+            <p>	&copy; codeKages </p>
+        </footer>-->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-       
+
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RIGHT SIDE BAR-->
+
 
 
 
