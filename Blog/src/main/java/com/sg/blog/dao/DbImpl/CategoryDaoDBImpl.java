@@ -41,9 +41,9 @@ public class CategoryDaoDBImpl implements CategoryDao {
 
     private static final String SELECT_CATEGORY = "select * from Categories where CategoryID = ?";
     
-    private static final String SELECT_CATEGORY_FOR_BLOG = "select c.categoryID, c.categoryName, c.description from Categories c join Blog b on b.categoryID = c.categoryID where b.blogID = ?";
+    private static final String SELECT_CATEGORY_FOR_BLOG = "select c.categoryID, c.categoryName, c.description from Categories c join Blogs b on b.categoryID = c.categoryID where b.blogID = ?";
     
-    private static final String SELECT_CATEGORY_FOR_REQUEST = "select c.categoryID, c.categoryName, c.description from Categories c join Request r on r.categoryID = c.categoryID where r.blogID = ?";
+    private static final String SELECT_CATEGORY_FOR_REQUEST = "select c.categoryID, c.categoryName, c.description from Categories c join Requests r on r.categoryID = c.categoryID where r.blogID = ?";
 
     private static final String SELECT_ALL_CATEGORIES = "select * from Categories";
 

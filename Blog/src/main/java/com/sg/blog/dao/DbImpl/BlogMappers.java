@@ -29,7 +29,7 @@ public class BlogMappers {
             Role r = new Role();
             
             r.setRoleID(rs.getInt("RoleID"));
-            r.setRole(rs.getString("Role"));
+            r.setRole(rs.getString("RoleType"));
             
             return r;
         }
@@ -44,6 +44,7 @@ public class BlogMappers {
             u.setEmail(rs.getString("email"));
             u.setFirstName(rs.getString("firstName"));
             u.setLastName(rs.getString("lastName"));
+            u.setUserName(rs.getString("userName"));
             u.setPassword(rs.getString("password"));
       
             return u;

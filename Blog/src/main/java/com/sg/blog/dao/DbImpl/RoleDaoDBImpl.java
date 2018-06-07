@@ -28,7 +28,7 @@ public class RoleDaoDBImpl implements RoleDao {
     }
 
     //Role SQL
-    private static final String INSERT_ROLE = "insert into Roles (role) values (?)";
+    private static final String INSERT_ROLE = "insert into Roles (roleType) values (?)";
     
     private static final String DELETE_ROLE = "delete from Roles where RoleID = ?";
     
@@ -40,7 +40,7 @@ public class RoleDaoDBImpl implements RoleDao {
     
     private static final String SELECT_ALL_ROLES = "select * from Roles";
     
-    private static final String SELECT_ROLES_BY_USER = "select r.RoleID, r.Role from Roles r join Users_Roles ur on r.RoleID = ur.RoleID where ur.UserID = ?";
+    private static final String SELECT_ROLES_BY_USER = "select r.RoleID, r.RoleType from Roles r join Users_Roles ur on r.RoleID = ur.RoleID where ur.UserID = ?";
     
     //Users_Roles SQL
     private static final String DELETE_FROM_USERS_ROLES = "delete from Users_Roles where roleID = ?";
