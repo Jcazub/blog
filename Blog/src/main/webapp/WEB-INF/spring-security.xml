@@ -9,6 +9,9 @@
 
     <beans:bean id="webexpressionHandler"
                 class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/> 
+    
+    <beans:bean id="encoder"
+            class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
                 
     <http pattern="/login" security="none" />
     <http pattern="/signup" security="none" />
@@ -44,7 +47,7 @@
     <authentication-manager>
         <authentication-provider>
             <password-encoder ref="encoder"/>
-            <jdbc-user-service id="userService"
+            <jdbc-user-service id="userDService"
                                data-source-ref="dataSource"
                                users-by-username-query=
  "select username, password from users where username=?"
