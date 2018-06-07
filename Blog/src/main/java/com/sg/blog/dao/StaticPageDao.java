@@ -18,6 +18,6 @@ public interface StaticPageDao {
     public StaticPage editStaticPage(StaticPage page);
     public void deleteStaticPage(int pageID);
     public StaticPage getStaticPageByID(int pageID);
-    public List<StaticPage> getAllStaticPages();
+    public List<StaticPage> getAllStaticPages();   
     
 }

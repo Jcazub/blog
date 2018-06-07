@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sg.blog.service;
+package com.sg.blog.model;
 
 /**
  *
- * @author Al Rahman
+ * @author Jesse
  */
-public class BlogServiceImpl {
-    
+public enum ModelTerm {
+    BLOG, CATEGORY, REQUEST, REQUEST_TYPE, ROLE, STATIC_PAGE, TAG, USER;
 }
