@@ -39,9 +39,8 @@
                        access="ROLE_ADMIN" />
         <intercept-url pattern="/editPost" 
                        access="ROLE_ADMIN" /> 
-         
-        
-        <intercept-url pattern="/**" 
+           
+        <intercept-url pattern="/**"
                        access="ROLE_USER" />
     </http>
     <authentication-manager>
