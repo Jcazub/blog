@@ -46,6 +46,7 @@ public class BlogMappers {
             u.setLastName(rs.getString("lastName"));
             u.setUserName(rs.getString("userName"));
             u.setPassword(rs.getString("password"));
+            u.setEnabled(rs.getBoolean("enabled"));
       
             return u;
         }

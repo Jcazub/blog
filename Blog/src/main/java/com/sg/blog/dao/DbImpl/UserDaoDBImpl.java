@@ -38,19 +38,19 @@ public class UserDaoDBImpl implements UserDao {
     }
 
     //User SQL
-    private static final String INSERT_USER = "insert into Users (firstName, lastName, email, userName, password) values (?,?,?,?,?)";
+    private static final String INSERT_USER = "insert into Users (firstName, lastName, email, userName, password, enabled) values (?,?,?,?,?,?)";
 
     private static final String DELETE_USER = "delete from Users where UserID = ?";
 
-    private static final String EDIT_USER = "update Users set firstName = ?, lastName = ?, email = ?, userName = ?, password = ? where UserID = ?";
+    private static final String EDIT_USER = "update Users set firstName = ?, lastName = ?, email = ?, userName = ?, password = ?, enabled = ? where UserID = ?";
 
     private static final String SELECT_USER = "select * from Users where UserID = ?";
     
-    private static final String SELECT_USER_BY_STATIC_PAGE = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password from Users u join StaticPages s on u.userID = s.userID where s.staticPageID = ?";
+    private static final String SELECT_USER_BY_STATIC_PAGE = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join StaticPages s on u.userID = s.userID where s.staticPageID = ?";
     
-    private static final String SELECT_USER_BY_BLOG = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password from Users u join Blogs b on u.userID = b.userID where b.BlogID = ?";;
+    private static final String SELECT_USER_BY_BLOG = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join Blogs b on u.userID = b.userID where b.BlogID = ?";;
     
-    private static final String SELECT_USER_BY_REQUEST = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password from Users u join Requests r on u.userID = r.userID where r.RequestID = ?";;
+    private static final String SELECT_USER_BY_REQUEST = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join Requests r on u.userID = r.userID where r.RequestID = ?";;
 
     private static final String SELECT_ALL_USERS = "select * from Users";
 
@@ -84,7 +84,7 @@ public class UserDaoDBImpl implements UserDao {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public User addUser(User user) {
-        jdbcTemplate.update(INSERT_USER, user.getFirstName(), user.getLastName(), user.getEmail(), user.getUserName(), user.getPassword());
+        jdbcTemplate.update(INSERT_USER, user.getFirstName(), user.getLastName(), user.getEmail(), user.getUserName(), user.getPassword(), user.getEnabled());
         user.setUserID(jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class));
         insertIntoUsersRoles(user);
         return user;
@@ -94,7 +94,7 @@ public class UserDaoDBImpl implements UserDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public User editUser(User user) {
         jdbcTemplate.update(DELETE_FROM_USERS_ROLES, user.getUserID());
-        jdbcTemplate.update(EDIT_USER, user.getFirstName(), user.getLastName(), user.getEmail(), user.getUserName(), user.getPassword(), user.getUserID());
+        jdbcTemplate.update(EDIT_USER, user.getFirstName(), user.getLastName(), user.getEmail(), user.getUserName(), user.getPassword(), user.getEnabled(), user.getUserID());
         insertIntoUsersRoles(user);
         return user;
     }

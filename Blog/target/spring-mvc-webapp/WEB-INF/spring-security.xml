@@ -45,11 +45,10 @@
     </http>
     <authentication-manager>
         <authentication-provider>
-            <password-encoder ref="encoder"/>
             <jdbc-user-service id="userService"
                                data-source-ref="dataSource"
                                users-by-username-query=
- "select username, password from users where username=?"
+ "select username, password, enabled from users where username=?"
                                authorities-by-username-query=
  "select u.username, r.roletype from users u join users_roles ur on u.userID = ur.userID join roles r on r.roleID = ur.roleID where u.username=?" />
         </authentication-provider>

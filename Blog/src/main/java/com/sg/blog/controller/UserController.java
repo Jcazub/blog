@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
     
-//    private UserDao userDao;
-//    private PasswordEncoder encoder;
-//
-//    @Inject
-//    public UserController(UserDao userDao, PasswordEncoder encoder) {
-//        this.userDao = userDao;
-//        this.encoder = encoder;
-//    }
+    private UserDao userDao;
+    private PasswordEncoder encoder;
+
+    @Inject
+    public UserController(UserDao userDao, PasswordEncoder encoder) {
+        this.userDao = userDao;
+        this.encoder = encoder;
+    }
 
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
     public String addPost() {

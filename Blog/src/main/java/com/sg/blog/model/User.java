@@ -16,6 +16,7 @@ public class User {
 
     int userID;
     String firstName, lastName, email, userName, password;
+    Boolean enabled;
     List<Role> roles;
 
     public int getUserID() {
@@ -66,6 +67,14 @@ public class User {
         this.password = password;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
@@ -76,14 +85,15 @@ public class User {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + this.userID;
-        hash = 97 * hash + Objects.hashCode(this.firstName);
-        hash = 97 * hash + Objects.hashCode(this.lastName);
-        hash = 97 * hash + Objects.hashCode(this.email);
-        hash = 97 * hash + Objects.hashCode(this.userName);
-        hash = 97 * hash + Objects.hashCode(this.password);
-        hash = 97 * hash + Objects.hashCode(this.roles);
+        int hash = 7;
+        hash = 71 * hash + this.userID;
+        hash = 71 * hash + Objects.hashCode(this.firstName);
+        hash = 71 * hash + Objects.hashCode(this.lastName);
+        hash = 71 * hash + Objects.hashCode(this.email);
+        hash = 71 * hash + Objects.hashCode(this.userName);
+        hash = 71 * hash + Objects.hashCode(this.password);
+        hash = 71 * hash + Objects.hashCode(this.enabled);
+        hash = 71 * hash + Objects.hashCode(this.roles);
         return hash;
     }
 
@@ -117,12 +127,14 @@ public class User {
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
+        if (!Objects.equals(this.enabled, other.enabled)) {
+            return false;
+        }
         if (!Objects.equals(this.roles, other.roles)) {
             return false;
         }
         return true;
     }
-    
-    
 
+    
 }

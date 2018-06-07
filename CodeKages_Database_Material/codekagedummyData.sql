@@ -1,10 +1,10 @@
 USE CodeKages_Database;
 
-INSERT INTO users (firstName,lastName,email,userName,`password`) 
+INSERT INTO users (firstName,lastName,email,userName,`password`,enabled) 
 VALUES 
-('Jesse','Azu','jesseAzu@gmail','Admin','blog123'),
-('Al','Rahman','alRahman@gmail.com','rahmanNoodles','ramen123'),
-('Rich','Tav','taverasRich@gmail.com','anbuBlogger','anbu123')
+('Jesse','Azu','jesseAzu@gmail','Admin','blog123',1),
+('Al','Rahman','alRahman@gmail.com','rahmanNoodles','ramen123',1),
+('Rich','Tav','taverasRich@gmail.com','anbuBlogger','anbu123',1)
 ;
 
 INSERT INTO roles(roleType)
