@@ -1,17 +1,11 @@
-<%-- 
-    Document   : signUp
-    Created on : Jun 1, 2018, 7:02:18 PM
-    Author     : chxxch
---%>
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <title>Bootstrap Example</title>
         <meta charset="utf-8">
@@ -34,23 +28,35 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                        <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li role="presentation">
                         <li><a href="#">About</a>
                         </li>
-                        <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/dashboard">
-                                Dashboard
-                            </a>
-                        </li>
+                        <sec:authorize access="hasRole('ROLE_USER')">
+                            <li role="presentation">
+                                <a href="${pageContext.request.contextPath}/dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
+                        </sec:authorize>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <c:choose>
+                            <c:when test="${pageContext.request.userPrincipal.name != null}">
+                                <li role="presentation">
+                                <li><a href="${pageContext.request.contextPath}/dashboard">Hello : ${pageContext.request.userPrincipal.name}</a>
+                                </li>
+                                <li><a href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                <li class="active"><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                </c:otherwise>
+                            </c:choose>
                     </ul>
 
                     <!-- top search -->
@@ -60,18 +66,14 @@
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>  
-                    
+
                 </div>
             </div>
         </nav>
         <br>
 
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <h4>Hello : ${pageContext.request.userPrincipal.name}
-                | <a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
-            </h4>
-        </c:if>
-        
+
+
         <!-- NAV END -->
 
         <h2>Account Creation</h2>

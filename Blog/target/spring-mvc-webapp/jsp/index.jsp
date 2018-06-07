@@ -44,8 +44,6 @@
                         </sec:authorize>
                     </ul>
 
-
-
                     <ul class="nav navbar-nav navbar-right">
                         <c:choose>
                             <c:when test="${pageContext.request.userPrincipal.name != null}">
