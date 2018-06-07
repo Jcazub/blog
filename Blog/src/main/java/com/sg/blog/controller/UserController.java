@@ -27,11 +27,6 @@ public class UserController {
         this.userDao = userDao;
         this.encoder = encoder;
     }
-
-    @RequestMapping(value = "/addPost", method = RequestMethod.POST)
-    public String addPost() {
-        return "post";
-    }
     
     @RequestMapping(value="/dashboard", method=RequestMethod.GET)
     public String displayDashboard() {

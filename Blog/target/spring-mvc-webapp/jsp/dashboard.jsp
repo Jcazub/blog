@@ -84,7 +84,7 @@
                         <p><a href="#">My Profile</a></p>
                     </div>
                     <div class="well">
-                        <p><a href="#">Create Post</a></p>
+                        <p><a href="${pageContext.request.contextPath}/createPost">Create Post</a></p>
                     </div>
                     <div class="well">
                         <p><a href="#">Create Page</a></p>

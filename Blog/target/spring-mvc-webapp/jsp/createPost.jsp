@@ -2,10 +2,19 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 
     <head>
+        <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+        <script>
+            tinymce.init({
+                selector: '#texteditor'
+            });
+        </script>
+        
+        
         <title>Bootstrap Example</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,23 +36,35 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                        <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li role="presentation">
                         <li><a href="#">About</a>
                         </li>
-                        <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/dashboard">
-                                Dashboard
-                            </a>
-                        </li>
+                        <sec:authorize access="hasRole('ROLE_USER')">
+                            <li role="presentation">
+                                <a href="${pageContext.request.contextPath}/dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
+                        </sec:authorize>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <c:choose>
+                            <c:when test="${pageContext.request.userPrincipal.name != null}">
+                                <li role="presentation">
+                                <li><a href="${pageContext.request.contextPath}/dashboard">Hello : ${pageContext.request.userPrincipal.name}</a>
+                                </li>
+                                <li><a href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                </c:otherwise>
+                            </c:choose>
                     </ul>
 
                     <!-- top search -->
@@ -53,65 +74,36 @@
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>  
-                    
+
                 </div>
             </div>
         </nav>
         <br>
 
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <h4>Hello : ${pageContext.request.userPrincipal.name}
-                | <a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
-            </h4>
-        </c:if>
-        
+
+
         <!-- NAV END -->
-        
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LEFT SIDE BAR--> 
-        <!-- <div class="container text-center">    
-            <div class="row">
-                <div class="col-sm-2 well">
-                    <div class="well">
-                        <p><a href="#">My Profile</a></p>
-                    </div>
-                    <div class="well">
-                        <p><a href="#">Interest</a></p>
 
-                    </div>
-                    <div class="alert alert-success fade in">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                        <p><strong>New</strong></p>
-                        posts pending approval!
-                    </div>
-                </div>
-        -->
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RECENT POSTS-->
-        <div class="col-sm-6 col-sm-offset-3 text-center"> 
-            <div class="well">
-                <h4><small>RECENT POSTS</small></h4>
-                <hr>
 
-                <c:forEach var="currentBlog" items="${posts}" >
-                    <h2>${currentBlog.title}</h2>
-                    <h5><span class="glyphicon glyphicon-time"></span> Post by ${currentBlog.user.userName}, ${currentBlog.publishDate}.</h5>
-                    <c:forEach var="currentTag" items="${currentBlog.tags}">
-                        <h5><span class="label label-primary">${currentTag.name}</span></h5>
-                        </c:forEach>
-                    <p>${currentBlog.content}</p>
-                    <br><br>
-                </c:forEach>
+        <h1>TinyMCE Quick Start Guide</h1>
+        <form id="getpostform" 
+              method="POST"
+              action="addPost">
+            <input type="text" name="title" placeholder="Title"/> 
+            <textarea name="content" class="tinymce" id="texteditor" required>Hello, World!</textarea>
+            <input type="date" name="publishDate" placeholder="Publish Date"/>
+            <input type="submit" class ="btn btn-default" value="Create Post"/>
+        </form>      
 
-            </div>
+        <div id="postContainer">
         </div>
-        
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RIGHT SIDE BAR-->
 
-
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-<!--        <footer class="container-fluid text-center">
+        <footer class="container-fluid text-center">
             <p>Footer Text</p>
-        </footer>-->
-        
+        </footer>
+
+
+        <!-- Placed at the end of the document so the pages load faster -->
 
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
@@ -123,5 +115,12 @@
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
         <!-- Personal Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <!-- TINYMCE -->
+        <!-- NEEDS TO BE MOVED -->
+        
+        <script type="text/javascript" src="plugin/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript" src="js/getPost.js"></script>
+
     </body>
 </html>

@@ -23,6 +23,7 @@ public interface UserDao {
     public User editUser(User user);
     public void deleteUser(int userID);
     public User getUserByID(int userID);
+    public User getUserByUserName(String userName);
     public User getUserForStaticPage(StaticPage staticPage);
     public User getUserForBlog(Blog blog);
     public User getUserForRequest(Request request);
