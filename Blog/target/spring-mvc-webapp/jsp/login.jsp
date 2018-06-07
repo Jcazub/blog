@@ -11,7 +11,7 @@
 <html>
     
     <head>
-        <title>Bootstrap Example</title>
+        <title>Log In</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 4 core CSS -->
@@ -72,10 +72,10 @@
         
         <!-- NAV END -->
 
-    <h2>Log In</h2>
+    <h2 style="text-align:center;">Log In</h2>
 
     <c:if test="${param.login_error == 1}">
-        <h3>Wrong id or password!</h3>
+        <h3 style="text-align:center;">Wrong id or password!</h3>
     </c:if>
     <form class="form-horizontal" 
           role="form" 
@@ -95,7 +95,7 @@
         <div class="form-group">
             <label for="j_password" class="col-md-4 control-label">Password:</label>
             <div class="col-md-4">
-                <input type="text" 
+                <input type="password" 
                        class="form-control" 
                        name="j_password" 
                        placeholder="Password"

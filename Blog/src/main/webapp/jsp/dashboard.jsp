@@ -88,7 +88,7 @@
                 </div>
 
 
-                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RECENT POSTS-->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RECENT POSTS-->
                 <div class="col-sm-8 text-left"> 
                     <div class="well">
                         <h4><small>RECENT POSTS</small></h4>
