@@ -11,8 +11,8 @@
                 class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/> 
                 
     <http pattern="/login" security="none" />
-<!--    <http pattern="/signup" security="none" />-->
-<!--    <http pattern="/error" security="none" />-->
+    <http pattern="/signup" security="none" />
+    <http pattern="/error" security="none" />
     <http pattern="/css/**" security="none" />
     <http pattern="/js/**" security="none" />
     <http pattern="/img/**" security="none" />
@@ -36,21 +36,7 @@
                        access="ADMIN" />
         <intercept-url pattern="/editPost" 
                        access="ADMIN" /> 
-        
-        <!--Static Page related -->
-               
-        <!--Category related -->
-        
-        <!--Tag related -->
-        
-        <!--Role related -->
-        
-        <!--Request Type related -->
-        
-        <!--Request related -->
-        
-        <!--User related -->
-        
+         
         
         <intercept-url pattern="/**" 
                        access="CONTRIBUTOR" />
