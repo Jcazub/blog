@@ -9,8 +9,8 @@ VALUES
 
 INSERT INTO roles(roleType)
 VALUES
-('admin'),
-('contributor')
+('ROLE_ADMIN'),
+('ROLE_USER')
 ;
 
 INSERT INTO users_roles (userId,roleId)

@@ -17,7 +17,7 @@
     <!-- Bean definitions go here -->
     <tx:annotation-driven/>
 
-    <context:component-scan base-package="com.sg.blog.dao" />
+    <context:component-scan base-package="com.sg.blog" />
     <bean id="dataSource"
           class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -113,7 +113,7 @@
         <constructor-arg ref="roleDao"/>
     </bean>
     
-    <bean id="userService"
+    <bean id="userServiceimpl"
           class="com.sg.blog.service.Impl.UserServiceImpl">
         <constructor-arg ref="userDao"/>
         <constructor-arg ref="roleDao"/>
