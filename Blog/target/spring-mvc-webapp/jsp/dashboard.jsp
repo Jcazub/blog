@@ -114,51 +114,26 @@
                     <div class="w3-card w3-margin">
                         <div class="w3-container w3-padding text-left" >
                             <h4><span>Tags <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#tags"><span class="glyphicon glyphicon-tag"></span></button></h4>
-                            
-                                <div class= "input-group">
-                                    <input type="text" class="col-md-5" placeholder="New Tag" name="search">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-tag"></i></button>
-                                    </div>
 
-                                    <div id="tags" class="collapse">
-                                        <c:forEach var="currentTag" items="${tags}" >
-                                            <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">${currentTag.name}</span>
-                <!--                                <span>${currentTag.name}</span>-->
-                                        </c:forEach>
-                                    </div>
+                            <div class= "input-group">
+                                <input type="text" class="col-md-5" placeholder="New Tag" name="search">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-tag"></i></button>
                                 </div>
-                                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RIGHT SIDE BAR-->
 
-                                <!--                    <div class="col-sm-2 well">
-                                                        <div class="well">
-                                                            <p><a href="#">Category/Tag Management</a></p>
-                                                        </div>
-                                                        <div class="well">
-                                                            <p><a href="#">Posts Management</a></p>
-                                
-                                                        </div>
-                                                        <div class="alert alert-success fade in">
-                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                                            <p><strong>New</strong></p>
-                                                            posts pending approval!
-                                                        </div>
-                                                        <div class="well">
-                                                            <p><a href="#">Site Management</a></p>
-                                                        </div>
-                                                    </div>-->
-
+                                <div id="tags" class="collapse">
+                                    <c:forEach var="currentTag" items="${tags}" >
+                                        <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">${currentTag.name}</span>
+            <!--                                <span>${currentTag.name}</span>-->
+                                    </c:forEach>
+                                </div>
+                            </div> 
                         </div>
-
-
                     </div>
-                    <!--    </div>-->
-
                     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
                     <footer class="container-fluid text-center main-footer">
-                        <p>	&copy; codeKages </p>
+                        <p>&copy;codeKages </p>
                     </footer>
-
                     <!-- Placed at the end of the document so the pages load faster -->
                     <!-- Bootstrap 3 scripts -->
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
