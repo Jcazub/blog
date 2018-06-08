@@ -7,7 +7,13 @@
 <html>
 
     <head>
-        <title>Bootstrap Example</title>
+        <style>
+            html {
+                background-image: url(https://images.pexels.com/photos/932261/pexels-photo-932261.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+                background-size: cover;
+            }
+        </style>
+        <title>Home</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 4 core CSS -->
@@ -17,10 +23,7 @@
         <!-- Main CSS -->        
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet"> 
     </head>
-
     <body>
-
-
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -30,7 +33,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">codeKages</a> 
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -45,7 +48,6 @@
                             </li>
                         </sec:authorize>
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right">
                         <c:choose>
                             <c:when test="${pageContext.request.userPrincipal.name != null}">
@@ -68,17 +70,12 @@
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>  
-
                 </div>
             </div>
         </nav>
         <br>
-
-
-
-        <!-- NAV END -->
-      
-        <div class="col-sm-6 col-sm-offset-3 text-center"> 
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
+        <div class="col-sm-6 col-sm-offset-3 text-left"> 
             <div class="well">
                 <h4><small>RECENT POSTS</small></h4>
                 <hr>
@@ -92,23 +89,19 @@
                     <br><br>
                 </c:forEach>
             </div>
-
         </div>
-
-        <br>
-<!--        <footer class="container-fluid text-center">
-            <p>	&copy; codeKages </p>
-        </footer>-->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RIGHT SIDE BAR-->
-
-
-
-
-
-
-
+        <footer class="container-fluid text-center">
+            <style>
+                footer {
+                    position: fixed;
+                    height: 50px;
+                    bottom: 0;
+                    width: 100%;
+                }
+            </style>
+            <p>	&copy; codeKages </p>
+        </footer>
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -120,4 +113,5 @@
         <!-- Personal Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </body>
+
 </html>

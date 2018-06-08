@@ -5,9 +5,14 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
-
     <head>
-        <title>Bootstrap Example</title>
+        <style>
+            html { 
+                background: url(https://images.pexels.com/photos/301614/pexels-photo-301614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat center fixed; 
+                background-size: cover;
+            }
+        </style>
+        <title>Log In</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 4 core CSS -->
@@ -17,7 +22,6 @@
         <!-- Main CSS -->        
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet"> 
     </head>
-
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
         <nav class="navbar navbar-inverse">
@@ -28,7 +32,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">codeKages</a> 
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -58,7 +62,6 @@
                                 </c:otherwise>
                             </c:choose>
                     </ul>
-
                     <!-- top search -->
                     <form class="navbar-form navbar-right" action="#">
                         <div class="form-group">
@@ -66,68 +69,72 @@
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>  
-
                 </div>
             </div>
         </nav>
         <br>
-
-
-
-        <!-- NAV END -->
-
-    <h2 style="text-align:center;">Log In</h2>
-
-    <c:if test="${param.login_error == 1}">
-        <h3 style="text-align:center;">Wrong id or password!</h3>
-    </c:if>
-    <form class="form-horizontal" 
-          role="form" 
-          method="post" 
-          action="j_spring_security_check">
-        <div class="form-group">
-            <label for="j_username" class="col-md-4 control-label">Username:</label>
-            <div class="col-md-4">
-                <input type="text" 
-                       class="form-control" 
-                       name="j_username" 
-                       placeholder="Username"
-                       maxlength="50"
-                       required/>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV END -->
+        <h2 style="text-align:center;">Log In</h2>
+        <c:if test="${param.login_error == 1}">
+            <h3 style="text-align:center;">Wrong id or password!</h3>
+        </c:if>
+        <form class="form-horizontal" 
+              role="form" 
+              method="post" 
+              action="j_spring_security_check">
+            <div class="form-group">
+                <label for="j_username" class="col-md-4 control-label">Username:</label>
+                <div class="col-md-4">
+                    <input type="text" 
+                           class="form-control" 
+                           name="j_username" 
+                           placeholder="Username"
+                           maxlength="50"
+                           required/>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="j_password" class="col-md-4 control-label">Password:</label>
-            <div class="col-md-4">
-                <input type="password" 
-                       class="form-control" 
-                       name="j_password" 
-                       placeholder="Password"
-                       maxlength="50"
-                       required/>
+            <div class="form-group">
+                <label for="j_password" class="col-md-4 control-label">Password:</label>
+                <div class="col-md-4">
+                    <input type="password" 
+                           class="form-control" 
+                           name="j_password" 
+                           placeholder="Password"
+                           maxlength="50"
+                           required/>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-4 col-md-8">
-                <input type="submit" 
-                       class="btn btn-default" 
-                       id="search-button" 
-                       value="Sign In"/>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-8">
+                    <input type="submit" 
+                           class="btn btn-default" 
+                           id="search-button" 
+                           value="Sign In"/>
+                </div>
             </div>
-        </div>
-    </form>    
-</div>
-
-<!-- Placed at the end of the document so the pages load faster -->
-<!-- Bootstrap 3 scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- Bootstrap 4 scripts -->
-<!--        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
-<!-- Personal Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        </form>
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
+        <footer class="container-fluid text-center">
+            <style>
+                footer {
+                    position: fixed;
+                    height: 50px;
+                    bottom: 0;
+                    width: 100%;
+                }
+            </style>
+            <p>	&copy; codeKages </p>
+        </footer>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Bootstrap 3 scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap 4 scripts -->
+    <!--        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
+    <!-- Personal Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </body>
 </html>

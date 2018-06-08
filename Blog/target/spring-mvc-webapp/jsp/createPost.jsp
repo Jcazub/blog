@@ -13,8 +13,8 @@
                 selector: '#texteditor'
             });
         </script>
-        
-        
+
+
         <title>Bootstrap Example</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">codeKages</a> 
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -79,12 +79,7 @@
             </div>
         </nav>
         <br>
-
-
-
         <!-- NAV END -->
-
-
         <h1>TinyMCE Quick Start Guide</h1>
         <form id="getpostform" 
               method="POST"
@@ -94,17 +89,18 @@
             <input type="date" name="publishDate" placeholder="Publish Date"/>
             <input type="submit" class ="btn btn-default" value="Create Post"/>
         </form>      
-
-        <div id="postContainer">
-        </div>
-
+        - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <footer class="container-fluid text-center">
-            <p>Footer Text</p>
+            <style>
+                footer {
+                    position: fixed;
+                    height: 50px;
+                    bottom: 0;
+                    width: 100%;
+                }
+            </style>
+            <p>	&copy; codeKages </p>
         </footer>
-
-
-        <!-- Placed at the end of the document so the pages load faster -->
-
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -115,12 +111,7 @@
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
         <!-- Personal Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
-        <!-- TINYMCE -->
-        <!-- NEEDS TO BE MOVED -->
-        
         <script type="text/javascript" src="plugin/tinymce/tinymce.min.js"></script>
         <script type="text/javascript" src="js/getPost.js"></script>
-
     </body>
 </html>

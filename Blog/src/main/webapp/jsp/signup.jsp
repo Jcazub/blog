@@ -5,7 +5,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
-
     <head>
         <title>Bootstrap Example</title>
         <meta charset="utf-8">
@@ -28,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">codeKages</a> 
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -43,7 +42,6 @@
                             </li>
                         </sec:authorize>
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right">
                         <c:choose>
                             <c:when test="${pageContext.request.userPrincipal.name != null}">
@@ -58,7 +56,6 @@
                                 </c:otherwise>
                             </c:choose>
                     </ul>
-
                     <!-- top search -->
                     <form class="navbar-form navbar-right" action="#">
                         <div class="form-group">
@@ -71,11 +68,7 @@
             </div>
         </nav>
         <br>
-
-
-
         <!-- NAV END -->
-
         <h2>Account Creation</h2>
 
         <form action="/action_page.php">
@@ -98,10 +91,58 @@
         </form>
         <input type="submit">
         <br><br>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="usr">First Name:</label>
+                <input type="text" 
+                       class="form-control"
+                       placeholder="First Name"
+                       maxlength="50"
+                       id="usr">
+            </div>
+
+            <div class="form-group">
+                <label for="usr">Last Name:</label>
+                <input type="text" class="form-control" id="usr">
+            </div>
+
+            <div class="form-group">
+                <label for="usr">E-Mail:</label>
+                <input type="email" class="form-control" id="usr">
+            </div>
+
+            <div class="form-group">
+                <label for="usr">User Name:</label>
+                <input type="email" class="form-control" id="usr">
+            </div>
+
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd">
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-8">
+                    <input type="submit" 
+                           class="btn btn-default" 
+                           id="search-button" 
+                           value="Sign Up"/>
+                </div>
+            </div>
+        </div>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <footer class="container-fluid text-center">
-            <p>Footer Text</p>
+            <style>
+                footer {
+                    position: fixed;
+                    height: 50px;
+                    bottom: 0;
+                    width: 100%;
+                }
+            </style>
+            <p>	&copy; codeKages </p>
         </footer>
-        
+
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
