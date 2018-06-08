@@ -5,20 +5,16 @@
  */
 package com.sg.blog.controller;
 
-import com.sg.blog.service.BlogService;
 import com.sg.blog.service.CategoryService;
 import javax.inject.Inject;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author chxxch
  */
+@Controller
 public class CategoryController {
-    
-    
     
     CategoryService categoryService;
     
@@ -27,9 +23,4 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
     
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String refresh(Model model) {
-        model.addAttribute("categories", categoryService.getAllCategories());
-        return "dashboard";
-    }
 }

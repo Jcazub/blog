@@ -131,15 +131,7 @@
             </div>
         </div>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-        <footer class="container-fluid text-center">
-            <style>
-                footer {
-                    position: fixed;
-                    height: 50px;
-                    bottom: 0;
-                    width: 100%;
-                }
-            </style>
+        <footer class="container-fluid text-center main-footer"> 
             <p>	&copy; codeKages </p>
         </footer>
 

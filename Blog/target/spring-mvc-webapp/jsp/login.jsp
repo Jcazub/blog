@@ -4,14 +4,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
-<html>
+<html class="login-html">
     <head>
-        <style>
-            html { 
-                background: url(https://images.pexels.com/photos/301614/pexels-photo-301614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat center fixed; 
-                background-size: cover;
-            }
-        </style>
         <title>Log In</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -114,15 +108,7 @@
             </div>
         </form>
             <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-        <footer class="container-fluid text-center">
-            <style>
-                footer {
-                    position: fixed;
-                    height: 50px;
-                    bottom: 0;
-                    width: 100%;
-                }
-            </style>
+        <footer class="container-fluid text-center main-footer">
             <p>	&copy; codeKages </p>
         </footer>
     <!-- Placed at the end of the document so the pages load faster -->

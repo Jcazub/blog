@@ -90,15 +90,7 @@
             <input type="submit" class ="btn btn-default" value="Create Post"/>
         </form>      
         - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-        <footer class="container-fluid text-center">
-            <style>
-                footer {
-                    position: fixed;
-                    height: 50px;
-                    bottom: 0;
-                    width: 100%;
-                }
-            </style>
+        <footer class="container-fluid text-center main-footer">
             <p>	&copy; codeKages </p>
         </footer>
         <!-- Placed at the end of the document so the pages load faster -->
