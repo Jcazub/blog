@@ -1,4 +1,14 @@
 /* Remove the navbar's default margin-bottom and rounded borders */ 
+.index-html {
+    background-image: url(https://images.pexels.com/photos/932261/pexels-photo-932261.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-size: cover;
+}
+
+.login-html {
+    background: url(https://images.pexels.com/photos/301614/pexels-photo-301614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat center fixed; 
+                background-size: cover;
+}
+
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
@@ -15,10 +25,15 @@
 }
 
 /* Set black background color, white text and some padding */
-footer {
+.main-footer {
     background-color: #555;
     color: white;
     padding: 15px;
+    padding: 15px;
+    position: fixed;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -29,3 +44,4 @@ footer {
     }
     .row.content {height:auto;} 
 }
+

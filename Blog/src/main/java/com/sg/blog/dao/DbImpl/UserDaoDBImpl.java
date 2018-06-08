@@ -46,6 +46,8 @@ public class UserDaoDBImpl implements UserDao {
 
     private static final String SELECT_USER = "select * from Users where UserID = ?";
     
+    private static final String SELECT_USER_BY_NAME = "select * from Users where userName = ?";
+    
     private static final String SELECT_USER_BY_STATIC_PAGE = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join StaticPages s on u.userID = s.userID where s.staticPageID = ?";
     
     private static final String SELECT_USER_BY_BLOG = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join Blogs b on u.userID = b.userID where b.BlogID = ?";;
@@ -111,6 +113,18 @@ public class UserDaoDBImpl implements UserDao {
     public User getUserByID(int userID) {
         try {
             User u = jdbcTemplate.queryForObject(SELECT_USER, new UserMapper(), userID);
+            u = findRolesForUser(u);
+            return u;
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
+    }
+    
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    public User getUserByUserName(String userName) {
+        try {
+            User u = jdbcTemplate.queryForObject(SELECT_USER_BY_NAME, new UserMapper(), userName);
             u = findRolesForUser(u);
             return u;
         } catch (EmptyResultDataAccessException ex) {

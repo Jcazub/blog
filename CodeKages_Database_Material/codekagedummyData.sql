@@ -13,9 +13,10 @@ VALUES
 ('ROLE_USER')
 ;
 
-INSERT INTO users_roles (userId,roleId)
+INSERT INTO users_roles (userID,roleID)
 VALUES
 ('1','1'),
+('1','2'),
 ('2','2'),
 ('3','2')
 ;
@@ -29,7 +30,7 @@ VALUES
 ('Politics','Exciting news on politics')-- 5
 ;
 
-INSERT INTO blogs (userId,categoryId,creationDate,publishDate,approvedDate,isApproved,title,content)
+INSERT INTO blogs (userID,categoryID,creationDate,publishDate,approvedDate,isApproved,title,content)
 VALUES
 ('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','Gadgets and Robots','Some stuff about gadgets and robots')
 ;
@@ -42,7 +43,7 @@ VALUES
 ('robots')
 ;
 
-INSERT INTO Blogs_Tags (blogId,tagId)
+INSERT INTO Blogs_Tags (blogID,tagID)
 VALUES
 ('1','1'),
 ('1','3')
