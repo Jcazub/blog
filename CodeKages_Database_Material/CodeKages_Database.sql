@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(50) NOT NULL, 
     userName VARCHAR(50) NOT NULL, 
     `password` VARCHAR(50) NOT NULL,
-    enabled boolean not null,
     PRIMARY KEY (UserID));
     
 CREATE TABLE IF NOT EXISTS roles (
