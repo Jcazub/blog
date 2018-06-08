@@ -74,7 +74,7 @@
 
 
         <!-- NAV END -->
-        
+
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LEFT SIDE BAR--> 
         <div class="container text-center">
             <div class="row">
@@ -92,7 +92,7 @@
                 </div>
 
 
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RECENT POSTS-->
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RECENT POSTS-->
                 <div class="col-sm-8 text-left"> 
                     <div class="well">
                         <h4><small>RECENT POSTS</small></h4>
@@ -103,54 +103,66 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         <br><br>
                     </div>
-                </div>
-                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RIGHT SIDE BAR-->
 
-                <div class="col-sm-2 well">
-                    <div class="well">
-                        <p><a href="#">Category/Tag Management</a></p>
-                    </div>
-                    <div class="well">
-                        <p><a href="#">Posts Management</a></p>
 
-                    </div>
-                    <div class="alert alert-success fade in">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                        <p><strong>New</strong></p>
-                        posts pending approval!
-                    </div>
-                    <div class="well">
-                        <p><a href="#">Site Management</a></p>
+                    <div>
+                        <hr>
+                        <c:forEach var="currentCategory" items="${categories}" >
+                            <h2>${currentCategory.categoryName}</h2>
+                            <h5><span class="label label-primary">${currentCategory.description}</span></h5>
+                            <br><br>
+                        </c:forEach>
                     </div>
                 </div>
-
             </div>
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RIGHT SIDE BAR-->
+
+            <div class="col-sm-2 well">
+                <div class="well">
+                    <p><a href="#">Category/Tag Management</a></p>
+                </div>
+                <div class="well">
+                    <p><a href="#">Posts Management</a></p>
+
+                </div>
+                <div class="alert alert-success fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <p><strong>New</strong></p>
+                    posts pending approval!
+                </div>
+                <div class="well">
+                    <p><a href="#">Site Management</a></p>
+                </div>
+            </div>
+
         </div>
-                    
-                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-        <footer class="container-fluid text-center">
-            <style>
-                footer {
-                    position: fixed;
-                    height: 50px;
-                    bottom: 0;
-                    width: 100%;
-                }
-            </style>
-            <p>	&copy; codeKages </p>
-        </footer>
-        
-        <!-- Placed at the end of the document so the pages load faster -->
-        <!-- Bootstrap 3 scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- Bootstrap 4 scripts -->
-        <!--        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
-        <!-- Personal Scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    </body>
+<!--    </div>-->
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
+    <footer class="container-fluid text-center">
+        <style>
+            footer {
+                position: fixed;
+                height: 50px;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
+        <p>	&copy; codeKages </p>
+    </footer>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Bootstrap 3 scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap 4 scripts -->
+    <!--        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
+    <!-- Personal Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
 </html>
 
 
