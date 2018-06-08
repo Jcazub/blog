@@ -1,10 +1,23 @@
+<<<<<<< HEAD
+=======
+<%-- 
+    Document   : signUp
+    Created on : Jun 1, 2018, 7:02:18 PM
+    Author     : chxxch
+--%>
+
+>>>>>>> 81d8bdbdd30a6f62850251114d2511076fa8e47e
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+=======
+>>>>>>> 81d8bdbdd30a6f62850251114d2511076fa8e47e
 <!DOCTYPE html>
 <html>
+    
     <head>
         <title>Bootstrap Example</title>
         <meta charset="utf-8">
@@ -27,13 +40,18 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
+<<<<<<< HEAD
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/">codeKages</a> 
+=======
+                        <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+>>>>>>> 81d8bdbdd30a6f62850251114d2511076fa8e47e
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li role="presentation">
                         <li><a href="#">About</a>
                         </li>
+<<<<<<< HEAD
                         <sec:authorize access="hasRole('ROLE_USER')">
                             <li role="presentation">
                                 <a href="${pageContext.request.contextPath}/dashboard">
@@ -56,6 +74,20 @@
                                 </c:otherwise>
                             </c:choose>
                     </ul>
+=======
+                        <li role="presentation">
+                            <a href="${pageContext.request.contextPath}/dashboard">
+                                Dashboard
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+
+>>>>>>> 81d8bdbdd30a6f62850251114d2511076fa8e47e
                     <!-- top search -->
                     <form class="navbar-form navbar-right" action="#">
                         <div class="form-group">
@@ -63,12 +95,28 @@
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>  
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 81d8bdbdd30a6f62850251114d2511076fa8e47e
                 </div>
             </div>
         </nav>
         <br>
+<<<<<<< HEAD
         <!-- NAV END -->
+=======
+
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <h4>Hello : ${pageContext.request.userPrincipal.name}
+                | <a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
+            </h4>
+        </c:if>
+        
+        <!-- NAV END -->
+
+>>>>>>> 81d8bdbdd30a6f62850251114d2511076fa8e47e
         <h2>Account Creation</h2>
 
         <form action="/action_page.php">
@@ -91,6 +139,7 @@
         </form>
         <input type="submit">
         <br><br>
+<<<<<<< HEAD
 
         <div class="col-md-4">
             <div class="form-group">
@@ -135,6 +184,12 @@
             <p>	&copy; codeKages </p>
         </footer>
 
+=======
+        <footer class="container-fluid text-center">
+            <p>Footer Text</p>
+        </footer>
+        
+>>>>>>> 81d8bdbdd30a6f62850251114d2511076fa8e47e
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
