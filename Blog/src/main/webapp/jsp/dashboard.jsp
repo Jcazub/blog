@@ -28,7 +28,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Logo</a> 
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">codeKages</a> 
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -126,6 +126,19 @@
 
             </div>
         </div>
+                    
+                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
+        <footer class="container-fluid text-center">
+            <style>
+                footer {
+                    position: fixed;
+                    height: 50px;
+                    bottom: 0;
+                    width: 100%;
+                }
+            </style>
+            <p>	&copy; codeKages </p>
+        </footer>
         
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
