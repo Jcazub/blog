@@ -89,7 +89,7 @@
             <input type="date" name="publishDate" placeholder="Publish Date"/>
             <input type="submit" class ="btn btn-default" value="Create Post"/>
         </form>      
-        - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
+      
         <footer class="container-fluid text-center main-footer">
             <p>	&copy; codeKages </p>
         </footer>

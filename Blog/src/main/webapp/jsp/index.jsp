@@ -69,16 +69,16 @@
         </nav>
         <br>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
-        <div class="col-sm-6 col-sm-offset-3 text-left"> 
+        <div class="col-sm-6 col-sm-offset-3"> 
             <div class="well">
                 <h4><small>RECENT POSTS</small></h4>
                 <hr>
                 <c:forEach var="currentBlog" items="${posts}" >
                     <h2>${currentBlog.title}</h2>
-                    <h5><span class="glyphicon glyphicon-time"></span> Post by ${currentBlog.user.userName}, ${currentBlog.publishDate}.</h5>
-                    <c:forEach var="currentTag" items="${currentBlog.tags}">
-                        <h5><span class="label label-primary">${currentTag.name}</span></h5>
-                        </c:forEach>
+                    <span class="glyphicon glyphicon-time"> Post by ${currentBlog.user.userName}, ${currentBlog.publishDate}.</span><br>
+                    <span><c:forEach var="currentTag" items="${currentBlog.tags}"></span>
+                        <span class="label label-primary">${currentTag.name} </c:forEach></span>
+                    <br>
                     <p>${currentBlog.content}</p>
                     <br><br>
                 </c:forEach>
