@@ -1,0 +1,13 @@
+title View Landing Page
+Spring->Controller: loadHomePage()
+note left of Spring: url: /
+Controller->Service: getAllPublishedBlogs()
+Service->Dao: getAllPublishedBlogs()
+    Dao->JDBC: Query
+JDBC->Mapper: MapBlog
+Mapper->JDBC: Blog
+JDBC->Dao: List<Blog>
+Dao->Service: List<Blog>
+Service->Controller: List<Blog>
+Controller->Spring: index
+
