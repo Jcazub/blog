@@ -15,13 +15,13 @@ import java.util.Objects;
  */
 public class Blog {
 
-    int blogID;
-    LocalDate creationDate, publishDate, approvedDate;
-    Boolean isApproved;
-    String title, content;
-    Category category;
-    User user;
-    List<Tag> tags;
+    private int blogID;
+    private LocalDate creationDate, publishDate, approvedDate;
+    private Boolean isApproved;
+    private String title, content;
+    private Category category;
+    private User user;
+    private List<Tag> tags;
 
     public int getBlogID() {
         return blogID;

@@ -14,10 +14,10 @@ import java.util.Objects;
  */
 public class StaticPage {
 
-    int staticID;
-    String title, content;
-    LocalDate creationDate;
-    User user;
+    private int staticID;
+    private String title, content;
+    private LocalDate creationDate;
+    private User user;
 
     public int getStaticID() {
         return staticID;
