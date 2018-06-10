@@ -5,7 +5,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html class="index-html">
-
     <head>
         <title>Home</title>
         <meta charset="utf-8">
@@ -18,6 +17,7 @@
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet"> 
     </head>
     <body>
+        
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">

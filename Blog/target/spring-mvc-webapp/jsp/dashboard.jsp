@@ -9,6 +9,10 @@
         <title>Bootstrap Example</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/assets/css/material-dashboard.css">
+        <!--     Fonts and icons     -->
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
@@ -68,10 +72,11 @@
                         </form>  
                     </div>
                 </div>
+
                 <br>
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TOP NAV END -->
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SIDE BAR -->                   
-                <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li class="sidebar-search">
@@ -110,6 +115,7 @@
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
+
             <div id="page-wrapper">
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ TIMELINE -->
                 <div class="col-lg-6">
@@ -179,7 +185,7 @@
                                         </div>
                                     </div>
                                 </li>                                                                
-                                                                                          
+
                             </ul>
                         </div>
                         <!-- /.panel-body -->
@@ -361,14 +367,23 @@
                     
                     -->
                     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-                    <footer class="container-fluid text-center main-footer">
-                        <p>&copy;codeKages </p>
-                    </footer>
+
                 </div>
+
             </div>
+            <footer class="container-fluid text-center main-footer">
+                <p>&copy;codeKages </p>
+            </footer>
         </div>
+        <!--        </div>-->
+        <!--   Core JS Files   -->
+        <script src="/assets/js/core/jquery.min.js"></script>
+        <script src="/assets/js/core/popper.min.js"></script>
+        <script src="/assets/js/bootstrap-material-design.js"></script>
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
+
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- Bootstrap 4 scripts -->
