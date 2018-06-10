@@ -27,7 +27,7 @@
     <body>
         <div id="wrapper">
             <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-            <nav class="navbar navbar-inverse">
+            <nav class="w3-bar w3-black">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -74,10 +74,11 @@
                 </div>              
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TOP NAV END -->
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SIDE BAR -->                   
-                <div class="sidebar" role="navigation">
+                <div class="w3-sidebar w3-card" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li class="sidebar-search">
+                                <br>
                                 <div class="input-group custom-search-form">
                                     <input type="text" class="form-control" placeholder="Search...">
                                     <span class="input-group-btn">
@@ -94,22 +95,22 @@
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Manage Posts<span class="fa arrow"></span></a>  
                                 <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/createPost">Create Post</a>
-                                </li>
-                                <li>
-                                    <a href="#">Morris.js Charts</a>
-                                </li>
-                            </ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/createPost">Create Post</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Morris.js Charts</a>
+                                    </li>
+                                </ul>
                                 <!-- /.nav-second-level -->
                             </li>
-                            
+
                             <li>
                                 <a href="#"><i class="fa fa-wrench fa-fw"></i>Manage Users<span class="fa arrow"></span></a>                           
-                                
-                               
+
+
                                 <!-- /.nav-second-level -->
-                                
+
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>Multi-Level Dropdown<span class="fa arrow"></span></a>
@@ -127,11 +128,12 @@
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
+            <br>
 
             <div id="page-wrapper">
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ TIMELINE -->
                 <div class="col-lg-6">
-                    <div class="panel panel-default">
+                    <div class="w3-card panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
                         </div>
@@ -205,8 +207,9 @@
                     <!-- /.panel -->
                 </div>
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  NOTIFICATION PANEL -->
+                <!--                <div class="row">-->
                 <div class="col-lg-4">
-                    <div class="panel panel-default">
+                    <div class="w3-card panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> Notifications Panel
                         </div>
@@ -239,154 +242,64 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CATEGORIES-->
-                    <!--                <div class="row">-->
-                    <div class="col-lg-6">
-                        <div class="w3-card panel-default">
-                            <div class="panel-heading">
-                                Category Management
-                            </div>
-                            <!-- .panel-heading -->
-                            <div class="panel-body">
-                                <div class="panel-group" id="categoryAccordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#categoryAccordion" href="#collapseOne">Categories</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in">
-                                            <div class="panel-body">
-                                                <c:forEach var="currentCategory" items="${categories}" >
-                                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">${currentCategory.name}</span>
-                        <!--                                <span>${currentCategory.desc}</span>-->
-                                                </c:forEach>                                       </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#categoryAccordion" href="#collapseTwo">Edit Categories</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTwo" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Lorem ipsum dolor sit amet,
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#categoryAccordion" href="#collapseThree">Collapsible Group Item #3</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseThree" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Lorem ipsum dolor sit amet,
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!--</div>-->
-                    <!-- /.col-lg-12 -->
-                    <!--                </div>-->
-                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TAGS-->
-                    <!--                <div class="row">-->
-                    <div class="col-lg-6">
-                        <div class="w3-card panel-default">
-                            <div class="panel-heading">
-                                Tag Management
-                            </div>
-                            <!-- .panel-heading -->
-                            <div class="panel-body">
-                                <div class="panel-group" id="tagAccordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#tagAccordion" href="#collapseTags">Tags</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTags" class="panel-collapse collapse in">
-                                            <div class="panel-body">
-                                                <c:forEach var="currentTag" items="${tags}" >
-                                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">${currentTag.name}</span>
-                        <!--                                <span>${currentTag.name}</span>-->
-                                                </c:forEach>                                        </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#tagAccordion" href="#collapseTags2">Edit Tags</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTags2" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#tagAccordion" href="#collapseTags3">Collapsible Group Item #3</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTags3" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                    <!--                </div>-->
-                    <!--                            <div class= "input-group">
-                                                         <input type="text" class="col-md-5" placeholder="New Tag" name="search">
-                                                         <div class="input-group-btn">
-                                                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-tag"></i></button>
-                                                         </div>-->
-
-                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LEFT SIDE BAR--> 
-
-
-                    <!--        <div class="container text-center">-->
-                    <!--            <div class="row">
-                    
-                                    <div class="col-md-5 well">
-                                        <div class="well">
-                                            <p><a href="#">My Profile</a></p>
-                                        </div>
-                                        <div class="well">
-                                            <p><a href="${pageContext.request.contextPath}/createPost">Create Post</a></p>
-                                        </div>
-                                        <div class="well">
-                                            <p><a href="#">Create Page</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                    -->
-                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
-
                 </div>
-
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CATEGORIES-->                     
+                <div class="col-lg-3">
+                    <div class="panel-body">
+                        <div class="w3-card panel-group" id="categoryAccordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#categoryAccordion" href="#collapseOne">Category Management</a>
+                                    </h4>
+                                </div>
+                                <!-- .panel-heading -->
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <c:forEach var="currentCategory" items="${categories}" >
+                                        <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">${currentCategory.name}</span>
+            <!--                                <span>${currentCategory.desc}</span>-->
+                                    </c:forEach>                                       </div>
+                            </div>
+                        </div>                                                                      
+                    </div>
+                </div>
+                <!-- .panel-body -->
+                <!--                    </div>-->
+                <!-- /.panel -->
             </div>
-            <footer class="container-fluid text-center main-footer">
-                <p>&copy;codeKages </p>
-            </footer>
-        </div>
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TAGS-->
+            <div class="col-lg-2">
+                <div class="panel-body">
+                    <div class="w3-card panel-group" id="tagAccordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#tagAccordion" href="#collapseTags">Tags</a>
+                                </h4>
+                            </div>                            
+                            <!-- .panel-heading -->
+                        </div>
+                        <div id="collapseTags" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <c:forEach var="currentTag" items="${tags}" >
+                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">${currentTag.name}</span>
+        <!--                                <span>${currentTag.name}</span>-->
+                                </c:forEach> 
+                            </div>
+                        </div>                                                                                
+                    </div>
+                </div>
+                <!-- .panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>   
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->       
+        <footer class="container-fluid text-center main-footer">
+            <p>&copy;codeKages </p>
+        </footer>
+        <!--</div>-->
         <!--        </div>-->
         <!--   Core JS Files   -->
         <script src="/assets/js/core/jquery.min.js"></script>
