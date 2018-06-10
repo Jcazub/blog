@@ -71,9 +71,7 @@
                             <button type="submit" class="btn btn-default">Submit</button>
                         </form>  
                     </div>
-                </div>
-
-                <br>
+                </div>              
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TOP NAV END -->
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SIDE BAR -->                   
                 <div class="sidebar" role="navigation">
@@ -94,10 +92,24 @@
                                 <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Manage Posts<span class="fa arrow"></span></a>                                                        
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Manage Posts<span class="fa arrow"></span></a>  
+                                <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/createPost">Create Post</a>
+                                </li>
+                                <li>
+                                    <a href="#">Morris.js Charts</a>
+                                </li>
+                            </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            
                             <li>
                                 <a href="#"><i class="fa fa-wrench fa-fw"></i>Manage Users<span class="fa arrow"></span></a>                           
+                                
+                               
                                 <!-- /.nav-second-level -->
+                                
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>Multi-Level Dropdown<span class="fa arrow"></span></a>
