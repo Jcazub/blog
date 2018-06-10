@@ -29,6 +29,8 @@
                        access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/index.jsp" 
                        access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <intercept-url pattern="/post" 
+                       access="IS_AUTHENTICATED_ANONYMOUSLY" />
         
         <!--Post related -->
         <intercept-url pattern="/createPost" 
