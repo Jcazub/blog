@@ -20,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -86,5 +87,14 @@ public class PostController {
         blogDao.addBlog(b);
           
         return "redirect:/";
+    }
+    
+    @RequestMapping(value = "/post", method = RequestMethod.GET)
+    public String displayPost(HttpServletRequest request, Model model) {
+        Blog b = blogDao.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+        
+        model.addAttribute("post", b);
+        
+        return "post";
     }
 }
