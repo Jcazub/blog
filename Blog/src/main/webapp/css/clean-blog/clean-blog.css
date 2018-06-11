@@ -1,4 +1,4 @@
-body {
+/*body {
   font-size: 20px;
   color: #212529;
   font-family: 'Lora', 'Times New Roman', serif;
@@ -131,7 +131,7 @@ img::-moz-selection {
     -webkit-transition: background-color 0.2s;
     -moz-transition: background-color 0.2s;
     transition: background-color 0.2s;
-    /* Force Hardware Acceleration in WebKit */
+     Force Hardware Acceleration in WebKit 
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
@@ -140,7 +140,7 @@ img::-moz-selection {
     -webkit-backface-visibility: hidden;
   }
   #mainNav.is-fixed {
-    /* when the user scrolls down, we hide the header right above the viewport */
+     when the user scrolls down, we hide the header right above the viewport 
     position: fixed;
     top: -67px;
     -webkit-transition: -webkit-transform 0.2s;
@@ -162,7 +162,7 @@ img::-moz-selection {
     color: #0085A1;
   }
   #mainNav.is-visible {
-    /* if the user changes the scrolling direction, we show the header */
+     if the user changes the scrolling direction, we show the header 
     -webkit-transform: translate3d(0, 100%, 0);
     -moz-transform: translate3d(0, 100%, 0);
     -ms-transform: translate3d(0, 100%, 0);
@@ -420,4 +420,4 @@ footer .copyright {
 .btn-lg {
   font-size: 16px;
   padding: 25px 35px;
-}
+}*/
