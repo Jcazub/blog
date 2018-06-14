@@ -30,7 +30,7 @@
 
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-        <nav class="navbar navbar-inverse">
+<!--        <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -91,11 +91,13 @@
                 </div>
             </div>
         </nav>
-        <br>
+        <br>-->
 
-        <sec:authorize access="hasRole('ROLE_USER')">
+        <%--<sec:authorize access="hasRole('ROLE_USER')">--%>
 
-        </sec:authorize>
+        <%--</sec:authorize>--%>
+        
+        <jsp:include page="navbar.jsp"/>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         
         <h1>Edit Post</h1>

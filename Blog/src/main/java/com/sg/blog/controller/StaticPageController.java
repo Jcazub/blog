@@ -11,6 +11,7 @@ import com.sg.blog.service.StaticPageService;
 import com.sg.blog.service.UserService;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -99,6 +100,10 @@ public class StaticPageController {
         return "page";
     }
     
-    
-    
+    @RequestMapping(value="/showPages")
+    public String listPages (Model model) {
+        List<StaticPage> pages = staticPageService.getAllStaticPages();
+         model.addAttribute("pages", pages);
+         return "navbar";
+    }
 }

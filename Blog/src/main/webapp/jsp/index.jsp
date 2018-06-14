@@ -87,10 +87,6 @@
         </nav>
 
         <br>
-
-        <sec:authorize access="hasRole('ROLE_USER')">
-
-        </sec:authorize>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         <!--    <div class="col-lg-10 col-lg-offset-3">
                 <div class="w3-panel w3-card-4">
