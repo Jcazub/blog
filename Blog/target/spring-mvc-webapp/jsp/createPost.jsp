@@ -133,11 +133,13 @@
                             </div>-->
 
                 <textarea name="content" id="texteditor"></textarea>
-
+                <br>
                 <div class="form-group">
                     <div class="col-md-4">
                         <label for="publishDate" class="col-md-2 control-label">Publish Date:</label>
-                        <input type="date" class="form-control" name="publishDate" placeholder="Publish Date" required/>
+                        <div class="col-md-12">
+                            <input type="date" class="form-control" name="publishDate" placeholder="Publish Date" required/>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <label for="expirationDate" class="col-md-2 control-label">Expiration Date:</label>
