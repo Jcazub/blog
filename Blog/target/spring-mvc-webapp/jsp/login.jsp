@@ -7,7 +7,7 @@
 <html class="login-html">
     <head>
 
-        <title>Bootstrap Example</title>
+        <title>Login</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->
@@ -31,7 +31,7 @@
 
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-        <nav class="navbar navbar-inverse">
+<!--        <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -92,11 +92,13 @@
                 </div>
             </div>
         </nav>
-        <br>
+        <br>-->
 
-        <sec:authorize access="hasRole('ROLE_USER')">
+        <%--<sec:authorize access="hasRole('ROLE_USER')">--%>
 
-        </sec:authorize>
+        <%--</sec:authorize>--%>
+        
+        <jsp:include page="navbar.jsp"/>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         <h2 style="text-align:center;">Log In</h2>
         <c:if test="${param.login_error == 1}">

@@ -44,6 +44,4 @@ public class IndexController {
         model.addAttribute("recentPosts", publishedBlogs);
         return "index";
     }
-
-    
 }
