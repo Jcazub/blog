@@ -16,9 +16,9 @@ import java.util.Map;
  * @author Jesse
  */
 public interface CategoryService {
-    public Category addCategory(Category category, User user);
-    public Category editCategory(Category category, User user);
-    public void deleteCategory(int categoryID,  User user);
+    public Category addCategory(Category category);
+    public Category editCategory(Category category);
+    public void deleteCategory(int categoryID);
     public Category getCategoryByID(int categoryID);
     public List<Category> getAllCategories();
     public List<Category> seachCategories(Map<SearchTerm, String> criteria);

@@ -102,6 +102,7 @@ public class BlogMappers {
             b.setCreationDate(rs.getTimestamp("creationDate").toLocalDateTime().toLocalDate());
             b.setPublishDate(rs.getTimestamp("publishDate").toLocalDateTime().toLocalDate());
             b.setApprovedDate(rs.getTimestamp("approvedDate").toLocalDateTime().toLocalDate());
+            b.setExpirationDate(rs.getTimestamp("expirationDate").toLocalDateTime().toLocalDate());
             b.setIsApproved(rs.getBoolean("isApproved"));
             
             return b;
@@ -131,6 +132,7 @@ public class BlogMappers {
             r.setCreationDate(rs.getTimestamp("creationDate").toLocalDateTime().toLocalDate());
             r.setPublishDate(rs.getTimestamp("publishDate").toLocalDateTime().toLocalDate());
             r.setApprovedDate(rs.getTimestamp("approvedDate").toLocalDateTime().toLocalDate());
+            r.setExpirationDate(rs.getTimestamp("expirationDate").toLocalDateTime().toLocalDate());
             r.setIsApproved(rs.getBoolean("isApproved"));
             
             return r;

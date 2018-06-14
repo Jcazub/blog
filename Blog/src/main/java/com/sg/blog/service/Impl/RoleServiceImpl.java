@@ -23,33 +23,27 @@ public class RoleServiceImpl extends Service implements RoleService {
     }
 
     @Override
-    public Role addRole(Role role, User user) {
-        if (adminValidation(user)) {
-            if (dataValidation(role)) {
+    public Role addRole(Role role) {
+        if (dataValidation(role)) {
                 roleDao.addRole(role);
                 return role;
             }
-        }
         return null;
     }
 
     @Override
-    public Role editRole(Role role, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfRoleExists(role.getRoleID())) {
+    public Role editRole(Role role) {
+        if (verifyIfRoleExists(role.getRoleID())) {
                 return roleDao.editRole(role);
             }
-        }
         return null;
     }
 
     @Override
-    public void deleteRole(int roleID, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfRoleExists(roleID)) {
+    public void deleteRole(int roleID) {
+        if (verifyIfRoleExists(roleID)) {
                 roleDao.deleteRole(roleID);
             }
-        }
     }
 
     @Override

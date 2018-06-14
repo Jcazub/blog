@@ -1,43 +1,44 @@
 home page
-/post?postID=?
+//post?postID=?
 
 use javascript
-/searchpost [searchTerms:title, content, author, date]
-/searchtags [searchTerms:name]
-/searchcategories [searchTerms: name, desc]
+//searchpost [searchTerms:title, content, author, date]
+//searchtags [searchTerms:name]
+//searchcategories [searchTerms: name, desc]
 
-/login (response body)
-/logout (response body)
-/userportal
+//login (response body)
+//logout (response body)
+//userportal
 
 login portal page
 
-/addPost (response body)
-/editPost (response body)
-/approvePost?postID=?
-/deletePost?postID=?
+//addPost (response body)
+//editPost (response body)
+//approvePost?postID=?
+//deletePost?postID=?
 
 for admins:
-/filterUnapprovedPosts
+//filterUnapprovedPosts
 
-/addPage
-/editPage
-/deletePage
+//addPage
+//editPage
+//deletePage
 
-/addUser
-/editUser
-/promoteUser
-/demoteUser
-/deleteUser
-/displayUser
+//addUser
+//editUser
+//promoteUser
+//demoteUser
+//deleteUser
+//displayUser
 
-/page?pageID=?
+//page?pageID=?
 
-/editTag
+//addTag
+//editTag
 /deleteTag    
 
-/addCategory
-/editCategory
+//addCategory
+//editCategory
 /deleteCategory
 
 tag cloud

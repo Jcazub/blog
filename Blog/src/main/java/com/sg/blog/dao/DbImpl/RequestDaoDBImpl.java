@@ -40,11 +40,11 @@ public class RequestDaoDBImpl implements RequestDao {
     }
 
     //Request SQL
-    private static final String INSERT_REQUEST = "insert into Requests (blogID, userID, categoryID, creationDate, publishDate, approvedDate, isApproved, title, content, requestTypeID) values (?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT_REQUEST = "insert into Requests (blogID, userID, categoryID, creationDate, publishDate, approvedDate, expirationDate, isApproved, title, content, requestTypeID) values (?,?,?,?,?,?,?,?,?,?,?)";
 
     private static final String DELETE_REQUEST = "delete from Requests where BlogID = ?";
 
-    private static final String EDIT_REQUEST = "update Request set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, isApproved = ?, title = ?, content = ?, requestTypeID = ? where BlogID = ?";
+    private static final String EDIT_REQUEST = "update Request set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, expirationDate = ?, isApproved = ?, title = ?, content = ?, requestTypeID = ? where BlogID = ?";
 
     private static final String SELECT_REQUEST = "select * from Requests where BlogID = ?";
 
@@ -82,10 +82,10 @@ public class RequestDaoDBImpl implements RequestDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Request addRequest(Request request) {
         if (request.getRequestType().getRequestType().equals("edit")) {
-            jdbcTemplate.update(INSERT_REQUEST, request.getBlogID(), request.getUser().getUserID(), request.getCategory().getCategoryID(), request.getCreationDate().toString(), request.getPublishDate().toString(), request.getApprovedDate().toString(), request.getIsApproved(), request.getTitle(), request.getContent(), request.getRequestType().getRequestTypeID());
+            jdbcTemplate.update(INSERT_REQUEST, request.getBlogID(), request.getUser().getUserID(), request.getCategory().getCategoryID(), request.getCreationDate().toString(), request.getPublishDate().toString(), request.getApprovedDate().toString(), request.getExpirationDate().toString(), request.getIsApproved(), request.getTitle(), request.getContent(), request.getRequestType().getRequestTypeID());
             insertIntoRequestsTags(request);
         } else {
-            jdbcTemplate.update(INSERT_REQUEST, request.getBlogID(), request.getUser().getUserID(), null, null, null, null, null, null, null, request.getRequestType().getRequestTypeID());
+            jdbcTemplate.update(INSERT_REQUEST, request.getBlogID(), request.getUser().getUserID(), null, null, null, null, null, null, null, null, request.getRequestType().getRequestTypeID());
         }
         return request;
     }
@@ -95,10 +95,10 @@ public class RequestDaoDBImpl implements RequestDao {
     public Request editRequest(Request request) {
         jdbcTemplate.update(DELETE_FROM_REQUESTS_TAGS, request.getBlogID());
         if (request.getRequestType().getRequestType().equals("delete")) {
-            jdbcTemplate.update(EDIT_REQUEST, request.getUser().getUserID(), request.getCategory().getCategoryID(), request.getCreationDate().toString(), request.getPublishDate().toString(), request.getApprovedDate().toString(), request.getIsApproved(), request.getTitle(), request.getContent(), request.getRequestType().getRequestTypeID(), request.getBlogID());
+            jdbcTemplate.update(EDIT_REQUEST, request.getUser().getUserID(), request.getCategory().getCategoryID(), request.getCreationDate().toString(), request.getPublishDate().toString(), request.getApprovedDate().toString(), request.getExpirationDate().toString(), request.getIsApproved(), request.getTitle(), request.getContent(), request.getRequestType().getRequestTypeID(), request.getBlogID());
             insertIntoRequestsTags(request);
         } else {
-            jdbcTemplate.update(EDIT_REQUEST, request.getUser().getUserID(), null, null, null, null, null, null, null, request.getRequestType().getRequestTypeID(), request.getBlogID());
+            jdbcTemplate.update(EDIT_REQUEST, request.getUser().getUserID(), null, null, null, null, null, null, null, null, request.getRequestType().getRequestTypeID(), request.getBlogID());
         }
         return request;
     }
