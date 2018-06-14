@@ -5,7 +5,6 @@
  */
 package com.sg.blog.controller;
 
-import com.sg.blog.dao.CategoryDao;
 import com.sg.blog.model.Category;
 import com.sg.blog.model.SearchTerm;
 import com.sg.blog.service.CategoryService;
@@ -28,11 +27,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CategoryController {
 
     CategoryService categoryService;
-    CategoryDao categoryDao;
 
     @Inject
-    public CategoryController(CategoryDao categoryDao) {
-        this.categoryDao = categoryDao;
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @RequestMapping(value = "/search/categories", method = RequestMethod.POST)
@@ -68,11 +66,10 @@ public class CategoryController {
             criteriaMap.put(SearchTerm.CATEGORYNAME, currentTerm);
         }
         
-        return categoryDao.seachCategories(criteriaMap);
+        return categoryService.seachCategories(criteriaMap);
     }
     
     @RequestMapping(value = "/editCategory", method = RequestMethod.POST)
-    @ResponseBody
     public String editCategory(HttpServletRequest request) {
         Integer i = Integer.parseInt(request.getParameter("catID"));
         Category c = categoryService.getCategoryByID(i);
@@ -87,18 +84,24 @@ public class CategoryController {
             c.setDesc(desc);
         }
         
-        //edit category
         categoryService.editCategory(c);
         
         return "redirect:/dashboard";
     }
     
     @RequestMapping(value = "addCategory", method = RequestMethod.POST)
-    @ResponseBody
     public String addCategory(HttpServletRequest request) {
         Category c = new Category();
-        
-        return "/";
+        c.setName(request.getParameter("dashboard-catNameAdd"));
+        c.setDesc(request.getParameter("dashboard-catDescAdd"));
+        categoryService.addCategory(c);
+        return "redirect:/dashboard";
+    }
+    
+    @RequestMapping(value = "deleteCategory", method = RequestMethod.GET)
+    public String deleteCategory(HttpServletRequest request) {
+        categoryService.deleteCategory(Integer.parseInt(request.getParameter("categoryID")));
+        return "redirect:/dashboard";
     }
 
 }

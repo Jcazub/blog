@@ -98,7 +98,7 @@
         </sec:authorize>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         
-        <h1>TinyMCE Quick Start Guide</h1>
+        <h1>Create Post</h1>
         <form id="getpostform" 
               method="POST"
               action="addPost"

@@ -41,11 +41,11 @@ public class BlogDaoDBImpl implements BlogDao {
     }
     
     //Blog SQL
-    private static final String INSERT_BLOG = "insert into Blogs (userID, categoryID, creationDate, publishDate, approvedDate, isApproved, title, content) values (?,?,?,?,?,?,?,?)";
+    private static final String INSERT_BLOG = "insert into Blogs (userID, categoryID, creationDate, publishDate, approvedDate, isApproved, title, content, expirationDate) values (?,?,?,?,?,?,?,?,?)";
     
     private static final String DELETE_BLOG = "delete from Blogs where BlogID = ?";
     
-    private static final String EDIT_BLOG = "update Blogs set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, isApproved = ?, title = ?, content = ? where BlogID = ?";
+    private static final String EDIT_BLOG = "update Blogs set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, isApproved = ?, title = ?, content = ?, expirationDate = ? where BlogID = ?";
     
     private static final String SELECT_BLOG = "select * from Blogs where BlogID = ?";
     
@@ -81,7 +81,7 @@ public class BlogDaoDBImpl implements BlogDao {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Blog addBlog(Blog blog) {
-        jdbcTemplate.update(INSERT_BLOG, blog.getUser().getUserID(), blog.getCategory().getCategoryID(), blog.getCreationDate().toString(), blog.getPublishDate().toString(), blog.getApprovedDate().toString(), blog.getIsApproved(), blog.getTitle(), blog.getContent());
+        jdbcTemplate.update(INSERT_BLOG, blog.getUser().getUserID(), blog.getCategory().getCategoryID(), blog.getCreationDate().toString(), blog.getPublishDate().toString(), blog.getApprovedDate().toString(), blog.getIsApproved(), blog.getTitle(), blog.getContent(), blog.getExpirationDate().toString());
         blog.setBlogID(jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class));
         insertIntoBlogsTags(blog);
         return blog;
@@ -91,7 +91,7 @@ public class BlogDaoDBImpl implements BlogDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Blog editBlog(Blog blog) {
         jdbcTemplate.update(DELETE_FROM_BLOGS_TAGS, blog.getBlogID());
-        jdbcTemplate.update(EDIT_BLOG, blog.getUser().getUserID(), blog.getCategory().getCategoryID(), blog.getCreationDate().toString(), blog.getPublishDate().toString(), blog.getApprovedDate().toString(), blog.getIsApproved(), blog.getTitle(), blog.getContent(), blog.getBlogID());
+        jdbcTemplate.update(EDIT_BLOG, blog.getUser().getUserID(), blog.getCategory().getCategoryID(), blog.getCreationDate().toString(), blog.getPublishDate().toString(), blog.getApprovedDate().toString(), blog.getIsApproved(), blog.getTitle(), blog.getContent(), blog.getExpirationDate().toString(), blog.getBlogID());
         insertIntoBlogsTags(blog);
         return blog;
     }

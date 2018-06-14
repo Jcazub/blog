@@ -56,6 +56,11 @@ public class UserServiceImpl extends Service implements UserService {
     public User getUserByID(int userID) {
         return userDao.getUserByID(userID);
     }
+    
+    @Override
+    public User getUserByUserName(String userName) {
+        return userDao.getUserByUserName(userName);
+    }
 
     @Override
     public List<User> getAllUsers() {
@@ -89,6 +94,7 @@ public class UserServiceImpl extends Service implements UserService {
                 || "".equals(user.getPassword())
                 || user.getEmail() == null
                 || "".equals(user.getEmail())
+                || user.getRoles() == null
                 || user.getRoles().isEmpty()) {
             return false;
         }

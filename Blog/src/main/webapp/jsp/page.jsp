@@ -76,45 +76,18 @@
         <!-- CONTENT ---------------->
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+            <div class="col-lg-8">
 
-                    <!-- Title -->
-                    <h1 class="mt-4">${post.title}</h1>
+                <!-- Title -->
+                <h1 class="mt-4 text-center">${page.title}</h1>
+                <br>
+                <br>
+                
+                <!-- Post Content -->
+                ${page.content}
 
-                    <!-- Author -->
-                    <p class="lead">
-                        by
-                        <a href="#">${post.user.userName}</a>
-                    </p>
-
-                    <hr>
-
-                    <!-- Date/Time -->
-                    <p>Posted on ${post.publishDate} in <a href="#">${post.category.name}</a></p>
-
-                    <hr>
-
-                    <!-- Preview Image -->
-                    <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
-                    <hr>
-
-                    <!-- Post Content -->
-                    ${post.content}
-
-                    <div>
-                        <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <c:if test="${post.isApproved == false}">
-                            <a href="${pageContext.request.contextPath}/approvePost?postID=${post.blogID}" class="btn btn-primary">
-                                Approve Post
-                            </a>
-                        </c:if>    
-                    </sec:authorize>
-                    </div>
-                    
-
-                </div>
             </div>
+        </div>
         </div>
 
 

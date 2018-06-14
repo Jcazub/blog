@@ -5,8 +5,12 @@
  */
 package com.sg.blog.controller;
 
+import com.sg.blog.model.Blog;
 import com.sg.blog.service.BlogService;
 import com.sg.blog.service.CategoryService;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +35,11 @@ public class IndexController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String refresh(Model model) {
-        model.addAttribute("posts", blogService.getAllBlogs());
+        List<Blog> allPosts = blogService.getAllBlogs();
+        List<Blog> publishedBlogs = allPosts.stream()
+                .filter(b -> (LocalDate.now().isEqual(b.getPublishDate()) || LocalDate.now().isAfter(b.getPublishDate())) && LocalDate.now().isBefore(b.getExpirationDate()) && b.getIsApproved() == true)
+                .collect(Collectors.toList());
+        model.addAttribute("posts", publishedBlogs);
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("recentPosts", blogService.getAllBlogs());
         return "index";

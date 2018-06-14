@@ -23,6 +23,7 @@ public interface UserService {
     public User editUser(User editedCredentials);
     public void deleteUser(User editedCredentials);
     public User getUserByID(int userID);
+    public User getUserByUserName(String userName);
     public List<User> getAllUsers();
     public List<User> searchUser(Map<SearchTerm, String> criteria);
     public boolean userVerification(User user, User editedCredentials);

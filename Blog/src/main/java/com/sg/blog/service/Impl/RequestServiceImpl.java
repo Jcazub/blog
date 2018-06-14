@@ -18,7 +18,7 @@ import java.util.List;
  * @author Jesse
  */
 public class RequestServiceImpl extends Service implements RequestService {
-    
+
     RequestDao requestDao;
 
     public RequestServiceImpl(RequestDao requestDao, RoleDao roleDao) {
@@ -36,10 +36,10 @@ public class RequestServiceImpl extends Service implements RequestService {
 
     @Override
     public Request editRequest(Request request) {
-        if (verifyIfRequestExists(request.getBlogID())) {     
+        if (verifyIfRequestExists(request.getBlogID())) {
             if (dataValidation(request)) {
-                    return requestDao.editRequest(request);
-                }
+                return requestDao.editRequest(request);
+            }
         }
         return null;
     }
@@ -73,26 +73,26 @@ public class RequestServiceImpl extends Service implements RequestService {
 
     @Override
     public boolean dataValidation(Request blog) {
-       
+
         if ((blog.getUser() == null)
                 || (blog.getBlogID() == 0)
                 || (blog.getRequestType() == null)) {
             return false;
         }
-        
+
         if (blog.getRequestType().getRequestType().equals("edit")) {
             if ((blog.getCreationDate() == null)
-                || (blog.getPublishDate() == null)
-                || (blog.getTitle() == null)
-                || ("".equals(blog.getTitle()))
-                || (blog.getContent() == null)
-                || ("".equals(blog.getContent()))
-                || (blog.getCategory() == null)) {
+                    || (blog.getPublishDate() == null)
+                    || (blog.getExpirationDate() == null)
+                    || (blog.getTitle() == null)
+                    || ("".equals(blog.getTitle()))
+                    || (blog.getContent() == null)
+                    || ("".equals(blog.getContent()))
+                    || (blog.getCategory() == null)) {
                 return false;
             }
         }
         return true;
     }
-    
-    
+
 }

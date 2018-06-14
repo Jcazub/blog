@@ -106,7 +106,7 @@
         </sec:authorize>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SIDE BAR -->
-        <div class="container">
+<!--        <div class="container">
             <div class="w3-card col-md-2" role="navigation">
                 <div class="sidebar-nav navbar-collapse" data-spy="affix" data-offset-top="205">
                     <ul class="nav" id="side-menu">
@@ -120,7 +120,7 @@
                                     </button>
                                 </span>
                             </div>
-                            <!-- /input-group -->
+                             /input-group 
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -132,163 +132,133 @@
                             <ul class="dropdown-menu">                         
                                 <li><a href="${pageContext.request.contextPath}/createPost">Create Post</a></li>                           
                             </ul>
-                            <!-- /.nav-second-level -->
+                             /.nav-second-level 
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"> </i> Manage Users<span class="fa arrow"></span></a>                           
-                            <!-- /.nav-second-level -->
+                             /.nav-second-level 
                         </li>                  
                         <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i>Manage Pages<span class="fa arrow"></span></a>
 
-                            <!-- /.nav-second-level -->
+                             /.nav-second-level 
                         </li>
                     </ul>
                 </div>
             </div>
-            <br>
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TIMELINE           -->          
-            <!--        <div class="col-md-6">
-                        <div class="w3-card panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
-                            </div>
-                             /.panel-heading 
-                            <div class="panel-body">
-                                <ul class="timeline">
-                                    <li>
-                                        <div class="timeline-badge"><i class="fa fa-check"></i>
-                                        </div>
-                                        <div class="timeline-panel">
-                                            <div class="timeline-heading">
-            <c:forEach var="currentBlog" items="${posts}" >
-                <div class="post-preview">
-                    <a href="${pageContext.request.contextPath}/post?postID=${currentBlog.blogID}">
-                        <h2 class="post-title">
-                ${currentBlog.title}
-            </h2>                             
-        </a>
-    </div>
-    <div class="post-content">
-        <p>${currentBlog.content}</p>                                     
-            </c:forEach>
-            <hr>
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-gear"></i> <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a>
-                    </li>
-                    <li><a href="#">Another action</a>
-                    </li>
-                    <li><a href="#">Something else here</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</li>
-<li class="timeline-inverted">
-<div class="timeline-badge warning"><i class="fa fa-check"></i>
-</div>
-<div class="timeline-panel">
-    <div class="timeline-heading">
-        <h4 class="timeline-title">Lorem ipsum dolor</h4>
-    </div>
-    <div class="timeline-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem quibusdam, tenetur commodi provident cumque magni voluptatem libero, quis rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia repellendus.</p>
-        <hr>
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-gear"></i> <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a>
-                </li>
-                <li><a href="#">Another action</a>
-                </li>
-                <li><a href="#">Something else here</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-</li>                                                                
+            <br>-->
 
-</ul>
-</div>
-/.panel-body 
-</div>
-/.panel 
-</div>-->
-
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NOTIFICATION PANEL -->           
-            <!--        <div class="col-lg-4">
-                        <div class="w3-card panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                            </div>
-                             /.panel-heading 
-                            <div class="panel-body">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item">
-                                        <i class="fa fa-comment fa-fw"></i> New Comment
-                                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                        <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <i class="fa fa-tasks fa-fw"></i> New Task
-                                        <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                        </span>
-                                    </a>
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PUBLISHED POSTS        -->  
+            <div class="col-lg-4">
+                <div class="w3-card panel-default" id="pblogAccordion">
+                    <div class="panel-heading">
+                        <i class="glyphicon glyphicon-edit fa-fw"></i> Published Blogs
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">  
+                        <c:forEach var="blog" items="${publishedBlogs}">
+                            <div class="card">
+                                <div class="card-header" id="pblogHeading${blog.blogID}">
+                                    <h5 class="mb-0">
+                                        <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapsepBlog${blog.blogID}" aria-expanded="true" aria-controls="collapsepBlog${blog.blogID}">
+                                            ${blog.title}
+                                        </a>
+                                    </h5>
                                 </div>
-                                 /.list-group 
-                                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                            </div>
-                             /.panel-body 
-                        </div>
-                    </div>          -->
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CATEGORIES         --> 
 
+                                <div id="collapsepBlog${blog.blogID}" class="collapse" aria-labelledby="pblogHeading${blog.blogID}" data-parent="#pblogAccordion">
+                                    <div class="card-body"> 
+                                        <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View</a>
+                                        <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
+                                        <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
+                                    </div>
+                                </div>
 
-            <div class="col-md-2">
-                <div class="panel-body">
-                    <div class="w3-card panel-group" >
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#categoryAccordion" href="#collapseOne">Category Management</a>
-                                </h4>
                             </div>
-                            <!-- .panel-heading -->
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <c:forEach var="currentCategory" items="${categories}" >
-                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">${currentCategory.name}</span>
-        <!--                                <span>${currentCategory.desc}</span>-->
-                                </c:forEach>                                       </div>
-                        </div>
-                    </div>                                                                      
+                        </c:forEach>
+                    </div>
+
+                    <!-- /.list-group -->
+                    <a href="${pageContext.request.contextPath}/displayCreatePage" class="btn btn-default btn-block">Add New Blog Post</a>
                 </div>
-            </div>    
+                <!-- /.panel-body -->
+            </div>
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UNAPPROVED POSTS        -->  
+            <div class="col-lg-4">
+                <div class="w3-card panel-default" id="uablogAccordion">
+                    <div class="panel-heading">
+                        <i class="glyphicon glyphicon-edit fa-fw"></i> Unapproved Blogs
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">  
+                        <c:forEach var="blog" items="${unapprovedBlogs}">
+                            <div class="card">
+                                <div class="card-header" id="uablogHeading${blog.blogID}">
+                                    <h5 class="mb-0">
+                                        <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapseuaBlog${blog.blogID}" aria-expanded="true" aria-controls="collapseuaBlog${blog.blogID}">
+                                            ${blog.title}
+                                        </a>
+                                    </h5>
+                                </div>
+
+                                <div id="collapseuaBlog${blog.blogID}" class="collapse" aria-labelledby="uablogHeading${blog.blogID}" data-parent="#uablogAccordion">
+                                    <div class="card-body"> 
+                                        <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View</a>
+                                        <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
+                                        <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
+                                        <a href="${pageContext.request.contextPath}/approvePost?postID=${blog.blogID}" class="btn btn-primary">Approve Post</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </c:forEach>
+                    </div>
+
+                    <!-- /.list-group -->
+                    <a href="${pageContext.request.contextPath}/displayCreatePage" class="btn btn-default btn-block">Add New Blog Post</a>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~STATIC PAGES         -->  
+            <div class="col-lg-4">
+                <div class="w3-card panel-default" id="pageAccordion">
+                    <div class="panel-heading">
+                        <i class="fa fa-files-o fa-fw"></i> Static Pages
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">  
+                        <c:forEach var="currentPage" items="${pages}">
+                            <div class="card">
+                                <div class="card-header" id="pageHeading${currentPage.staticID}">
+                                    <h5 class="mb-0">
+                                        <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapsePage${currentPage.staticID}" aria-expanded="true" aria-controls="collapsePage${currentPage.staticID}">
+                                            ${currentPage.title}
+                                        </a>
+                                    </h5>
+                                </div>
+
+                                <div id="collapsePage${currentPage.staticID}" class="collapse" aria-labelledby="pageHeading${currentPage.staticID}" data-parent="#pageAccordion">
+                                    <div class="card-body"> 
+                                        <a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}" class="btn btn-danger">View</a>
+                                        <a href="${pageContext.request.contextPath}/displayEditPage?pageID=${currentPage.staticID}" class="btn btn-danger">Edit</a>  
+                                        <a href="${pageContext.request.contextPath}/deletePage?pageID=${currentPage.staticID}" class="btn btn-danger">Delete</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </c:forEach>
+                    </div>
+
+                    <!-- /.list-group -->
+                    <a href="${pageContext.request.contextPath}/displayCreatePage" class="btn btn-default btn-block">Add New Static Page</a>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CATEGORIES         -->    
 
             <div class="col-lg-4">
                 <div class="w3-card panel-default" id="categoryAccordion">
@@ -310,10 +280,12 @@
                                 <div id="collapseCat${currentCategory.categoryID}" class="collapse" aria-labelledby="catHeading${currentCategory.categoryID}" data-parent="#categoryAccordion">
                                     <div class="card-body"> 
                                         <div id="collapseCatEdit${currentCategory.categoryID}" class="collapse" aria-labelledby="catHeading${currentCategory.categoryID}" data-parent="#categoryAccordion">
-                                            <form> 
+                                            <form
+                                                method="POST"
+                                                action="editCategory"> 
                                                 <input name="catID" value="${currentCategory.categoryID}" hidden>
                                                 <div class="form-group">
-                                                    <label for="dashboard-catName${currentCategory.categoryID}">CategoryName:</label>
+                                                    <label for="dashboard-catName${currentCategory.categoryID}">Category Name:</label>
                                                     <input type="text" 
                                                            class="form-control"
                                                            placeholder="${currentCategory.name}"
@@ -332,56 +304,67 @@
                                                            id="dashboard-catDesc${currentCategory.categoryID}"
                                                            name="dashboard-catDesc${currentCategory.categoryID}">
                                                 </div> 
-                                                
-                                                
-                                                
+
+                                                <div class="form-group">
+                                                    <input type="submit" class ="btn btn-default" value="Confirm Edit"/>
+                                                </div>
+
                                             </form>
 
                                         </div>
 
                                         <a data-toggle="collapse" data-target="#collapseCatEdit${currentCategory.categoryID}" aria-expanded="true" aria-controls="collapseCatEdit${currentCategory.categoryID}" class="btn btn-primary">Edit</a>   
-                                        <a href="#" class="btn btn-danger">Delete</a>
+                                        <a href="${pageContext.request.contextPath}/deleteCategory?categoryID=${currentCategory.categoryID}" class="btn btn-danger">Delete</a>
                                     </div>
                                 </div>
 
                             </div>
                         </c:forEach>
                     </div>
+
+                    <div id="collapseCatAdd" class="collapse" aria-labelledby="catHeading" data-parent="#categoryAccordion">
+                        <form
+                            method="POST"
+                            action="addCategory">  
+                            <div class="form-group">
+                                <label for="dashboard-catNameAdd">Category Name:</label>
+                                <input type="text" 
+                                       class="form-control"
+                                       placeholder="Name"
+                                       maxlength="50"
+                                       required
+                                       id="dashboard-catNameAdd"
+                                       name="dashboard-catNameAdd">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dashboard-catDescAdd">Description:</label>
+                                <input type="text" 
+                                       class="form-control"
+                                       placeholder="Description"
+                                       maxlength="50"
+                                       id="dashboard-catDescAdd"
+                                       name="dashboard-catDescAdd">
+                            </div> 
+
+                            <div class="form-group">
+                                <input type="submit" class ="btn btn-default" value="Add Category"/>
+                            </div>
+
+                        </form>
+
+                    </div>
                     <!-- /.list-group -->
-                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                    <a data-toggle="collapse" data-target="#collapseCatAdd" aria-expanded="true" aria-controls="collapseCatAdd" class="btn btn-default btn-block">Add New Category</a>
                 </div>
                 <!-- /.panel-body -->
             </div> 
-
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TAGS               -->
-            <div class="col-md-2">
-                <div class="panel-body">
-                    <div class="w3-card panel-group" id="tagAccordion">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#tagAccordion" href="#collapseTags">Tags</a>
-                                </h4>
-                            </div>                            
-                            <!-- .panel-heading -->
-                        </div>
-                        <div id="collapseTags" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <c:forEach var="currentTag" items="${tags}" >
-                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">${currentTag.name}</span>
-        <!--                                <span>${currentTag.name}</span>-->
-                                </c:forEach> 
-                            </div>
-                        </div>                                                                                
-                    </div>
-                </div>               
-            </div>
 
             <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER MANAGEMENT PANEL -->           
             <div class="col-lg-4">
                 <div class="w3-card panel-default" id="userAccordion">
                     <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> User Management
+                        <i class="fa fa-users fa-fw"> </i> User Management
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">  
@@ -421,11 +404,6 @@
                                 </div>
                             </div>
 
-                            <!--                        <a href="#" class="list-group-item">
-                                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                                        </span>
-                                                    </a>-->
                         </c:forEach>
                     </div>
                     <!-- /.list-group -->

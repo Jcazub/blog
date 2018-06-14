@@ -80,6 +80,7 @@ public class BlogServiceImpl extends Service implements BlogService {
     public boolean dataValidation(Blog blog) {
         if ((blog.getCreationDate() == null)
                 || (blog.getPublishDate() == null)
+                || (blog.getExpirationDate() == null)
                 || (blog.getTitle() == null)
                 || ("".equals(blog.getTitle()))
                 || (blog.getContent() == null)
