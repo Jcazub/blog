@@ -41,7 +41,7 @@ public class IndexController {
                 .collect(Collectors.toList());
         model.addAttribute("posts", publishedBlogs);
         model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("recentPosts", blogService.getAllBlogs());
+        model.addAttribute("recentPosts", publishedBlogs);
         return "index";
     }
 

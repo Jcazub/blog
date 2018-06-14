@@ -97,64 +97,67 @@
 
         </sec:authorize>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
-        
-        <h1>Create Post</h1>
-        <form id="getpostform" 
-              method="POST"
-              action="addPost"
-              class="form-horizontal">
 
-            <div class="form-group">
-                <label for="title" class="col-md-2 control-label">Title:</label>
-                <div class="col-md-2">
-                    <input type="text" 
-                           class="form-control" 
-                           name="title" 
-                           placeholder="Title"
-                           maxlength="50"
-                           required/>
+        <div class="container">
+            <h1 class="text-center">Create Post</h1>
+            <br>
+            <form id="getpostform" 
+                  method="POST"
+                  action="addPost"
+                  class="form-horizontal">
+                <div class="form-group">
+                    <label for="title" class="col-md-2 control-label">Title:</label>
+                    <div class="col-md-2">
+                        <input type="text" 
+                               class="form-control" 
+                               name="title" 
+                               placeholder="Title"
+                               maxlength="50"
+                               required/>
+                    </div>
+
+                    <label for="categorySelect" class="col-md-2 control-label">Category:</label>
+                    <div class="col-md-4">
+                        <select name="categorySelect" class="form-control">
+                            <c:forEach var="currentCategory" items="${categories}">
+                                <option value="${currentCategory.categoryID}">${currentCategory.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
 
-                <label for="categorySelect" class="col-md-2 control-label">Category:</label>
-                <div class="col-md-4">
-                    <select name="categorySelect" class="col-md-2">
-                        <c:forEach var="currentCategory" items="${categories}">
-                            <option value="${currentCategory.categoryID}">${currentCategory.name}</option>
-                        </c:forEach>
-                    </select>
+                <!--            <div class="form-group">
+                                <div class="col-md-6">
+                                                 
+                                </div>
+                            </div>-->
+
+                <textarea name="content" id="texteditor"></textarea>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label for="publishDate" class="col-md-2 control-label">Publish Date:</label>
+                        <input type="date" class="form-control" name="publishDate" placeholder="Publish Date" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="expirationDate" class="col-md-2 control-label">Expiration Date:</label>
+                        <input type="date" class="form-control" name="expirationDate" placeholder="Expiration Date" required/>
+                    </div>
                 </div>
-            </div>
 
-            <!--            <div class="form-group">
-                            <div class="col-md-6">
-                                             
-                            </div>
-                        </div>-->
-
-            <textarea name="content" id="texteditor"></textarea>
-
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label for="publishDate" class="col-md-2 control-label">Publish Date:</label>
-                    <input type="date" name="publishDate" placeholder="Publish Date" required/>
+                <!-- tags -->
+                <div class="bs-example">         
+                    <label for="tagsSelect" class="col-md-2 control-label">Tags:</label>
+                    <select multiple data-role="tagsinput" name="tagsSelect">
+                    </select> 
                 </div>
-                <div class="col-md-4">
-                    <label for="expirationDate" class="col-md-2 control-label">Expiration Date:</label>
-                    <input type="date" name="expirationDate" placeholder="Expiration Date" required/>
+
+                <div class="form-group">
+                    <input type="submit" class ="btn btn-default" value="Create Post"/>
                 </div>
-            </div>
+            </form>
+        </div>
 
-            <!-- tags -->
-            <div class="bs-example">         
-                <label for="tagsSelect" class="col-md-2 control-label">Tags:</label>
-                <select multiple data-role="tagsinput" name="tagsSelect">
-                </select> 
-            </div>
-
-            <div class="form-group">
-                <input type="submit" class ="btn btn-default" value="Create Post"/>
-            </div>
-        </form>      
 
         <footer class="container-fluid text-center main-footer">
             <p>	&copy; codeKages </p>
