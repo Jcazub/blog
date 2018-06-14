@@ -8,7 +8,7 @@
     
     <head>
        
-        <title>Bootstrap Example</title>
+        <title>Home</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->
@@ -202,19 +202,17 @@
                         </div>  
 
                         <!--=====================
-                              NEWSLATTER
+                              NEWSLETTER
                        ======================-->
                         <div class="widget-sidebar">
-                            <h2 class="title-widget-sidebar">// NEWSLATTER</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ut .</p>  
+                            <h2 class="title-widget-sidebar">// NEWSLETTER</h2>
+                            <p>Enter your email below to get the latest updates.</p>  
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
                                 <input id="email" type="text" class="form-control" name="email" placeholder="Email">
                             </div>
-                            <button type="button" class="btn btn-warning">Warning</button>
+                            <button type="button" class="btn btn-warning">Subscribe</button>
                         </div>  
-
-
                     </div>
                 </div>
             </div>
@@ -234,7 +232,7 @@
         </form> 
 
         <div class="list-group" id="index-categories">
-            <li>SFsafsf</li>
+            <!--<li>SFsafsf</li>-->
         </div>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <footer class="container-fluid text-center main-footer">

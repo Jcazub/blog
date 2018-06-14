@@ -105,6 +105,7 @@ public class PostController {
 
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public String displayPost(HttpServletRequest request, Model model) {
+        
         Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
 
         model.addAttribute("post", b);

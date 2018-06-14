@@ -15,7 +15,7 @@
             });
         </script>
 
-        <title>Bootstrap Example</title>
+        <title>Edit Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->
@@ -98,7 +98,7 @@
         </sec:authorize>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         
-        <h1>TinyMCE Quick Start Guide</h1>
+        <h1>Edit Page</h1>
         <form id="getpostform" 
               method="POST"
               action="editPage"

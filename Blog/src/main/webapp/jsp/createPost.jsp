@@ -15,7 +15,7 @@
             });
         </script>
 
-        <title>Bootstrap Example</title>
+        <title>Create a Post</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->

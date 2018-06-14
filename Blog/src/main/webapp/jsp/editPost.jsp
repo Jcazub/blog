@@ -15,7 +15,7 @@
             });
         </script>
 
-        <title>Bootstrap Example</title>
+        <title>Edit Post</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->
@@ -98,7 +98,7 @@
         </sec:authorize>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         
-        <h1>Create Post</h1>
+        <h1>Edit Post</h1>
         <form id="getpostform" 
               method="POST"
               action="editPost"
