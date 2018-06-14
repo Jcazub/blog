@@ -36,29 +36,30 @@ public class UserServiceImpl extends Service implements UserService {
     }
 
     @Override
-    public User editUser(User user, User editedCredentials) {
-        if (userVerification(user, editedCredentials)) {
-            if (dataValidation(editedCredentials)) {
+    public User editUser(User editedCredentials) {
+        if (dataValidation(editedCredentials)) {
                 if (verifyIfUserExists(editedCredentials.getUserID())) {
                     return userDao.editUser(editedCredentials);
                 }
             }
-        }
         return null;
     }
 
     @Override
-    public void deleteUser(User user, User editedCredentials) {
-        if (userVerification(user, editedCredentials)) {
-            if (verifyIfUserExists(editedCredentials.getUserID())) {
+    public void deleteUser(User editedCredentials) {
+        if (verifyIfUserExists(editedCredentials.getUserID())) {
                 userDao.deleteUser(editedCredentials.getUserID());
             }
-        }
     }
 
     @Override
     public User getUserByID(int userID) {
         return userDao.getUserByID(userID);
+    }
+    
+    @Override
+    public User getUserByUserName(String userName) {
+        return userDao.getUserByUserName(userName);
     }
 
     @Override
@@ -93,6 +94,7 @@ public class UserServiceImpl extends Service implements UserService {
                 || "".equals(user.getPassword())
                 || user.getEmail() == null
                 || "".equals(user.getEmail())
+                || user.getRoles() == null
                 || user.getRoles().isEmpty()) {
             return false;
         }

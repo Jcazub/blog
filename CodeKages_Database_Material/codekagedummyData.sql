@@ -30,10 +30,15 @@ VALUES
 ('Politics','Exciting news on politics')-- 5
 ;
 
-INSERT INTO blogs (userID,categoryID,creationDate,publishDate,approvedDate,isApproved,title,content)
+INSERT INTO blogs (userID,categoryID,creationDate,publishDate,approvedDate,isApproved,title,content, expirationDate)
 VALUES
-('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','Gadgets and Robots','Some stuff about gadgets and robots')
+('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','Gadgets and Robots','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
+('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','0','Gadgets and not robots','Some stuff about gadgets and robots','2999-05-31 23:59:59')
 ;
+
+INSERT INTO staticPages (userID, title, content, creationDate)
+VALUES
+('3','testPage','testPage Content', '2018-05-30 23:59:59');
 
 
 INSERT INTO tags (tagName)

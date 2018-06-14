@@ -28,34 +28,49 @@
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
 
         <!-- CONTENT ---------------->
-        <header class="masthead">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                        <div class="post-heading">
-                            <h1>${post.title}</h1>
-                            <h2 class="subheading">${post.title}</h2>
-                            <span class="meta">Posted by
-                                <a href="#">${post.user.userName}</a>
-                                on ${post.publishDate}</span>
-                        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <!-- Title -->
+                    <h1 class="mt-4">${post.title}</h1>
+
+                    <!-- Author -->
+                    <p class="lead">
+                        by
+                        <a href="#">${post.user.userName}</a>
+                    </p>
+
+                    <hr>
+
+                    <!-- Date/Time -->
+                    <p>Posted on ${post.publishDate} in <a href="#">${post.category.name}</a></p>
+
+                    <hr>
+
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+
+                    <hr>
+
+                    <!-- Post Content -->
+                    ${post.content}
+
+                    <div>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <c:if test="${post.isApproved == false}">
+                            <a href="${pageContext.request.contextPath}/approvePost?postID=${post.blogID}" class="btn btn-primary">
+                                Approve Post
+                            </a>
+                        </c:if>    
+                    </sec:authorize>
                     </div>
+                    
+
                 </div>
             </div>
-        </header>
+        </div>
 
-        <article>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                        <p>${post.content}</p>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <hr>
 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <footer class="container-fluid text-center main-footer">
@@ -65,11 +80,9 @@
         <!-- Bootstrap 3 scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- Bootstrap 4 scripts -->
-        <!--        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
+        <!-- Tags scripts -->
+        <script src="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/main.js"></script>
     </body>
 </html>
