@@ -32,7 +32,7 @@
         <intercept-url pattern="/post" 
                        access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/search/posts" 
-                       pattern="IS_AUTHENTICATED_ANONYMOUSLY"/>
+                       access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         
         <!--Post related -->
         <intercept-url pattern="/createPost" 
