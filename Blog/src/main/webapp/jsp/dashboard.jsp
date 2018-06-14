@@ -179,7 +179,7 @@
                     </div>
 
                     <!-- /.list-group -->
-                    <a href="${pageContext.request.contextPath}/displayCreatePage" class="btn btn-default btn-block">Add New Blog Post</a>
+                    <a href="${pageContext.request.contextPath}/createPost" class="btn btn-default btn-block">Add New Blog Post</a>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -216,7 +216,7 @@
                     </div>
 
                     <!-- /.list-group -->
-                    <a href="${pageContext.request.contextPath}/displayCreatePage" class="btn btn-default btn-block">Add New Blog Post</a>
+                    <a href="${pageContext.request.contextPath}/createPost" class="btn btn-default btn-block">Add New Blog Post</a>
                 </div>
                 <!-- /.panel-body -->
             </div>
