@@ -180,7 +180,7 @@
                                             <div class="post-img">
                                                 <img src="https://lh3.googleusercontent.com/-ndZJOGgvYQ4/WM1ZI8dH86I/AAAAAAAADeo/l67ZqZnRUO8QXIQi38bEXuxqHfVX0TV2gCJoC/w424-h318-n-rw/thumbnail8.jpg" class="img-responsive">
                                             </div>
-                                            <a href="#"><h5>${currentRecentPost.title}</h5></a>
+                                            <a href="${pageContext.request.contextPath}/post?postID=${currentRecentPost.blogID}"><h5>${currentRecentPost.title}</h5></a>
                                             <p><small><i class="fa fa-calendar" data-original-title="" title=""></i>${currentRecentPost.publishDate}</small></p>
                                         </li>
                                         <!-- put conditional if last entry -->
@@ -202,19 +202,17 @@
                         </div>  
 
                         <!--=====================
-                              NEWSLATTER
+                              NEWSLETTER
                        ======================-->
                         <div class="widget-sidebar">
-                            <h2 class="title-widget-sidebar">// NEWSLATTER</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ut .</p>  
+                            <h2 class="title-widget-sidebar">// NEWSLETTER</h2>
+                            <p>Enter your email below to get the latest updates.</p>  
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
                                 <input id="email" type="text" class="form-control" name="email" placeholder="Email">
                             </div>
-                            <button type="button" class="btn btn-warning">Warning</button>
+                            <button type="button" class="btn btn-warning">Subscribe</button>
                         </div>  
-
-
                     </div>
                 </div>
             </div>
@@ -234,7 +232,7 @@
         </form> 
 
         <div class="list-group" id="index-categories">
-            <li>SFsafsf</li>
+            <!--<li>SFsafsf</li>-->
         </div>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <footer class="container-fluid text-center main-footer">
