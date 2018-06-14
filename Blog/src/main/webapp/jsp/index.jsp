@@ -24,68 +24,68 @@
 
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-        <!--        <nav class="navbar navbar-inverse">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>                        
-                            </button>
-                            <a class="navbar-brand" href="${pageContext.request.contextPath}/"><img src="https://lh3.googleusercontent.com/-N4NB2F966TU/WM7V1KYusRI/AAAAAAAADtA/fPvGVNzOkCo7ZMqLI6pPITE9ZF7NONmawCJoC/w185-h40-p-rw/logo.png"></a>
-                        </div>
-                        <div class="collapse navbar-collapse" id="myNavbar">
-                            <ul class="nav navbar-nav">
-                                <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                                <li><a href="#">About</a></li>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/"><img src="https://lh3.googleusercontent.com/-N4NB2F966TU/WM7V1KYusRI/AAAAAAAADtA/fPvGVNzOkCo7ZMqLI6pPITE9ZF7NONmawCJoC/w185-h40-p-rw/logo.png"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Page 1-1</a></li>
+                                <li><a href="#">Page 1-2</a></li>
+                                <li><a href="#">Page 1-3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-left">
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" id="post-search">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" id="search-posts-btn">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                        <c:choose>
+                            <c:when test="${pageContext.request.userPrincipal.name != null}">
+
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome, ${pageContext.request.userPrincipal.name}<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Page 1-1</a></li>
-                                        <li><a href="#">Page 1-2</a></li>
-                                        <li><a href="#">Page 1-3</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/dashboard">Go to Dashboard</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/viewUserDetails">View Account Settings</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/createPost">Create Post</a></li>
                                     </ul>
                                 </li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <form class="navbar-form navbar-left">
-        
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" id="post-search">
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-default" id="search-posts-btn">
-                                                <i class="glyphicon glyphicon-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-        
-                                </form>
-        
-        
-        <c:choose>
-            <c:when test="${pageContext.request.userPrincipal.name != null}">
+                                <li role="presentation"><a href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                </c:otherwise>
+                            </c:choose>
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome, ${pageContext.request.userPrincipal.name}<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/dashboard">Go to Dashboard</a></li>
-                        <li><a href="${pageContext.request.contextPath}/viewUserDetails">View Account Settings</a></li>
-                        <li><a href="${pageContext.request.contextPath}/createPost">Create Post</a></li>
                     </ul>
-                </li>
-                <li role="presentation"><a href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-            </c:when>
-            <c:otherwise>
-            <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </c:otherwise>
-        </c:choose>
+                </div>
+            </div>
+        </nav>
 
-</ul>
-</div>
-</div>
-</nav>-->
-        <jsp:include page="navbar.jsp"/>
         <br>
 
         <sec:authorize access="hasRole('ROLE_USER')">

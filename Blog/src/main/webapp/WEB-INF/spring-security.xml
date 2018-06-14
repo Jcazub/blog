@@ -31,6 +31,8 @@
                        access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/post" 
                        access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <intercept-url pattern="/search/posts" 
+                       pattern="IS_AUTHENTICATED_ANONYMOUSLY"/>
         
         <!--Post related -->
         <intercept-url pattern="/createPost" 
@@ -43,7 +45,7 @@
                        access="ROLE_ADMIN" /> 
            
         <intercept-url pattern="/**"
-                       access="IS_AUTHENTICATED_ANONYMOUSLY" />
+                       access="ROLE_USER" />
     </http>
     <authentication-manager>
         <authentication-provider>

@@ -5,9 +5,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html class="index-html" lang="en">
-    
-    <head>
 
+    <head>
         <title>View Post</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,13 +14,27 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" id="bootstrap-css">
         <!-- Tags CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.css">
-
         <!-- Main CSS -->  
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/bp.css" rel="stylesheet">
+        <style>
+            #tagcloud a {
+                text-decoration: none;
+                color: white;
+                display: inline-block;
+                padding: 5px;
+                margin: 0 7px 7px 0;
+                border-radius: 5px;
+            }
+
+            sup {
+                padding-left: 2px;
+            }
+        </style>
+
     </head>
-    
+
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
         <nav class="navbar navbar-inverse">
@@ -123,31 +136,50 @@
 
                     <div>
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <c:if test="${post.isApproved == false}">
-                            <a href="${pageContext.request.contextPath}/approvePost?postID=${post.blogID}" class="btn btn-primary">
-                                Approve Post
-                            </a>
-                        </c:if>    
-                    </sec:authorize>
+                            <c:if test="${post.isApproved == false}">
+                                <a href="${pageContext.request.contextPath}/approvePost?postID=${post.blogID}" class="btn btn-primary">
+                                    Approve Post
+                                </a>
+                            </c:if>    
+                        </sec:authorize>
                     </div>
-                    
+
 
                 </div>
             </div>
+            <br>
+            <div id="tagcloud">
+                <c:forEach var="tag" items="${post.tags}">
+                    <c:set var="rand"><%= (int) (Math.random() * 100) %></c:set>
+                    <a href="#" rel='${rand}'><span>${tag.name}<sup></sup></span></a>
+                            </c:forEach>
+
+            </div>
+            
         </div>
+
 
 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <footer class="container-fluid text-center main-footer">
             <p>	&copy; codeKages </p>
         </footer>
+
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- Tags scripts -->
         <script src="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.min.js"></script>
+
+        <script src="${pageContext.request.contextPath}/tags/tagcloud.js"></script>
         <!-- Personal Scripts -->
-        <script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/js/main.js"></script> 
+        <script>
+            $("#tagcloud a").tagcloud();
+        </script>
+
     </body>
 </html>

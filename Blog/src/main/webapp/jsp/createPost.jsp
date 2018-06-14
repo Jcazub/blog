@@ -135,14 +135,12 @@
                 <textarea name="content" id="texteditor"></textarea>
                 <br>
                 <div class="form-group">
-                    <div class="col-md-4">
-                        <label for="publishDate" class="col-md-2 control-label">Publish Date:</label>
-                        <div class="col-md-12">
+                    <label for="publishDate" class="col-md-2 control-label">Publish Date:</label>
+                        <div class="col-md-4">
                             <input type="date" class="form-control" name="publishDate" placeholder="Publish Date" required/>
                         </div>
-                    </div>
+                    <label for="expirationDate" class="col-md-2 control-label">Expiration Date:</label>
                     <div class="col-md-4">
-                        <label for="expirationDate" class="col-md-2 control-label">Expiration Date:</label>
                         <input type="date" class="form-control" name="expirationDate" placeholder="Expiration Date" required/>
                     </div>
                 </div>
@@ -155,7 +153,10 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" class ="btn btn-default" value="Create Post"/>
+                    <div class="col-md-offset-5 col-md-8">
+                        <input type="submit" class ="btn btn-default" value="Create Post"/>
+                    </div>
+                    
                 </div>
             </form>
         </div>
