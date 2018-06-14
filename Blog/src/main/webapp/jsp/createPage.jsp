@@ -15,7 +15,7 @@
         </script>
 
 
-        <title>Create a Post</title>
+        <title>Create a Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 4 core CSS -->
@@ -31,14 +31,13 @@
         <jsp:include page="navbar.jsp"/> 
         <!-- NAV END -->
         
-        <h1>Create a Post</h1>
+        <h1>Create a Page</h1>
         <form id="getpostform" 
               method="POST"
-              action="addPost">
-            <input type="text" name="title" placeholder="Title"/> 
+              action="addPage">
+            <input type="text" name="title" placeholder="Page Title"/> 
             <textarea name="content" class="tinymce" id="texteditor" required>Type Content Here!</textarea>
-            <input type="date" name="publishDate" placeholder="Publish Date"/>
-            <input type="submit" class ="btn btn-default" value="Create Post"/>
+            <input type="submit" class ="btn btn-default" value="Create Page"/>
         </form>      
       
         <footer class="container-fluid text-center main-footer">
@@ -58,3 +57,4 @@
         <script type="text/javascript" src="js/getPost.js"></script>
     </body>
 </html>
+

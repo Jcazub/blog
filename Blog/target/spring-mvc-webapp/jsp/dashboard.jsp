@@ -26,50 +26,7 @@
     </head>
     <body>       
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-        <div class="w3-bar w3-black">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>                        
-                    </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">codeKages</a> 
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li role="presentation">
-                        <li><a href="#">About</a>
-                        </li>                    
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <c:choose>
-                            <c:when test="${pageContext.request.userPrincipal.name != null}">
-                                <li role="presentation"><a href="${pageContext.request.contextPath}/dashboard">Hello : ${pageContext.request.userPrincipal.name}</a>
-                                </li>
-                                <sec:authorize access="hasRole('ROLE_USER')">
-                                    <li class="active" role="presentation"><a href="${pageContext.request.contextPath}/dashboard"><i class="fa fa-dashboard fa-fw"></i></a>
-                                    </li>
-                                </sec:authorize>
-                                <li><a href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                                <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                    </ul>
-                    <!-- top search -->
-                    <form class="navbar-form navbar-right" action="#">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" name="search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>  
-                </div>
-            </div>
-        </div> 
-        <br>
+        <jsp:include page="navbar.jsp"/> 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TOP NAV END -->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SIDE BAR -->                
         <div class="w3-card col-md-2" role="navigation">

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html class="index-html">
     <head>
-        <title>Home</title>
+        <title>View Post</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 4 core CSS -->
@@ -24,53 +24,7 @@
     <body>
 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-        <nav class="navbar navbar-inverse main-nav">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>                        
-                    </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">codeKages</a> 
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li role="presentation"><a href="#">About</a>
-                        </li>
-                        <sec:authorize access="hasRole('ROLE_USER')">
-                            <li role="presentation">
-                                <a href="${pageContext.request.contextPath}/dashboard">
-                                    Dashboard
-                                </a>
-                            </li>
-                        </sec:authorize>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <c:choose>
-                            <c:when test="${pageContext.request.userPrincipal.name != null}">
-                                <li role="presentation"><a href="${pageContext.request.contextPath}/dashboard">Hello : ${pageContext.request.userPrincipal.name}</a>
-                                </li>
-                                <li role="presentation"><a href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                                <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                    </ul>
-
-                    <!-- top search -->
-                    <form class="navbar-form navbar-right" action="#">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" name="search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>  
-                </div>
-            </div>
-        </nav>
-        <br>
+        <jsp:include page="navbar.jsp"/> 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
 
         <!-- CONTENT ---------------->
@@ -81,7 +35,7 @@
                     <div class="col-lg-8 col-md-10 mx-auto">
                         <div class="post-heading">
                             <h1>${post.title}</h1>
-                            <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+                            <h2 class="subheading">${post.title}</h2>
                             <span class="meta">Posted by
                                 <a href="#">${post.user.userName}</a>
                                 on ${post.publishDate}</span>
