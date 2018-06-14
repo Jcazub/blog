@@ -180,7 +180,7 @@
                                             <div class="post-img">
                                                 <img src="https://lh3.googleusercontent.com/-ndZJOGgvYQ4/WM1ZI8dH86I/AAAAAAAADeo/l67ZqZnRUO8QXIQi38bEXuxqHfVX0TV2gCJoC/w424-h318-n-rw/thumbnail8.jpg" class="img-responsive">
                                             </div>
-                                            <a href="#"><h5>${currentRecentPost.title}</h5></a>
+                                            <a href="${pageContext.request.contextPath}/post?postID=${currentRecentPost.blogID}"><h5>${currentRecentPost.title}</h5></a>
                                             <p><small><i class="fa fa-calendar" data-original-title="" title=""></i>${currentRecentPost.publishDate}</small></p>
                                         </li>
                                         <!-- put conditional if last entry -->

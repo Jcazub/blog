@@ -52,7 +52,7 @@ public class PostController {
         this.tagService = tagService;
         this.userService = userService;
     }
-    
+
     @RequestMapping(value = "/createPost", method = RequestMethod.GET)
     public String createPost(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
@@ -125,42 +125,44 @@ public class PostController {
         Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        
-        
+
         if (title != null && !"".equals(title)) {
             b.setTitle(title);
         }
-        
+
         if (content != null && !"".equals(content)) {
             b.setContent(content);
         }
-        
+
         b.setPublishDate(LocalDate.parse(request.getParameter("publishDate")));
         b.setExpirationDate(LocalDate.parse(request.getParameter("expirationDate")));
-        
+
         b.setCategory(categoryService.getCategoryByID(Integer.parseInt(request.getParameter("categorySelect"))));
-        
+
         List<Tag> tags = new ArrayList();
         String[] tagsFromPage = request.getParameterValues("tagsSelect");
 
-        for (String currentTag : tagsFromPage) {
-            if (tagService.getTagByName(currentTag) == null) {
-                Tag t = new Tag();
-                t.setName(currentTag);
-                tagService.addTag(t);
-                tags.add(t);
-            } else {
-                tags.add(tagService.getTagByName(currentTag));
+        //check to make sure tags were added
+        if (tagsFromPage != null && tagsFromPage.length > 0) {
+            for (String currentTag : tagsFromPage) {
+                if (tagService.getTagByName(currentTag) == null) {
+                    Tag t = new Tag();
+                    t.setName(currentTag);
+                    tagService.addTag(t);
+                    tags.add(t);
+                } else {
+                    tags.add(tagService.getTagByName(currentTag));
+                }
             }
         }
 
         b.setTags(tags);
-        
+
         blogService.editBlog(b);
-        
+
         return "redirect:/";
     }
-    
+
     @RequestMapping(value = "/deletePost", method = RequestMethod.GET)
     public String deletePost(HttpServletRequest request) {
         blogService.deleteBlog(Integer.parseInt(request.getParameter("postID")));
@@ -180,16 +182,16 @@ public class PostController {
 
         return blogService.searchBlogs(criteriaMap);
     }
-    
+
     @RequestMapping(value = "/approvePost", method = RequestMethod.GET)
     public String approvePost(HttpServletRequest request) {
         Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
-        
+
         b.setApprovedDate(LocalDate.now());
         b.setIsApproved(true);
-        
+
         blogService.editBlog(b);
-        
+
         return "redirect:/dashboard";
     }
 }
