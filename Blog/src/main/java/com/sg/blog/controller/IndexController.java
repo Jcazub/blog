@@ -6,6 +6,7 @@
 package com.sg.blog.controller;
 
 import com.sg.blog.service.BlogService;
+import com.sg.blog.service.CategoryService;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +21,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
     
     BlogService blogService;
+    CategoryService categoryService;
     
     @Inject
-    public IndexController(BlogService blogService) {
+    public IndexController(BlogService blogService, CategoryService categoryService) {
         this.blogService = blogService;
+        this.categoryService = categoryService;
     }
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String refresh(Model model) {
         model.addAttribute("posts", blogService.getAllBlogs());
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("recentPosts", blogService.getAllBlogs());
         return "index";
     }
 

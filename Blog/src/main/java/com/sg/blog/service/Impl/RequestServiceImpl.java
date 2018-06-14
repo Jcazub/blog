@@ -35,23 +35,19 @@ public class RequestServiceImpl extends Service implements RequestService {
     }
 
     @Override
-    public Request editRequest(Request request, User user) {
-        if (verifyIfRequestExists(request.getBlogID())) {
-            if (userVerification(request, user)) {
-                if (dataValidation(request)) {
+    public Request editRequest(Request request) {
+        if (verifyIfRequestExists(request.getBlogID())) {     
+            if (dataValidation(request)) {
                     return requestDao.editRequest(request);
                 }
-            }
         }
         return null;
     }
 
     @Override
-    public void deleteRequest(Request request, User user) {
+    public void deleteRequest(Request request) {
         if (verifyIfRequestExists(request.getBlogID())) {
-            if (userVerification(request, user)) {
-                requestDao.deleteRequest(request.getBlogID());
-            }
+            requestDao.deleteRequest(request.getBlogID());
         }
     }
 

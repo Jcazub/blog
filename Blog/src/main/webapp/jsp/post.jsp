@@ -74,34 +74,38 @@
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
 
         <!-- CONTENT ---------------->
-        <header class="masthead">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                        <div class="post-heading">
-                            <h1>${post.title}</h1>
-                            <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
-                            <span class="meta">Posted by
-                                <a href="#">${post.user.userName}</a>
-                                on ${post.publishDate}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-8">
 
-        <article>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                        <p>${post.content}</p>
-                    </div>
-                </div>
-            </div>
-        </article>
+                <!-- Title -->
+                <h1 class="mt-4">${post.title}</h1>
 
-        <hr>
+                <!-- Author -->
+                <p class="lead">
+                    by
+                    <a href="#">${post.user.userName}</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p>Posted on ${post.publishDate} in <a href="#">${post.category.name}</a></p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+
+                <hr>
+
+                <!-- Post Content -->
+                ${post.content}
+
+            </div>
+        </div>
+        </div>
+
 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <footer class="container-fluid text-center main-footer">

@@ -15,9 +15,9 @@ import java.util.List;
  */
 public interface RequestTypeService {
     
-    public RequestType addRequestType(RequestType requestType, User user);
-    public RequestType editRequestType(RequestType requestType, User user);
-    public void deleteRequestType(int requestTypeID, User user);
+    public RequestType addRequestType(RequestType requestType);
+    public RequestType editRequestType(RequestType requestType);
+    public void deleteRequestType(int requestTypeID);
     public RequestType getRequestTypeByRequestTypeID(int requestTypeID);
     public RequestType getRequestTypeByName(String requestName);
     public List<RequestType> getAllRequestTypes();

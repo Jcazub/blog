@@ -16,8 +16,8 @@ import java.util.List;
 public interface RequestService {
     
     public Request addRequest(Request request);
-    public Request editRequest(Request request, User user);
-    public void deleteRequest(Request request, User user);
+    public Request editRequest(Request request);
+    public void deleteRequest(Request request);
     public Request getRequestByRequestID(int requestID);
     public List<Request> getAllRequests();
     public boolean userVerification(Request request, User user);

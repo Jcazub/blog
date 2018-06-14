@@ -27,34 +27,28 @@ public class StaticPageServiceImpl extends Service implements StaticPageService 
     }
 
     @Override
-    public StaticPage addStaticPage(StaticPage page, User user) {
-        if (adminValidation(user)) {
-            if (dataValidation(page)) {
+    public StaticPage addStaticPage(StaticPage page) {
+        if (dataValidation(page)) {
                 return staticPageDao.addStaticPage(page);
             }
-        }
         return null;
     }
 
     @Override
-    public StaticPage editStaticPage(StaticPage page, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfStaticPageExists(page.getStaticID())) {
+    public StaticPage editStaticPage(StaticPage page) {
+        if (verifyIfStaticPageExists(page.getStaticID())) {
                 if (dataValidation(page)) {
                     return staticPageDao.editStaticPage(page);
                 }
             }
-        }
         return null;
     }
 
     @Override
-    public void deleteStaticPage(int pageID, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfStaticPageExists(pageID)) {
+    public void deleteStaticPage(int pageID) {
+        if (verifyIfStaticPageExists(pageID)) {
                 staticPageDao.deleteStaticPage(pageID);
             }
-        }
     }
 
     @Override

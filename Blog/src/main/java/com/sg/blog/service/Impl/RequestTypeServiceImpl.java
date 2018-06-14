@@ -27,34 +27,28 @@ public class RequestTypeServiceImpl extends Service implements RequestTypeServic
     }
 
     @Override
-    public RequestType addRequestType(RequestType requestType, User user) {
-        if (adminValidation(user)) {
-            if (dataValidation(requestType)) {
+    public RequestType addRequestType(RequestType requestType) {
+        if (dataValidation(requestType)) {
                 return requestTypeDao.addRequestType(requestType);
             }
-        }
         return null;
     }
 
     @Override
-    public RequestType editRequestType(RequestType requestType, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfRequestTypeExists(requestType.getRequestTypeID())) {
+    public RequestType editRequestType(RequestType requestType) {
+        if (verifyIfRequestTypeExists(requestType.getRequestTypeID())) {
                 if (dataValidation(requestType)) {
                     return requestTypeDao.editRequestType(requestType);
                 }
             }
-        }
         return null;
     }
 
     @Override
-    public void deleteRequestType(int requestTypeID, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfRequestTypeExists(requestTypeID)) {
+    public void deleteRequestType(int requestTypeID) {
+        if (verifyIfRequestTypeExists(requestTypeID)) {
                 requestTypeDao.deleteRequestType(requestTypeID);
             }
-        }
     }
 
     @Override

@@ -15,9 +15,9 @@ import java.util.List;
  */
 public interface StaticPageService {
     
-    public StaticPage addStaticPage(StaticPage page, User user);
-    public StaticPage editStaticPage(StaticPage page, User user);
-    public void deleteStaticPage(int pageID, User user);
+    public StaticPage addStaticPage(StaticPage page);
+    public StaticPage editStaticPage(StaticPage page);
+    public void deleteStaticPage(int pageID);
     public StaticPage getStaticPageByID(int pageID);
     public List<StaticPage> getAllStaticPages();
     public boolean verifyIfStaticPageExists(int staticPageID);

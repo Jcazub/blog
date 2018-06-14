@@ -43,7 +43,7 @@
                        access="ROLE_ADMIN" /> 
            
         <intercept-url pattern="/**"
-                       access="ROLE_USER" />
+                       access="IS_AUTHENTICATED_ANONYMOUSLY" />
     </http>
     <authentication-manager>
         <authentication-provider>

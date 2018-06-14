@@ -10,5 +10,5 @@ package com.sg.blog.model;
  * @author Jesse
  */
 public enum SearchTerm {
-    
+    FIRST_NAME, LAST_NAME, EMAIL, USER_NAME, PASSWORD, TAG_NAME, CATEGORYNAME, DESCRIPTION, TITLE
 }

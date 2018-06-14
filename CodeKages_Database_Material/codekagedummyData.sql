@@ -32,6 +32,7 @@ VALUES
 
 INSERT INTO blogs (userID,categoryID,creationDate,publishDate,approvedDate,isApproved,title,content)
 VALUES
+('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','Gadgets and Robots','Some stuff about gadgets and robots'),
 ('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','Gadgets and Robots','Some stuff about gadgets and robots')
 ;
 
