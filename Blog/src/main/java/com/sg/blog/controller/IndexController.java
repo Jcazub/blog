@@ -50,6 +50,7 @@ public class IndexController {
                 .collect(Collectors.toList());
         List<Blog> recentBlogs = new ArrayList<>();
         
+        //Straight up milestone 1
         int publishedBlogsSize = publishedBlogs.size();
         for(int i = 0; i < publishedBlogsSize; i++) {
             if ((publishedBlogsSize - i) <= 5) {

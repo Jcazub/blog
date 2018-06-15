@@ -149,6 +149,7 @@
                                                 <a href="#" data-toggle="tooltip" data-placement="left" title="Comments"><i class="fa fa-comments" ></i> 30</a>
                                                 <a href="#" data-toggle="tooltip" data-placement="right" title="Loved"><i class="fa fa-heart"></i> 20</a>                  
                                             </span>
+                                            <!---- SOCIAL TOOLTIP ----->
                                             <div class="user-ditels">
                                                 <div class="user-img"><img src="https://lh3.googleusercontent.com/-uwagl9sPHag/WM7WQa00ynI/AAAAAAAADtA/hio87ZnTpakcchDXNrKc_wlkHEcpH6vMwCJoC/w140-h148-p-rw/profile-pic.jpg" class="img-responsive"></div>
                                                 <span class="user-full-ditels">
@@ -163,6 +164,7 @@
                                                     <a href="#"><i class="fa fa-github" data-toggle="tooltip" data-placement="bottom" title="Github"></i></a>				
                                                 </div>
                                             </div>
+                                                    
                                         </div>
                                     </aside>
                                 </div>
