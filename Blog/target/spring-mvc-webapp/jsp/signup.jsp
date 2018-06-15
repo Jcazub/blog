@@ -170,6 +170,8 @@
                     </div>
                 </div>
                 
+                
+                
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" 
@@ -183,9 +185,11 @@
         </div>
 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
+        <div class="w3-container">
         <footer class="container-fluid text-center main-footer"> 
             <p>	&copy; codeKages </p>
         </footer>
+        </div>
 
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Bootstrap 3 scripts -->
