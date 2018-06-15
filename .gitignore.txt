@@ -1,0 +1,3 @@
+/Blog/nbproject/
+
+/Blog/target/
