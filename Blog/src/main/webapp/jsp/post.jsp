@@ -37,7 +37,7 @@
 
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-<!--        <nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -52,21 +52,21 @@
                         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown">Pages<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Page 1-1</a></li>
-                                <li><a href="#">Page 1-2</a></li>
-                                <li><a href="#">Page 1-3</a></li>
+                                <c:forEach var="currentPage" items="${pages}">
+                                    <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
+                                </c:forEach>
+                                
                             </ul>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <form class="navbar-form navbar-left">
-
+                        <form class="navbar-form navbar-left" method="GET" action="${pageContext.request.contextPath}/">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" id="post-search">
+                                <input type="text" class="form-control" placeholder="Search" name="post-search">
                                 <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default" id="search-posts-btn">
+                                    <button type="submit" class="btn btn-default" id="search-posts-btn">
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
                                 </div>
@@ -98,13 +98,14 @@
                 </div>
             </div>
         </nav>
-        <br>-->
+
+        <br>
 
         <%--<sec:authorize access="hasRole('ROLE_USER')">--%>
 
         <%--</sec:authorize>--%>
-        
-        <jsp:include page="navbar.jsp"/>
+
+        <%--<jsp:include page="navbar.jsp"/>--%>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
 
         <!-- CONTENT ---------------->
@@ -124,7 +125,7 @@
                     <hr>
 
                     <!-- Date/Time -->
-                    <p>Posted on ${post.publishDate} in <a href="#">${post.category.name}</a></p>
+                    <p>Posted on ${post.publishDate} in <a href="${pageContext.request.contextPath}/?category-search=${post.category.categoryID}">${post.category.name}</a></p>
 
                     <hr>
 
@@ -152,12 +153,18 @@
             <br>
             <div id="tagcloud">
                 <c:forEach var="tag" items="${post.tags}">
-                    <c:set var="rand"><%= (int) (Math.random() * 16) %></c:set>
+                    <c:set var="rand"><%= (int) (Math.random() * 16)%></c:set>
                     <a href="#" rel='${rand}'><span>${tag.name}<sup></sup></span></a>
                             </c:forEach>
-
             </div>
-            
+
+
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <c:if test="${postType == 'request'}">
+                    <a href="${pageContext.request.contextPath}/approveEdit?postID=${post.blogID}" class="btn btn-primary">Approve Edit</a>
+                </c:if>
+            </sec:authorize> 
+
         </div>
 
 

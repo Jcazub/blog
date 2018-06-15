@@ -17,7 +17,7 @@ public interface RequestService {
     
     public Request addRequest(Request request);
     public Request editRequest(Request request);
-    public void deleteRequest(Request request);
+    public void deleteRequest(int requestID);
     public Request getRequestByRequestID(int requestID);
     public List<Request> getAllRequests();
     public boolean userVerification(Request request, User user);

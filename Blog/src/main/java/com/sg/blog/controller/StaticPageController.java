@@ -37,13 +37,13 @@ public class StaticPageController {
     }
     
     @RequestMapping(value = "/displayCreatePage", method = RequestMethod.GET)
-    public String displayCreatePage() {
+    public String displayCreatePage(Model model) {
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "createPage";
     }
     
     @RequestMapping(value = "/createPage", method = RequestMethod.POST)
     public String createPage(HttpServletRequest request, Principal principal) {
-        
         StaticPage s = new StaticPage();
         String title = request.getParameter("title");
         String content = request.getParameter("content");
@@ -61,7 +61,7 @@ public class StaticPageController {
     
     @RequestMapping(value = "/displayEditPage", method = RequestMethod.GET)
     public String displayEditPage(HttpServletRequest request, Model model) {
-        
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         model.addAttribute("page", staticPageService.getStaticPageByID(Integer.parseInt(request.getParameter("pageID"))));
         
         return "editPage";
@@ -96,14 +96,15 @@ public class StaticPageController {
     
     @RequestMapping(value="/page", method = RequestMethod.GET)
     public String viewPage(HttpServletRequest request, Model model) {   
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         model.addAttribute("page", staticPageService.getStaticPageByID(Integer.parseInt(request.getParameter("pageID"))));
         return "page";
     }
     
-    @RequestMapping(value="/showPages")
-    public String listPages (Model model) {
-        List<StaticPage> pages = staticPageService.getAllStaticPages();
-         model.addAttribute("pages", pages);
-         return "navbar";
-    }
+//    @RequestMapping(value="/showPages")
+//    public String listPages (Model model) {
+//        List<StaticPage> pages = staticPageService.getAllStaticPages();
+//         model.addAttribute("pages", pages);
+//         return "index";
+//    }
 }

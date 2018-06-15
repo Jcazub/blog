@@ -1,66 +1,120 @@
 $(document).ready(function () {
 
-    $('#search-categories-btn').click(function (event) {
-        
-        window.location.replace("http://localhost:8080/Blog/");
-        
-        $.ajax({
-            type: 'POST',
-            url: 'search/categories',
-            data: JSON.stringify({
-                categoryName: $('#category-search').val(),
-                categoryDesc: $('#category-search').val()
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            'dataType': 'json',
-            success: function (data) {
-                //clear errors
-
-                fillCategories(data);
-            },
-            error: function () {
-                $('#errorMessages')
-                        .append($('<li>')
-                                .attr({class: 'list-group-item list-group-item-danger'})
-                                .text('Error calling web service.  Please try again later.'));
-            }
-        });
-    }); //search catergories end
+//    $('#search-categories-btn').click(function (event) {
+//        
+//        window.location.replace("http://localhost:8080/Blog/");
+//        
+//        $.ajax({
+//            type: 'POST',
+//            url: 'search/categories',
+//            data: JSON.stringify({
+//                categoryName: $('#category-search').val(),
+//                categoryDesc: $('#category-search').val()
+//            }),
+//            headers: {
+//                'Accept': 'application/json',
+//                'Content-Type': 'application/json'
+//            },
+//            'dataType': 'json',
+//            success: function (data) {
+//                //clear errors
+//
+//                fillCategories(data);
+//            },
+//            error: function () {
+//                $('#errorMessages')
+//                        .append($('<li>')
+//                                .attr({class: 'list-group-item list-group-item-danger'})
+//                                .text('Error calling web service.  Please try again later.'));
+//            }
+//        });
+//    }); 
+    //search catergories end
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    $('#search-posts-btn').click(function (event) {
-        
-        
-        
-        $.ajax({
-            type: 'POST',
-            url: 'search/posts',
-            data: JSON.stringify({
-                title: $('#post-search').val(),
-                tagName: $('#post-search').val()
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            'dataType': 'json',
-            success: function (data) {
-                //clear errors
-
-                filterPosts(data);
-            },
-            error: function () {
-                $('#errorMessages')
-                        .append($('<li>')
-                                .attr({class: 'list-group-item list-group-item-danger'})
-                                .text('Error calling web service.  Please try again later.'));
-            }
-        });
+    $("form").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            $("#submit-edit-post").attr('value');
+            $("#submit-create-post").attr('value');
+            //add more buttons here
+            return false;
+        }
     });
+
+//    $(function () {
+//        var keyStop = {
+//            8: ":not(input:text, textarea, input:file, input:password)", // stop backspace = back
+//            13: "input:text, input:password, select", // stop enter = submit 
+//
+//            end: null
+//        };
+//        $(document).bind("keydown", function (event) {
+//            var selector = keyStop[event.which];
+//
+//            if (selector !== undefined && $(event.target).is(selector)) {
+//                event.preventDefault(); //stop event
+//            }
+//            return true;
+//        });
+//    });
+
+//    $('#search-posts-btn').click(function (event) {
+//        
+//        window.location.replace("http://localhost:8080/Blog/");
+//        
+//        $.ajax({
+//            type: 'POST',
+//            url: 'search/posts',
+//            data: JSON.stringify({
+//                title: $('#post-search').val(),
+//                tagName: $('#post-search').val()
+//            }),
+//            headers: {
+//                'Accept': 'application/json',
+//                'Content-Type': 'application/json'
+//            },
+//            'dataType': 'json',
+//            success: function (data) {
+//                //clear errors
+//
+//                filterSearchPosts(data);
+//            },
+//            error: function () {
+//                $('#errorMessages')
+//                        .append($('<li>')
+//                                .attr({class: 'list-group-item list-group-item-danger'})
+//                                .text('Error calling web service.  Please try again later.'));
+//            }
+//        });
+//    });
+
+//    $('#filter-posts-btn').click(function (event) {
+//        
+//        $.ajax({
+//            type: 'POST',
+//            url: 'filter/posts',
+//            data: JSON.stringify({
+//                filter: $('#postSelect').val()
+//            }),
+//            headers: {
+//                'Accept': 'application/json',
+//                'Content-Type': 'application/json'
+//            },
+//            'dataType': 'json',
+//            success: function (data) {
+//                //clear errors
+//
+//                filterSearchPosts(data);
+//            },
+//            error: function () {
+//                $('#errorMessages')
+//                        .append($('<li>')
+//                                .attr({class: 'list-group-item list-group-item-danger'})
+//                                .text('Error calling web service.  Please try again later.'));
+//            }
+//        });
+//    });
 
 //TAG CLOUD SCRIPTS
     $("#tagcloud a").tagcloud();
@@ -94,7 +148,7 @@ function fillCategories(data) {
     });
 }
 
-function filterPosts(data) {
+function filterSearchPosts(data) {
     $("#index-posts").html("");
 
     var postList = $('#index-posts');
@@ -136,6 +190,7 @@ function filterPosts(data) {
         postList.append(appending);
     });
 }
+
 
 var acc = document.getElementsByClassName("accordion");
 var i;

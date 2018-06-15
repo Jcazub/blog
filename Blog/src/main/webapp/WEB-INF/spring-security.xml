@@ -36,13 +36,13 @@
         
         <!--Post related -->
         <intercept-url pattern="/createPost" 
-                       access="ROLE_ADMIN" />
+                       access="ROLE_USER" />
         <intercept-url pattern="/deletePost" 
-                       access="ROLE_ADMIN" />
+                       access="ROLE_USER" />
         <intercept-url pattern="/displayEditPost" 
-                       access="ROLE_ADMIN" />
+                       access="ROLE_USER" />
         <intercept-url pattern="/editPost" 
-                       access="ROLE_ADMIN" /> 
+                       access="ROLE_USER" /> 
            
         <intercept-url pattern="/**"
                        access="ROLE_USER" />

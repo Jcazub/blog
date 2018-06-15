@@ -5,17 +5,16 @@
  */
 package com.sg.blog.controller;
 
-import com.sg.blog.dao.BlogDao;
-import com.sg.blog.dao.CategoryDao;
-import com.sg.blog.dao.TagDao;
-import com.sg.blog.dao.UserDao;
 import com.sg.blog.model.Blog;
-import com.sg.blog.model.Category;
+import com.sg.blog.model.Request;
 import com.sg.blog.model.SearchTerm;
 import com.sg.blog.model.Tag;
 import com.sg.blog.model.User;
 import com.sg.blog.service.BlogService;
 import com.sg.blog.service.CategoryService;
+import com.sg.blog.service.RequestService;
+import com.sg.blog.service.RequestTypeService;
+import com.sg.blog.service.StaticPageService;
 import com.sg.blog.service.TagService;
 import com.sg.blog.service.UserService;
 import java.security.Principal;
@@ -27,6 +26,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,33 +45,49 @@ public class PostController {
     private CategoryService categoryService;
     private TagService tagService;
     private UserService userService;
+    private RequestService requestService;
+    private StaticPageService staticPageService;
+    private RequestTypeService requestTypeService;
 
     @Inject
-    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService, UserService userService) {
+    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService,
+            UserService userService, RequestService requestService, StaticPageService staticPageService, RequestTypeService requestTypeService) {
         this.blogService = blogService;
         this.categoryService = categoryService;
         this.tagService = tagService;
         this.userService = userService;
+        this.requestService = requestService;
+        this.staticPageService = staticPageService;
+        this.requestTypeService = requestTypeService;
     }
 
     @RequestMapping(value = "/createPost", method = RequestMethod.GET)
     public String createPost(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "createPost";
     }
 
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
     public String addPost(HttpServletRequest request, Principal principal) {
 
+        //create new Blog
         Blog b = new Blog();
-        b.setCreationDate(LocalDate.now());
-        //b.setPublishDate(LocalDate.now());
-        b.setApprovedDate(LocalDate.parse("2099-01-01"));
-        b.setIsApproved(true);
-
         //get user
         User user = userService.getUserByUserName(principal.getName());
         b.setUser(user);
+        b.setCreationDate(LocalDate.now());
+
+        //check user credentials
+        SecurityContextHolderAwareRequestWrapper authChecker = new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+
+        if (authChecker.isUserInRole("ADMIN")) {
+            b.setIsApproved(true);
+            b.setApprovedDate(LocalDate.now());
+        } else {
+            b.setIsApproved(false);
+            b.setApprovedDate(LocalDate.parse("2199-01-01"));
+        }
 
         //pulled from page
         b.setTitle(request.getParameter("title"));
@@ -86,14 +102,17 @@ public class PostController {
         List<Tag> tags = new ArrayList();
         String[] tagsFromPage = request.getParameterValues("tagsSelect");
 
-        for (String currentTag : tagsFromPage) {
-            if (tagService.getTagByName(currentTag) == null) {
-                Tag t = new Tag();
-                t.setName(currentTag);
-                tagService.addTag(t);
-                tags.add(t);
-            } else {
-                tags.add(tagService.getTagByName(currentTag));
+        //check to make sure tags were added
+        if (tagsFromPage != null && tagsFromPage.length > 0) {
+            for (String currentTag : tagsFromPage) {
+                if (tagService.getTagByName(currentTag) == null) {
+                    Tag t = new Tag();
+                    t.setName(currentTag);
+                    tagService.addTag(t);
+                    tags.add(t);
+                } else {
+                    tags.add(tagService.getTagByName(currentTag));
+                }
             }
         }
 
@@ -107,9 +126,16 @@ public class PostController {
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public String displayPost(HttpServletRequest request, Model model) {
 
-        Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+        String postType = request.getParameter("postType");
 
-        model.addAttribute("post", b);
+        if (postType != null && "request".equals(postType)) {
+            model.addAttribute("post", requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID"))));
+        } else {
+            model.addAttribute("post", blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID"))));
+        }
+
+        model.addAttribute("postType", postType);
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
 
         return "post";
     }
@@ -119,12 +145,17 @@ public class PostController {
         Integer i = Integer.parseInt(request.getParameter("postID"));
         model.addAttribute("post", blogService.getBlogByBlogID(i));
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "editPost";
     }
 
     @RequestMapping(value = "/editPost", method = RequestMethod.POST)
     public String editPost(HttpServletRequest request, Model model) {
+
+        SecurityContextHolderAwareRequestWrapper authChecker = new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+
         Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+
         String title = request.getParameter("title");
         String content = request.getParameter("content");
 
@@ -160,14 +191,53 @@ public class PostController {
 
         b.setTags(tags);
 
-        blogService.editBlog(b);
+        if (authChecker.isUserInRole("ADMIN")) {
+            blogService.editBlog(b);
+        } else {
+            Request r = new Request();
+            r.setApprovedDate(b.getApprovedDate());
+            r.setBlogID(b.getBlogID());
+            r.setCategory(b.getCategory());
+            r.setContent(b.getContent());
+            r.setCreationDate(b.getCreationDate());
+            r.setExpirationDate(b.getExpirationDate());
+            r.setIsApproved(b.getIsApproved());
+            r.setPublishDate(b.getPublishDate());
+            r.setTags(b.getTags());
+            r.setTitle(b.getTitle());
+            r.setUser(b.getUser());
+            r.setRequestType(requestTypeService.getRequestTypeByName("edit"));
+            requestService.addRequest(r);
+        }
 
         return "redirect:/";
     }
 
     @RequestMapping(value = "/deletePost", method = RequestMethod.GET)
-    public String deletePost(HttpServletRequest request) {
-        blogService.deleteBlog(Integer.parseInt(request.getParameter("postID")));
+    public String deletePost(HttpServletRequest request, Principal principal) {
+
+        SecurityContextHolderAwareRequestWrapper authChecker = new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+
+        if (authChecker.isUserInRole("ADMIN")) {
+            blogService.deleteBlog(Integer.parseInt(request.getParameter("postID")));
+        } else {
+            Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+            Request r = new Request();
+            r.setApprovedDate(b.getApprovedDate());
+            r.setBlogID(b.getBlogID());
+            r.setCategory(b.getCategory());
+            r.setContent(b.getContent());
+            r.setCreationDate(b.getCreationDate());
+            r.setExpirationDate(b.getExpirationDate());
+            r.setIsApproved(b.getIsApproved());
+            r.setPublishDate(b.getPublishDate());
+            r.setTags(b.getTags());
+            r.setTitle(b.getTitle());
+            r.setUser(b.getUser());
+            r.setRequestType(requestTypeService.getRequestTypeByName("delete"));
+            requestService.addRequest(r);
+        }
+
         return "redirect:/dashboard";
     }
 
@@ -178,14 +248,12 @@ public class PostController {
         Map<SearchTerm, String> criteriaMap = new HashMap<>();
 
         String currentTerm = searchMap.get("title");
-        
+
         if (currentTerm != null && !currentTerm.isEmpty()) {
             criteriaMap.put(SearchTerm.TITLE, currentTerm);
         }
-        
+
         currentTerm = searchMap.get("content");
-        
-        
 
         List<Blog> tempBlogs = blogService.searchBlogs(criteriaMap);
 
@@ -205,4 +273,46 @@ public class PostController {
 
         return "redirect:/dashboard";
     }
+
+    @RequestMapping(value = "/approveEdit", method = RequestMethod.GET)
+    public String approveEdit(HttpServletRequest request) {
+
+        Blog b = requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID")));
+
+        blogService.editBlog(b);
+
+        requestService.deleteRequest(b.getBlogID());
+
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/approveDelete", method = RequestMethod.GET)
+    public String approveDelete(HttpServletRequest request) {
+
+        Blog b = requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID")));
+
+        blogService.deleteBlog(b.getBlogID());
+
+        requestService.deleteRequest(b.getBlogID());
+
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/denyRequest", method = RequestMethod.GET)
+    public String denyRequest(HttpServletRequest request, Model model) {
+
+        requestService.deleteRequest(Integer.parseInt(request.getParameter("postID")));
+
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/viewEditRequest", method = RequestMethod.GET)
+    public String viewEditRequest(HttpServletRequest request) {
+
+        String postID = request.getParameter("postID");
+        String postType = "request";
+
+        return "redirect:/post?postID=" + postID + "&postType=" + postType;
+    }
+
 }

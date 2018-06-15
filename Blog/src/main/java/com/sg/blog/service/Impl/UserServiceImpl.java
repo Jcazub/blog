@@ -46,9 +46,9 @@ public class UserServiceImpl extends Service implements UserService {
     }
 
     @Override
-    public void deleteUser(User editedCredentials) {
-        if (verifyIfUserExists(editedCredentials.getUserID())) {
-                userDao.deleteUser(editedCredentials.getUserID());
+    public void deleteUser(int userID) {
+        if (verifyIfUserExists(userID)) {
+                userDao.deleteUser(userID);
             }
     }
 

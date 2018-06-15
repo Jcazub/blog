@@ -38,7 +38,7 @@ public class RequestTypeDaoDBImpl implements RequestTypeDao {
     
     private static final String SELECT_REQUEST_TYPE_BY_NAME = "select * from RequestTypes where RequestType = ?";
     
-    private static final String SELECT_REQUEST_TYPE_BY_REQUEST = "select rt.requestTypeID, rt.requestType from RequestTypes rt join Requests re join on re.requestTypeID = rt.requestTypeID where re.blogID = ?";
+    private static final String SELECT_REQUEST_TYPE_BY_REQUEST = "select rt.requestTypeID, rt.requestType from RequestTypes rt join Requests re on re.requestTypeID = rt.requestTypeID where re.blogID = ?";
     
     private static final String SELECT_ALL_REQUEST_TYPES = "select * from RequestTypes";
 

@@ -28,9 +28,12 @@ public class RequestServiceImpl extends Service implements RequestService {
 
     @Override
     public Request addRequest(Request request) {
-        if (dataValidation(request)) {
-            return requestDao.addRequest(request);
+        if (!verifyIfRequestExists(request.getBlogID())) {
+            if (dataValidation(request)) {
+                return requestDao.addRequest(request);
+            }
         }
+
         return null;
     }
 
@@ -45,9 +48,9 @@ public class RequestServiceImpl extends Service implements RequestService {
     }
 
     @Override
-    public void deleteRequest(Request request) {
-        if (verifyIfRequestExists(request.getBlogID())) {
-            requestDao.deleteRequest(request.getBlogID());
+    public void deleteRequest(int requestID) {
+        if (verifyIfRequestExists(requestID)) {
+            requestDao.deleteRequest(requestID);
         }
     }
 

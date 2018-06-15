@@ -8,12 +8,14 @@ package com.sg.blog.controller;
 import com.sg.blog.model.Role;
 import com.sg.blog.model.User;
 import com.sg.blog.service.RoleService;
+import com.sg.blog.service.StaticPageService;
 import com.sg.blog.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,20 +29,24 @@ public class LoginController {
     
     UserService userService;
     RoleService roleService;
+    StaticPageService staticPageService;
 
     @Inject
-    public LoginController(UserService userService, RoleService roleService) {
+    public LoginController(UserService userService, RoleService roleService, StaticPageService staticPageService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.staticPageService = staticPageService;
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String showLoginForm() {
+    public String showLoginForm(Model model) {
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "login";
     }
     
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String showSignUpForm() {
+    public String showSignUpForm(Model model) {
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "signup";
     }
     
