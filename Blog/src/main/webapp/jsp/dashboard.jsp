@@ -14,7 +14,7 @@
 
     <head>
 
-        <title>Bootstrap Example</title>
+        <title>Dashboard</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->
@@ -53,11 +53,12 @@
                         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown">Pages<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Page 1-1</a></li>
-                                <li><a href="#">Page 1-2</a></li>
-                                <li><a href="#">Page 1-3</a></li>
+                                <c:forEach var="currentPage" items="${pages}">
+                                    <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
+                                </c:forEach>
+                                
                             </ul>
                         </li>
                     </ul>

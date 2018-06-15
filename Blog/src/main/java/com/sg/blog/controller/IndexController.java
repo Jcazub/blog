@@ -6,8 +6,10 @@
 package com.sg.blog.controller;
 
 import com.sg.blog.model.Blog;
+import com.sg.blog.model.StaticPage;
 import com.sg.blog.service.BlogService;
 import com.sg.blog.service.CategoryService;
+import com.sg.blog.service.StaticPageService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,16 +25,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class IndexController {
-    
+
     BlogService blogService;
     CategoryService categoryService;
-    
+    StaticPageService staticPageService;
+
     @Inject
-    public IndexController(BlogService blogService, CategoryService categoryService) {
+    public IndexController(BlogService blogService, CategoryService categoryService, StaticPageService staticPageService) {
         this.blogService = blogService;
         this.categoryService = categoryService;
+        this.staticPageService = staticPageService;
     }
-    
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String refresh(Model model) {
         List<Blog> allPosts = blogService.getAllBlogs();
@@ -42,6 +46,7 @@ public class IndexController {
         model.addAttribute("posts", publishedBlogs);
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("recentPosts", publishedBlogs);
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "index";
     }
 }

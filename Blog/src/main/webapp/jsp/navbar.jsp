@@ -53,11 +53,12 @@
                         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#collapsePage${currentPage.staticID}" href="${pageContext.request.contextPath}/showPages">Pages<span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown">Pages<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <c:forEach var="currentPage" items="${pages}">
-                                <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
                                 </c:forEach>
+                                
                             </ul>
                         </li>
                     </ul>
@@ -87,7 +88,7 @@
                                         <li><a href="${pageContext.request.contextPath}/createPost">Create Post</a></li>
                                     </ul>
                                 </li>
-                                <li role="presentation"><a href="<c:url value="/j_spring_security_logout"/>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                <li role="presentation"><a href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                                 </c:when>
                                 <c:otherwise>
                                 <li><a href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -99,6 +100,7 @@
                 </div>
             </div>
         </nav>
+
         <br>
 
         <sec:authorize access="hasRole('ROLE_USER')">

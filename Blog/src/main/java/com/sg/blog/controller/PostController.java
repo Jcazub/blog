@@ -12,6 +12,7 @@ import com.sg.blog.model.User;
 import com.sg.blog.service.BlogService;
 import com.sg.blog.service.CategoryService;
 import com.sg.blog.service.RequestService;
+import com.sg.blog.service.StaticPageService;
 import com.sg.blog.service.TagService;
 import com.sg.blog.service.UserService;
 import java.security.Principal;
@@ -43,19 +44,23 @@ public class PostController {
     private TagService tagService;
     private UserService userService;
     private RequestService requestService;
+    private StaticPageService staticPageService;
 
     @Inject
-    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService, UserService userService, RequestService requestService) {
+    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService, 
+            UserService userService, RequestService requestService, StaticPageService staticPageService) {
         this.blogService = blogService;
         this.categoryService = categoryService;
         this.tagService = tagService;
         this.userService = userService;
         this.requestService = requestService;
+        this.staticPageService = staticPageService;
     }
 
     @RequestMapping(value = "/createPost", method = RequestMethod.GET)
     public String createPost(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "createPost";
     }
 
@@ -126,6 +131,7 @@ public class PostController {
         }
 
         model.addAttribute("postType", postType);
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
 
         return "post";
     }
@@ -135,6 +141,7 @@ public class PostController {
         Integer i = Integer.parseInt(request.getParameter("postID"));
         model.addAttribute("post", blogService.getBlogByBlogID(i));
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "editPost";
     }
 
