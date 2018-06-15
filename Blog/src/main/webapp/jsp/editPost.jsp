@@ -167,7 +167,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" class ="btn btn-default" value="Edit Post"/>
+                <input type="submit" class ="btn btn-default" id="submit-edit-post" value="Edit Post"/>
             </div>
         </form>      
 

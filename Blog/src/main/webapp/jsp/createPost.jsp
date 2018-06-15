@@ -157,7 +157,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-5 col-md-8">
-                        <input type="submit" class ="btn btn-default" value="Create Post"/>
+                        <input type="submit" class ="btn btn-default" id="submit-create-post" value="Create Post"/>
                     </div>
 
                 </div>

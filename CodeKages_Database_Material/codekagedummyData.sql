@@ -33,7 +33,7 @@ VALUES
 INSERT INTO blogs (userID,categoryID,creationDate,publishDate,approvedDate,isApproved,title,content, expirationDate)
 VALUES
 ('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','Gadgets and Robots','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','0','Gadgets and not robots','Some stuff about gadgets and robots','2999-05-31 23:59:59')
+('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','Gadgets and not robots','Some stuff about gadgets and robots','2999-05-31 23:59:59')
 ;
 
 INSERT INTO requesttypes (requestType)

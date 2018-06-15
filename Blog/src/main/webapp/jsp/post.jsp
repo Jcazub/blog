@@ -126,7 +126,7 @@
                     <hr>
 
                     <!-- Date/Time -->
-                    <p>Posted on ${post.publishDate} in <a href="#">${post.category.name}</a></p>
+                    <p>Posted on ${post.publishDate} in <a href="${pageContext.request.contextPath}/?category-search=${post.category.categoryID}">${post.category.name}</a></p>
 
                     <hr>
 
