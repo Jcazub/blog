@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,12 +31,14 @@ public class LoginController {
     UserService userService;
     RoleService roleService;
     StaticPageService staticPageService;
+    private PasswordEncoder encoder;
 
     @Inject
-    public LoginController(UserService userService, RoleService roleService, StaticPageService staticPageService) {
+    public LoginController(UserService userService, RoleService roleService, StaticPageService staticPageService, PasswordEncoder encoder) {
         this.userService = userService;
         this.roleService = roleService;
         this.staticPageService = staticPageService;
+        this.encoder = encoder;
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -58,9 +61,10 @@ public class LoginController {
         u.setLastName(request.getParameter("lastname"));
         u.setUserName(request.getParameter("username"));
         u.setEmail(request.getParameter("email"));
-        u.setPassword(request.getParameter("password"));
+        String clearPw = request.getParameter("password");
+        String hashPw = encoder.encode(clearPw);
+        u.setPassword(hashPw);
         u.setEnabled(true);
-        
         List<Role> roles = new ArrayList<>();
         
         Role r = roleService.getRoleByName("ROLE_USER");

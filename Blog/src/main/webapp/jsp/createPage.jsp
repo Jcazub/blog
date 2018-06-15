@@ -21,7 +21,7 @@
         <!-- Bootstrap 3 core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" id="bootstrap-css">
         <!-- Tags CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.css">
         <!-- Main CSS -->  
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-       <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -49,8 +49,8 @@
                             <ul class="dropdown-menu">
                                 <c:forEach var="currentPage" items="${pages}">
                                     <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
-                                </c:forEach>
-                                
+                                    </c:forEach>
+
                             </ul>
                         </li>
                     </ul>
@@ -97,39 +97,47 @@
         <sec:authorize access="hasRole('ROLE_USER')">
 
         </sec:authorize> 
-       <%--<jsp:include page="navbar.jsp"/>--%>
+        <%--<jsp:include page="navbar.jsp"/>--%>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
-        
-        <h1>Create a Page</h1>
-        <form id="getpostform" 
-              method="POST"
-              action="createPage"
-              class="form-horizontal">
 
-            <div class="form-group">
-                <label for="title" class="col-md-2 control-label">Title:</label>
-                <div class="col-md-2">
-                    <input type="text" 
-                           class="form-control" 
-                           name="title" 
-                           placeholder="Title"
-                           maxlength="50"
-                           required/>
+        <div class="container">
+            <h1 class="text-center">Create a Page</h1>
+            <form id="getpostform" 
+                  method="POST"
+                  action="createPage"
+                  class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="title" class="col-md-2 control-label">Title:</label>
+                    <div class="col-md-2">
+                        <input type="text" 
+                               class="form-control" 
+                               name="title" 
+                               placeholder="Title"
+                               maxlength="50"
+                               required/>
+                    </div>
                 </div>
-            </div>
 
-            <!--            <div class="form-group">
-                            <div class="col-md-6">
-                                             
-                            </div>
-                        </div>-->
+                <!--            <div class="form-group">
+                                <div class="col-md-6">
+                                                 
+                                </div>
+                            </div>-->
 
-            <textarea name="content" id="texteditor"></textarea>
+                <textarea name="content" id="texteditor"></textarea>
+                <br>
 
-            <div class="form-group">
-                <input type="submit" class ="btn btn-default" value="Create Page"/>
-            </div>
-        </form>      
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-8">
+                        <input type="submit" class ="btn btn-default" id="" value="Create Post"/>
+                    </div>
+
+                </div>
+            </form> 
+
+        </div>
+
 
         <footer class="container-fluid text-center main-footer">
             <p>	&copy; codeKages </p>
@@ -139,7 +147,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- Tags scripts -->
-        <script src="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.min.js"></script>
+        <script src="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script> 
     </body>

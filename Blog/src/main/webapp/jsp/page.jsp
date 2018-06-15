@@ -14,10 +14,6 @@
         <!-- Bootstrap 3 core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-        <!-- Clean Blog CSS -->
-        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href="css/clean-blog/clean-blog.css" rel="stylesheet">
         <!-- Main CSS -->        
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/bp.css" rel="stylesheet">
@@ -119,7 +115,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- Tags scripts -->
-        <script src="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.min.js"></script>
+        <script src="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
     </body>
