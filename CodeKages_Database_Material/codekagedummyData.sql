@@ -3,7 +3,7 @@ USE CodeKages_Database;
 INSERT INTO users (firstName,lastName,email,userName,`password`,enabled) 
 VALUES 
 ('Jesse','Azu','jesseAzu@gmail','Admin','$2a$10$qAL9f5LyXQoTHqElqjuiXuANUyTW.4IAavEMn9fu3gfrx4YH7nUj2',1),
-('Al','Rahman','alRahman@gmail.com','rahmanNoodles','$2a$10$qAL9f5LyXQoTHqElqjuiXuANUyTW.4IAavEMn9fu3gfrx4YH7nUj2',1),
+('Al','Rahman','alRahman@gmail.com','booBlogger','$2a$10$qAL9f5LyXQoTHqElqjuiXuANUyTW.4IAavEMn9fu3gfrx4YH7nUj2',1),
 ('Rich','Tav','taverasRich@gmail.com','anbuBlogger','$2a$10$qAL9f5LyXQoTHqElqjuiXuANUyTW.4IAavEMn9fu3gfrx4YH7nUj2',1)
 ;
 
@@ -41,17 +41,11 @@ VALUES
 ('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','F','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
 ('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','G','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
 ('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','0','H','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','I','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','J','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','0','K','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','L','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','M','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','N','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','0','O','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','0','P','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-06-31 23:59:59','2018-05-31 23:59:59','1','Q','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-04-31 23:59:59','2018-05-31 23:59:59','1','R','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
-('2','3','2018-05-30 23:59:59','2018-07-31 23:59:59','2018-05-31 23:59:59','1','S','Some stuff about gadgets and robots','2999-05-31 23:59:59')
+('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-30 23:59:59','1','I','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
+('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-02-20 23:59:59','1','J','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
+('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-30 23:59:59','0','K','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
+('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-03-30 23:59:59','1','L','Some stuff about gadgets and robots','2999-05-31 23:59:59'),
+('2','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-04-30 23:59:59','1','M','Some stuff about gadgets and robots','2999-05-31 23:59:59')
 ;
 
 INSERT INTO requesttypes (requestType)
