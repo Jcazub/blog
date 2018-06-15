@@ -49,7 +49,6 @@
                                 <c:forEach var="currentPage" items="${pages}">
                                     <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
                                     </c:forEach>
-
                             </ul>
                         </li>
                     </ul>
@@ -63,7 +62,6 @@
                                     </button>
                                 </div>
                             </div>
-
                         </form>
 
 
