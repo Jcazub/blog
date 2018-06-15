@@ -112,6 +112,7 @@ public class UserController {
 
     @RequestMapping(value = "/viewUserDetails", method = RequestMethod.GET)
     public String viewUserDetails(Model model, Principal principal) {
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
         model.addAttribute("User", userService.getUserByUserName(principal.getName()));
         return "viewUserDetails";
     }
