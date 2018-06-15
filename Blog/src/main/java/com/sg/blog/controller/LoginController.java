@@ -75,7 +75,11 @@ public class LoginController {
         
         userService.addUser(u);
         
-        return "/login";
+//        if (test.getUserID() != 0) {
+//            return "redirect:/signup";
+//        }
+        
+        return "redirect:/login";
         
     }
 }

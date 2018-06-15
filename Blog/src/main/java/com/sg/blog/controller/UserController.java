@@ -44,7 +44,6 @@ public class UserController {
 
     private UserDao userDao;
     private UserService userService;
-    private PasswordEncoder encoder;
     private CategoryService categoryService;
     private TagService tagService;
     private RequestService requestService;
@@ -53,9 +52,8 @@ public class UserController {
     private BlogService blogService;
 
     @Inject
-    public UserController(UserService userService, PasswordEncoder encoder, CategoryService categoryService, TagService tagService, RequestService requestService, RoleService roleService, StaticPageService staticPageService, BlogService blogService) {
+    public UserController(UserService userService, CategoryService categoryService, TagService tagService, RequestService requestService, RoleService roleService, StaticPageService staticPageService, BlogService blogService) {
         this.userService = userService;
-        this.encoder = encoder;
         this.categoryService = categoryService;
         this.tagService = tagService;
         this.requestService = requestService;

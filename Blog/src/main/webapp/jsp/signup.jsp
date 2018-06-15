@@ -171,8 +171,6 @@
                     </div>
                 </div>
                 
-                
-                
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" 
