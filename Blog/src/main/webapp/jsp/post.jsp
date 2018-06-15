@@ -157,7 +157,6 @@
                     <c:set var="rand"><%= (int) (Math.random() * 16)%></c:set>
                     <a href="#" rel='${rand}'><span>${tag.name}<sup></sup></span></a>
                             </c:forEach>
-
             </div>
 
 

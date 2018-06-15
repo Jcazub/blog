@@ -50,7 +50,6 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <form class="navbar-form navbar-left">
-
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search" id="post-search">
                                 <div class="input-group-btn">
@@ -148,7 +147,7 @@
                                                 <div class="user-img"><img src="https://lh3.googleusercontent.com/-uwagl9sPHag/WM7WQa00ynI/AAAAAAAADtA/hio87ZnTpakcchDXNrKc_wlkHEcpH6vMwCJoC/w140-h148-p-rw/profile-pic.jpg" class="img-responsive"></div>
                                                 <span class="user-full-ditels">
                                                     <h3>${currentBlog.user.userName}</h3>
-                                                    <p>Web & Graphics Disigner</p>
+                                                    <p>Web & Graphics Designer</p>
                                                 </span>
                                                 <div class="social-icon">
                                                     <a href="#"><i class="fa fa-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"></i></a>
