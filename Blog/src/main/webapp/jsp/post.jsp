@@ -152,7 +152,7 @@
             <br>
             <div id="tagcloud">
                 <c:forEach var="tag" items="${post.tags}">
-                    <c:set var="rand"><%= (int) (Math.random() * 100) %></c:set>
+                    <c:set var="rand"><%= (int) (Math.random() * 16) %></c:set>
                     <a href="#" rel='${rand}'><span>${tag.name}<sup></sup></span></a>
                             </c:forEach>
 

@@ -19,10 +19,15 @@ import com.sg.blog.service.UserService;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -128,13 +133,27 @@ public class UserController {
 //        u.setRoles(roles);
         userService.editUser(u);
 
+//        //resets principal
+        Collection<SimpleGrantedAuthority> nowAuthorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
+                .getContext().getAuthentication().getAuthorities();
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(u.getUserName(), u.getPassword(), nowAuthorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         return "redirect:/viewUserDetails";
     }
 
     @RequestMapping(value = "deleteUser", method = RequestMethod.GET)
-    public String deleteUser(Principal principal) {
+    public String deleteUser(HttpServletRequest request, Principal principal) {
         User user = userService.getUserByUserName(principal.getName());
         userService.deleteUser(user);
+
+        //log user out of current session
+        HttpSession session = request.getSession(false);
+        SecurityContextHolder.clearContext();
+        if (session != null) {
+            session.invalidate();
+        }
+
         return "redirect:/";
     }
 
