@@ -15,9 +15,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" id="bootstrap-css">
         <!-- Tags CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.css">
-
+        <!--     Fonts and icons     -->
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Main CSS -->  
-        <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">-->
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/bp.css" rel="stylesheet">
     </head>
@@ -49,11 +54,11 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <form class="navbar-form navbar-left">
+                        <form class="navbar-form navbar-left" method="GET" action="">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" id="post-search">
+                                <input type="text" class="form-control" placeholder="Search" name="post-search">
                                 <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default" id="search-posts-btn">
+                                    <button type="submit" class="btn btn-default" id="search-posts-btn">
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
                                 </div>
@@ -195,7 +200,7 @@
                         <div class="widget-sidebar">
                             <h2 class="title-widget-sidebar">// CATEGORIES</h2>
                             <c:forEach var="currentCategory" items="${categories}">
-                                <button class="categories-btn">${currentCategory.name}</button>
+                                <a href="${pageContext.request.contextPath}/?category-search=${currentCategory.categoryID}" class="btn categories-btn">${currentCategory.name}</a>
                             </c:forEach>
                         </div>  
 
@@ -245,6 +250,7 @@
         <script src="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
+        
     </body>
 
 </html>
