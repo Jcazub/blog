@@ -6,12 +6,14 @@
 package com.sg.blog.controller;
 
 import com.sg.blog.model.Blog;
+import com.sg.blog.model.Request;
 import com.sg.blog.model.SearchTerm;
 import com.sg.blog.model.Tag;
 import com.sg.blog.model.User;
 import com.sg.blog.service.BlogService;
 import com.sg.blog.service.CategoryService;
 import com.sg.blog.service.RequestService;
+import com.sg.blog.service.RequestTypeService;
 import com.sg.blog.service.StaticPageService;
 import com.sg.blog.service.TagService;
 import com.sg.blog.service.UserService;
@@ -45,16 +47,18 @@ public class PostController {
     private UserService userService;
     private RequestService requestService;
     private StaticPageService staticPageService;
+    private RequestTypeService requestTypeService;
 
     @Inject
-    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService, 
-            UserService userService, RequestService requestService, StaticPageService staticPageService) {
+    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService,
+            UserService userService, RequestService requestService, StaticPageService staticPageService, RequestTypeService requestTypeService) {
         this.blogService = blogService;
         this.categoryService = categoryService;
         this.tagService = tagService;
         this.userService = userService;
         this.requestService = requestService;
         this.staticPageService = staticPageService;
+        this.requestTypeService = requestTypeService;
     }
 
     @RequestMapping(value = "/createPost", method = RequestMethod.GET)
@@ -147,7 +151,11 @@ public class PostController {
 
     @RequestMapping(value = "/editPost", method = RequestMethod.POST)
     public String editPost(HttpServletRequest request, Model model) {
+
+        SecurityContextHolderAwareRequestWrapper authChecker = new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+
         Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+
         String title = request.getParameter("title");
         String content = request.getParameter("content");
 
@@ -183,14 +191,53 @@ public class PostController {
 
         b.setTags(tags);
 
-        blogService.editBlog(b);
+        if (authChecker.isUserInRole("ADMIN")) {
+            blogService.editBlog(b);
+        } else {
+            Request r = new Request();
+            r.setApprovedDate(b.getApprovedDate());
+            r.setBlogID(b.getBlogID());
+            r.setCategory(b.getCategory());
+            r.setContent(b.getContent());
+            r.setCreationDate(b.getCreationDate());
+            r.setExpirationDate(b.getExpirationDate());
+            r.setIsApproved(b.getIsApproved());
+            r.setPublishDate(b.getPublishDate());
+            r.setTags(b.getTags());
+            r.setTitle(b.getTitle());
+            r.setUser(b.getUser());
+            r.setRequestType(requestTypeService.getRequestTypeByName("edit"));
+            requestService.addRequest(r);
+        }
 
         return "redirect:/";
     }
 
     @RequestMapping(value = "/deletePost", method = RequestMethod.GET)
-    public String deletePost(HttpServletRequest request) {
-        blogService.deleteBlog(Integer.parseInt(request.getParameter("postID")));
+    public String deletePost(HttpServletRequest request, Principal principal) {
+
+        SecurityContextHolderAwareRequestWrapper authChecker = new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+
+        if (authChecker.isUserInRole("ADMIN")) {
+            blogService.deleteBlog(Integer.parseInt(request.getParameter("postID")));
+        } else {
+            Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+            Request r = new Request();
+            r.setApprovedDate(b.getApprovedDate());
+            r.setBlogID(b.getBlogID());
+            r.setCategory(b.getCategory());
+            r.setContent(b.getContent());
+            r.setCreationDate(b.getCreationDate());
+            r.setExpirationDate(b.getExpirationDate());
+            r.setIsApproved(b.getIsApproved());
+            r.setPublishDate(b.getPublishDate());
+            r.setTags(b.getTags());
+            r.setTitle(b.getTitle());
+            r.setUser(b.getUser());
+            r.setRequestType(requestTypeService.getRequestTypeByName("delete"));
+            requestService.addRequest(r);
+        }
+
         return "redirect:/dashboard";
     }
 
