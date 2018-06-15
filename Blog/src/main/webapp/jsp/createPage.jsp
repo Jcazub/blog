@@ -55,7 +55,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <form class="navbar-form navbar-left" method="GET" action="">
+                        <form class="navbar-form navbar-left" method="GET" action="${pageContext.request.contextPath}/">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search" name="post-search">
                                 <div class="input-group-btn">
