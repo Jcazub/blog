@@ -15,13 +15,19 @@ import com.sg.blog.service.RequestService;
 import com.sg.blog.service.RoleService;
 import com.sg.blog.service.StaticPageService;
 import com.sg.blog.service.TagService;
+import com.sg.blog.service.UserService;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserController {
 
     private UserDao userDao;
+    private UserService userService;
     private PasswordEncoder encoder;
     private CategoryService categoryService;
     private TagService tagService;
@@ -45,8 +52,8 @@ public class UserController {
     private BlogService blogService;
 
     @Inject
-    public UserController(UserDao userDao, PasswordEncoder encoder, CategoryService categoryService, TagService tagService, RequestService requestService, RoleService roleService, StaticPageService staticPageService, BlogService blogService) {
-        this.userDao = userDao;
+    public UserController(UserService userService, PasswordEncoder encoder, CategoryService categoryService, TagService tagService, RequestService requestService, RoleService roleService, StaticPageService staticPageService, BlogService blogService) {
+        this.userService = userService;
         this.encoder = encoder;
         this.categoryService = categoryService;
         this.tagService = tagService;
@@ -61,7 +68,7 @@ public class UserController {
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("tags", tagService.getAllTags());
         model.addAttribute("requests", requestService.getAllRequests());
-        model.addAttribute("users", userDao.getAllUsers());
+        model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("pages", staticPageService.getAllStaticPages());
         List<Blog> allPosts = blogService.getAllBlogs();
         List<Blog> publishedBlogs = allPosts.stream()
@@ -78,62 +85,112 @@ public class UserController {
 
     @RequestMapping(value = "/viewUserDetails", method = RequestMethod.GET)
     public String viewUserDetails(Model model, Principal principal) {
-        model.addAttribute("User", userDao.getUserByUserName(principal.getName()));
+        model.addAttribute("User", userService.getUserByUserName(principal.getName()));
         return "viewUserDetails";
     }
 
     @RequestMapping(value = "viewEditUserDetails", method = RequestMethod.GET)
     public String viewEditUserDetails(Model model, Principal principal) {
-        model.addAttribute("User", userDao.getUserByUserName(principal.getName()));
+        model.addAttribute("User", userService.getUserByUserName(principal.getName()));
         return "viewEditUserDetails";
     }
 
-    @RequestMapping(value = "editUser", method = RequestMethod.GET)
+    @RequestMapping(value = "editUser", method = RequestMethod.POST)
     public String editUser(HttpServletRequest request) {
+
+        User u = userService.getUserByID(Integer.parseInt(request.getParameter("userID")));
+
+        String firstname = request.getParameter("firstname");
+        if (firstname != null || !"".equals(firstname)) {
+            u.setFirstName(firstname);
+        }
+
+        String lastname = request.getParameter("lastname");
+        if (lastname != null || !"".equals(lastname)) {
+            u.setLastName(lastname);
+        }
+
+        String username = request.getParameter("username");
+        if (username != null || !"".equals(username)) {
+            u.setUserName(username);
+        }
+
+        String email = request.getParameter("email");
+        if (email != null || !"".equals(email)) {
+            u.setEmail(email);
+        }
+
+        String password = request.getParameter("password");
+        if (password != null || !"".equals(password)) {
+            u.setPassword(password);
+        }
+
+//        u.setEnabled(true);
+//        List<Role> roles = new ArrayList<>();
+//        Role r = roleService.getRoleByName("ROLE_USER");
+//        roles.add(r);
+//        
+//        u.setRoles(roles);
+        userService.editUser(u);
+
+//        //resets principal
+        Collection<SimpleGrantedAuthority> nowAuthorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
+                .getContext().getAuthentication().getAuthorities();
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(u.getUserName(), u.getPassword(), nowAuthorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         return "redirect:/viewUserDetails";
     }
 
     @RequestMapping(value = "deleteUser", method = RequestMethod.GET)
-    public String deleteUser(Principal principal) {
-        User user = userDao.getUserByUserName(principal.getName());
-        userDao.deleteUser(user.getUserID());
+    public String deleteUser(HttpServletRequest request, Principal principal) {
+        User user = userService.getUserByUserName(principal.getName());
+        userService.deleteUser(user);
+
+        //log user out of current session
+        HttpSession session = request.getSession(false);
+        SecurityContextHolder.clearContext();
+        if (session != null) {
+            session.invalidate();
+        }
+
         return "redirect:/";
     }
 
     @RequestMapping(value = "promoteUser", method = RequestMethod.GET)
     public String promoteUser(HttpServletRequest request, Model model) {
-        User user = userDao.getUserByID(Integer.parseInt(request.getParameter("userID")));
+        User user = userService.getUserByID(Integer.parseInt(request.getParameter("userID")));
         List<Role> newRoles = new ArrayList<>();
         newRoles.add(roleService.getRoleByName("ROLE_ADMIN"));
         newRoles.add(roleService.getRoleByName("ROLE_USER"));
         user.setRoles(newRoles);
-        userDao.editUser(user);
+        userService.editUser(user);
         return "redirect:/dashboard";
     }
 
     @RequestMapping(value = "demoteUser", method = RequestMethod.GET)
     public String demoteUser(HttpServletRequest request, Model model) {
-        User user = userDao.getUserByID(Integer.parseInt(request.getParameter("userID")));
+        User user = userService.getUserByID(Integer.parseInt(request.getParameter("userID")));
         List<Role> newRoles = new ArrayList<>();
         newRoles.add(roleService.getRoleByName("ROLE_USER"));
         user.setRoles(newRoles);
-        userDao.editUser(user);
+        userService.editUser(user);
         return "redirect:/dashboard";
     }
 
     @RequestMapping(value = "enableUser", method = RequestMethod.GET)
     public String enableUser(HttpServletRequest request, Model model) {
-        User user = userDao.getUserByID(Integer.parseInt(request.getParameter("userID")));
+        User user = userService.getUserByID(Integer.parseInt(request.getParameter("userID")));
         user.setEnabled(true);
-        userDao.editUser(user);
+        userService.editUser(user);
         return "redirect:/dashboard";
     }
 
     @RequestMapping(value = "disableUser", method = RequestMethod.GET)
     public String disableUser(HttpServletRequest request, Model model) {
-        User user = userDao.getUserByID(Integer.parseInt(request.getParameter("userID")));
+        User user = userService.getUserByID(Integer.parseInt(request.getParameter("userID")));
         user.setEnabled(false);
-        userDao.editUser(user);
+        userService.editUser(user);
         return "redirect:/dashboard";
     }
 

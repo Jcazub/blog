@@ -10,12 +10,24 @@
     background-size: cover;
 }
 
-.tinymce {
+/*.tinymce {
     display: block !important;
     margin-left: auto;
     margin-right: auto;
     width: 600px;
+}*/
+
+#tagcloud a {
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    padding: 5px;
+    margin: 0 7px 7px 0;
+    border-radius: 5px;
 }
 
+sup {
+    padding-left: 2px;
+}
 
 
