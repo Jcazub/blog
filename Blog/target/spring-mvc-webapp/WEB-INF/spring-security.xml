@@ -36,7 +36,7 @@
         
         <!--Post related -->
         <intercept-url pattern="/createPost" 
-                       access="ROLE_ADMIN" />
+                       access="ROLE_USER" />
         <intercept-url pattern="/deletePost" 
                        access="ROLE_ADMIN" />
         <intercept-url pattern="/displayEditPost" 

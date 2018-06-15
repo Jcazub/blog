@@ -45,9 +45,9 @@ public class RequestServiceImpl extends Service implements RequestService {
     }
 
     @Override
-    public void deleteRequest(Request request) {
-        if (verifyIfRequestExists(request.getBlogID())) {
-            requestDao.deleteRequest(request.getBlogID());
+    public void deleteRequest(int requestID) {
+        if (verifyIfRequestExists(requestID)) {
+            requestDao.deleteRequest(requestID);
         }
     }
 
