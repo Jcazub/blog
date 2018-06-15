@@ -1,10 +1,10 @@
 
 body{background-color:#ECF0F1;}
 
-.navbar-inverse {
+/*.navbar-inverse {
     background-color: #34495E;
     border-color: #34495E;
-}
+}*/
 
 .navbar {
     position: relative;
@@ -25,7 +25,7 @@ body{background-color:#ECF0F1;}
 .navbar-brand>img{ width:80%;}
 
 .navbar-inverse .navbar-nav > li > a {
-    color: #F39C12;
+    color: #ffffff;
 }
 .navbar-inverse .navbar-nav > li > a:hover {
    background-color: #009688;
