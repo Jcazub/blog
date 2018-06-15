@@ -53,10 +53,10 @@
                         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#collapsePage${currentPage.staticID}" href="${pageContext.request.contextPath}/showPages">Pages<span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="${pageContext.request.contextPath}/showPages">Pages<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <c:forEach var="currentPage" items="${pages}">
-                                <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>
+                                <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}"><c:out value="${currentPage.title}"/></a></li>
                                 </c:forEach>
                             </ul>
                         </li>
