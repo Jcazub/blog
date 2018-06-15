@@ -55,12 +55,11 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <form class="navbar-form navbar-left">
-
+                        <form class="navbar-form navbar-left" method="GET" action="">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" id="post-search">
+                                <input type="text" class="form-control" placeholder="Search" name="post-search">
                                 <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default" id="search-posts-btn">
+                                    <button type="submit" class="btn btn-default" id="search-posts-btn">
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
                                 </div>
