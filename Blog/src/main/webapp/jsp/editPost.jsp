@@ -21,7 +21,7 @@
         <!-- Bootstrap 3 core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" id="bootstrap-css">
         <!-- Tags CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.css">
         <!-- Main CSS -->  
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-<nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -49,8 +49,8 @@
                             <ul class="dropdown-menu">
                                 <c:forEach var="currentPage" items="${pages}">
                                     <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
-                                </c:forEach>
-                                
+                                    </c:forEach>
+
                             </ul>
                         </li>
                     </ul>
@@ -97,11 +97,86 @@
         <%--<sec:authorize access="hasRole('ROLE_USER')">--%>
 
         <%--</sec:authorize>--%>
-        
+
         <%--<jsp:include page="navbar.jsp"/>--%>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
-        
-        <h1>Edit Post</h1>
+
+        <div class="container">
+            <h1 class="text-center">Edit Post</h1>
+            <br>
+            <form id="getpostform" 
+                  method="POST"
+                  action="editPost"
+                  class="form-horizontal">
+                <input name="postID" value="${post.blogID}" hidden/>
+                <div class="form-group">
+                    <label for="title" class="col-md-2 control-label">Title:</label>
+                    <div class="col-md-2">
+                        <input type="text" 
+                               class="form-control" 
+                               name="title" 
+                               placeholder="Title"
+                               maxlength="50"
+                               value="${post.title}"
+                               required/>
+                    </div>
+
+                    <label for="categorySelect" class="col-md-2 control-label">Category:</label>
+                    <div class="col-md-4">
+                        <select name="categorySelect" class="form-control">
+                            <c:forEach var="currentCategory" items="${categories}">
+                                <c:choose>
+                                    <c:when test="${post.category == currentCategory}">
+                                        <option selected value="${currentCategory.categoryID}">${currentCategory.name}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${currentCategory.categoryID}">${currentCategory.name}</option> 
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+
+                <!--            <div class="form-group">
+                                <div class="col-md-6">
+                                                 
+                                </div>
+                            </div>-->
+
+                <textarea name="content" id="texteditor">${post.content}</textarea>
+                <br>
+                <div class="form-group">
+                    <label for="publishDate" class="col-md-2 control-label">Publish Date:</label>
+                    <div class="col-md-4">
+                        <input type="date" name="publishDate" placeholder="Publish Date" value="${post.publishDate}" required/>
+                    </div>
+                    <label for="expirationDate" class="col-md-2 control-label">Expiration Date:</label>
+                    <div class="col-md-4">
+                        <input type="date" name="expirationDate" placeholder="Expiration Date" value="${post.expirationDate}" required/>
+                    </div>
+                </div>
+
+                <!-- tags -->
+                <div class="bs-example">         
+                    <label for="tagsSelect" class="col-md-2 control-label">Tags:</label>
+                    <select multiple data-role="tagsinput" name="tagsSelect">
+                        <c:forEach var="currentTag" items="${post.tags}">
+                            <option value="${currentTag.name}">${currentTag.name}</option>
+                        </c:forEach>
+                    </select> 
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-8">
+                        <input type="submit" class ="btn btn-default" id="submit-edit-post" value="Edit Post"/>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+<!--        <h1>Edit Post</h1>
         <form id="getpostform" 
               method="POST"
               action="editPost"
@@ -128,7 +203,7 @@
                                     <option selected value="${currentCategory.categoryID}">${currentCategory.name}</option>
                                 </c:when>
                                 <c:otherwise>
-                                   <option value="${currentCategory.categoryID}">${currentCategory.name}</option> 
+                                    <option value="${currentCategory.categoryID}">${currentCategory.name}</option> 
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -136,26 +211,26 @@
                 </div>
             </div>
 
-            <!--            <div class="form-group">
+                        <div class="form-group">
                             <div class="col-md-6">
                                              
                             </div>
-                        </div>-->
+                        </div>
 
             <textarea name="content" id="texteditor">${post.content}</textarea>
 
             <div class="form-group">
                 <div class="col-md-4">
                     <label for="publishDate" class="col-md-2 control-label">Publish Date:</label>
-                    <input type="date" name="publishDate" placeholder="Publish Date" value="${post.publishDate}" required/>
+                    <input type="date" name="publishDate" placeholder="Publish Date" value="${post.publishDate}"/>
                 </div>
                 <div class="col-md-4">
                     <label for="expirationDate" class="col-md-2 control-label">Expiration Date:</label>
-                    <input type="date" name="expirationDate" placeholder="Expiration Date" value="${post.expirationDate}"  required/>
+                    <input type="date" name="expirationDate" placeholder="Expiration Date" value="${post.expirationDate}"/>
                 </div>
             </div>
 
-            <!-- tags -->
+             tags 
             <div class="bs-example">         
                 <label for="tagsSelect" class="col-md-2 control-label">Tags:</label>
                 <select multiple data-role="tagsinput" name="tagsSelect">
@@ -168,7 +243,7 @@
             <div class="form-group">
                 <input type="submit" class ="btn btn-default" id="submit-edit-post" value="Edit Post"/>
             </div>
-        </form>      
+        </form>      -->
 
         <footer class="container-fluid text-center main-footer">
             <p>	&copy; codeKages </p>
@@ -178,7 +253,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- Tags scripts -->
-        <script src="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.min.js"></script>
+        <script src="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script> 
     </body>

@@ -49,7 +49,7 @@ public class BlogDaoDBImpl implements BlogDao {
     
     private static final String SELECT_BLOG = "select * from Blogs where BlogID = ?";
     
-    private static final String SELECT_ALL_BLOGS = "select * from Blogs";
+    private static final String SELECT_ALL_BLOGS = "select * from Blogs ORDER BY publishDate ASC";
     
     //Blog_Tags SQL
     private static final String INSERT_INTO_BLOGS_TAGS = "insert into Blogs_Tags (BlogID, TagID) values (?,?)";

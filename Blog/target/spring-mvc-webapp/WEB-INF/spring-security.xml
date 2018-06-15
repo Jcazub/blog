@@ -49,6 +49,7 @@
     </http>
     <authentication-manager>
         <authentication-provider>
+            <password-encoder ref="encoder"/>
             <jdbc-user-service id="userService"
                                data-source-ref="dataSource"
                                users-by-username-query=
