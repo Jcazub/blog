@@ -123,7 +123,7 @@
                     <select name="categorySelect" class="col-md-2">
                         <c:forEach var="currentCategory" items="${categories}">
                             <c:choose>
-                                <c:when test="${post.category} == currentCategory">
+                                <c:when test="${post.category == currentCategory}">
                                     <option selected value="${currentCategory.categoryID}">${currentCategory.name}</option>
                                 </c:when>
                                 <c:otherwise>

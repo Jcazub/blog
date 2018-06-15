@@ -5,17 +5,14 @@
  */
 package com.sg.blog.controller;
 
-import com.sg.blog.dao.BlogDao;
-import com.sg.blog.dao.CategoryDao;
-import com.sg.blog.dao.TagDao;
-import com.sg.blog.dao.UserDao;
 import com.sg.blog.model.Blog;
-import com.sg.blog.model.Category;
+import com.sg.blog.model.Request;
 import com.sg.blog.model.SearchTerm;
 import com.sg.blog.model.Tag;
 import com.sg.blog.model.User;
 import com.sg.blog.service.BlogService;
 import com.sg.blog.service.CategoryService;
+import com.sg.blog.service.RequestService;
 import com.sg.blog.service.TagService;
 import com.sg.blog.service.UserService;
 import java.security.Principal;
@@ -45,13 +42,15 @@ public class PostController {
     private CategoryService categoryService;
     private TagService tagService;
     private UserService userService;
+    private RequestService requestService;
 
     @Inject
-    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService, UserService userService) {
+    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService, UserService userService, RequestService requestService) {
         this.blogService = blogService;
         this.categoryService = categoryService;
         this.tagService = tagService;
         this.userService = userService;
+        this.requestService = requestService;
     }
 
     @RequestMapping(value = "/createPost", method = RequestMethod.GET)
@@ -66,7 +65,7 @@ public class PostController {
         Blog b = new Blog();
         b.setCreationDate(LocalDate.now());
         //b.setPublishDate(LocalDate.now());
-        b.setApprovedDate(LocalDate.parse("2099-01-01"));
+        b.setApprovedDate(LocalDate.parse("2199-01-01"));
         b.setIsApproved(true);
 
         //get user
@@ -106,10 +105,16 @@ public class PostController {
 
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public String displayPost(HttpServletRequest request, Model model) {
-
-        Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
-
-        model.addAttribute("post", b);
+        
+        String postType = request.getParameter("postType");
+        
+        if (postType != null && "request".equals(postType)) {
+            model.addAttribute("post", requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID"))));
+        } else {
+            model.addAttribute("post", blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID"))));
+        }
+  
+        model.addAttribute("postType", postType);
 
         return "post";
     }
@@ -204,5 +209,46 @@ public class PostController {
         blogService.editBlog(b);
 
         return "redirect:/dashboard";
+    }
+    
+    @RequestMapping(value = "/approveEdit", method = RequestMethod.GET)
+    public String approveEdit(HttpServletRequest request) {
+        
+        Blog b = requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID")));
+        
+        blogService.editBlog(b);
+        
+        requestService.deleteRequest(b.getBlogID());
+        
+        return "redirect:/dashboard";
+    }
+    
+    @RequestMapping(value = "/approveDelete", method = RequestMethod.GET)
+    public String approveDelete(HttpServletRequest request) {
+        
+        Blog b = requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID")));
+        
+        blogService.deleteBlog(b.getBlogID());
+        
+        requestService.deleteRequest(b.getBlogID());
+        
+        return "redirect:/dashboard";
+    }
+    
+    @RequestMapping(value = "/denyRequest", method = RequestMethod.GET)
+    public String denyRequest(HttpServletRequest request, Model model) {
+        
+        requestService.deleteRequest(Integer.parseInt(request.getParameter("postID")));
+        
+        return "redirect:/dashboard";
+    }
+    
+    @RequestMapping(value = "/viewEditRequest", method = RequestMethod.GET)
+    public String viewEditRequest(HttpServletRequest request) {
+        
+        String postID = request.getParameter("postID");
+        String postType = "request";
+        
+        return "redirect:/post?postID=" + postID + "&postType=" + postType;
     }
 }

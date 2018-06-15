@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     $('#search-posts-btn').click(function (event) {
         
-        
+        window.location.replace("http://localhost:8080/Blog/");
         
         $.ajax({
             type: 'POST',
@@ -51,7 +51,34 @@ $(document).ready(function () {
             success: function (data) {
                 //clear errors
 
-                filterPosts(data);
+                filterSearchPosts(data);
+            },
+            error: function () {
+                $('#errorMessages')
+                        .append($('<li>')
+                                .attr({class: 'list-group-item list-group-item-danger'})
+                                .text('Error calling web service.  Please try again later.'));
+            }
+        });
+    });
+    
+    $('#filter-posts-btn').click(function (event) {
+        
+        $.ajax({
+            type: 'POST',
+            url: 'filter/posts',
+            data: JSON.stringify({
+                filter: $('#postSelect').val()
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json',
+            success: function (data) {
+                //clear errors
+
+                filterSearchPosts(data);
             },
             error: function () {
                 $('#errorMessages')
@@ -94,7 +121,7 @@ function fillCategories(data) {
     });
 }
 
-function filterPosts(data) {
+function filterSearchPosts(data) {
     $("#index-posts").html("");
 
     var postList = $('#index-posts');
@@ -136,6 +163,7 @@ function filterPosts(data) {
         postList.append(appending);
     });
 }
+
 
 var acc = document.getElementsByClassName("accordion");
 var i;

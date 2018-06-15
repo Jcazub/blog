@@ -36,6 +36,16 @@ VALUES
 ('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','0','Gadgets and not robots','Some stuff about gadgets and robots','2999-05-31 23:59:59')
 ;
 
+INSERT INTO requesttypes (requestType)
+VALUES
+('edit'),
+('delete')
+;
+
+INSERT INTO requests (userID,categoryID,creationDate,publishDate,approvedDate,isApproved,title,content, expirationDate, requestTypeID, blogID)
+VALUES
+('3','3','2018-05-30 23:59:59','2018-05-31 23:59:59','2018-05-31 23:59:59','1','Gadgets and Robots and Death Metal','Some stuff about gadgets and robots','2999-05-31 23:59:59', '2', '1');
+
 INSERT INTO staticPages (userID, title, content, creationDate)
 VALUES
 ('3','testPage','testPage Content', '2018-05-30 23:59:59');

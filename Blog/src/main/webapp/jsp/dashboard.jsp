@@ -101,62 +101,90 @@
         </nav>
         <br>
 
-        <sec:authorize access="hasRole('ROLE_USER')">
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
 
         </sec:authorize>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SIDE BAR -->
-<!--        <div class="container">
-            <div class="w3-card col-md-2" role="navigation">
-                <div class="sidebar-nav navbar-collapse" data-spy="affix" data-offset-top="205">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <br>
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                             /input-group 
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath}/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath}/viewUserDetails"><i class="fa fa-dashboard fa-fw"></i>View Account Details</a>
-                        </li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-edit fa-fw"></i>Manage Posts<span class="fa arrow"></span></a>  
-                            <ul class="dropdown-menu">                         
-                                <li><a href="${pageContext.request.contextPath}/createPost">Create Post</a></li>                           
+        <!--        <div class="container">
+                    <div class="w3-card col-md-2" role="navigation">
+                        <div class="sidebar-nav navbar-collapse" data-spy="affix" data-offset-top="205">
+                            <ul class="nav" id="side-menu">
+                                <li class="sidebar-search">
+                                    <br>
+                                    <div class="input-group custom-search-form">
+                                        <input type="text" class="form-control" placeholder="Search...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                     /input-group 
+                                </li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/viewUserDetails"><i class="fa fa-dashboard fa-fw"></i>View Account Details</a>
+                                </li>
+                                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-edit fa-fw"></i>Manage Posts<span class="fa arrow"></span></a>  
+                                    <ul class="dropdown-menu">                         
+                                        <li><a href="${pageContext.request.contextPath}/createPost">Create Post</a></li>                           
+                                    </ul>
+                                     /.nav-second-level 
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-users fa-fw"> </i> Manage Users<span class="fa arrow"></span></a>                           
+                                     /.nav-second-level 
+                                </li>                  
+                                <li>
+                                    <a href="#"><i class="fa fa-files-o fa-fw"></i>Manage Pages<span class="fa arrow"></span></a>
+        
+                                     /.nav-second-level 
+                                </li>
                             </ul>
-                             /.nav-second-level 
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-users fa-fw"> </i> Manage Users<span class="fa arrow"></span></a>                           
-                             /.nav-second-level 
-                        </li>                  
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i>Manage Pages<span class="fa arrow"></span></a>
+                        </div>
+                    </div>
+                    <br>-->
 
-                             /.nav-second-level 
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <br>-->
-
+        <div class="container">
             <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PUBLISHED POSTS        -->  
             <div class="col-lg-4">
                 <div class="w3-card panel-default" id="pblogAccordion">
-                    <div class="panel-heading">
-                        <i class="glyphicon glyphicon-edit fa-fw"></i> Published Blogs
-                    </div>
+
+                    <sec:authorize ifAllGranted="ROLE_USER" ifNotGranted="ROLE_ADMIN">
+                        <div class="panel-heading">
+                            <i class="glyphicon glyphicon-edit fa-fw"></i> Blogs
+                        </div>
+                    </sec:authorize>
+                    <sec:authorize ifAllGranted="ROLE_ADMIN">
+                        <form id="getpostform" 
+                              method="POST"
+                              action="filterPosts"
+                              class="form-horizontal"
+                              >
+                            <div class="panel-heading">
+                                <div class="form-group">
+                                    <i class="glyphicon glyphicon-edit fa-fw"></i> Blogs
+                                    <select name="postSelect" id="postSelect" class="">
+                                        <option <c:if test="${filter == 'published'}">selected</c:if> value="published">Published</option>
+                                        <option <c:if test="${filter == 'unapproved'}">selected</c:if> value="unapproved">Unapproved</option>
+                                        <option <c:if test="${filter == 'edit'}">selected</c:if> value="edit">Request: Edit</option>
+                                        <option <c:if test="${filter == 'delete'}">selected</c:if> value="delete">Request: Delete</option>
+                                        <option <c:if test="${filter == 'all'}">selected</c:if> value="all">All</option>
+                                        </select>
+
+                                        <input type="submit" class ="btn btn-default" value="Filter"/> 
+                                    </div>
+
+
+                                </div>
+                            </form>
+                    </sec:authorize>
                     <!-- /.panel-heading -->
                     <div class="panel-body">  
-                        <c:forEach var="blog" items="${publishedBlogs}">
+                        <c:forEach var="blog" items="${blogs}">
                             <div class="card">
                                 <div class="card-header" id="pblogHeading${blog.blogID}">
                                     <h5 class="mb-0">
@@ -168,9 +196,26 @@
 
                                 <div id="collapsepBlog${blog.blogID}" class="collapse" aria-labelledby="pblogHeading${blog.blogID}" data-parent="#pblogAccordion">
                                     <div class="card-body"> 
-                                        <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View</a>
-                                        <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
-                                        <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
+                                        <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View Blog</a>
+                                        <c:if test="${filter == 'edit'}">
+                                            <a href="${pageContext.request.contextPath}/viewEditRequest?postID=${blog.blogID}" class="btn btn-primary">View Edit</a>
+                                        </c:if>
+                                        <c:if test="${filter != 'edit' && filter !='delete'}">
+                                            <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
+                                            <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
+                                        </c:if>                                        
+                                        <c:if test="${filter == 'unapproved'}">
+                                            <a href="${pageContext.request.contextPath}/approvePost?postID=${blog.blogID}" class="btn btn-primary">Approve Post</a>
+                                        </c:if>
+                                        <c:if test="${filter == 'edit'}">
+                                            <a href="${pageContext.request.contextPath}/approveEdit?postID=${blog.blogID}" class="btn btn-primary">Approve Edit</a>
+                                        </c:if> 
+                                        <c:if test="${filter == 'delete'}">
+                                            <a href="${pageContext.request.contextPath}/approveDelete?postID=${blog.blogID}" class="btn btn-primary">Approve Delete</a>
+                                        </c:if>
+                                        <c:if test="${filter == 'edit' || filter == 'delete'}">
+                                            <a href="${pageContext.request.contextPath}/denyRequest?postID=${blog.blogID}" class="btn btn-primary">Deny Request</a>
+                                        </c:if>
                                     </div>
                                 </div>
 
@@ -179,239 +224,290 @@
                     </div>
 
                     <!-- /.list-group -->
+
+
                     <a href="${pageContext.request.contextPath}/createPost" class="btn btn-default btn-block">Add New Blog Post</a>
+
                 </div>
                 <!-- /.panel-body -->
             </div>
 
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UNAPPROVED POSTS        -->  
-            <div class="col-lg-4">
-                <div class="w3-card panel-default" id="uablogAccordion">
-                    <div class="panel-heading">
-                        <i class="glyphicon glyphicon-edit fa-fw"></i> Unapproved Blogs
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">  
-                        <c:forEach var="blog" items="${unapprovedBlogs}">
-                            <div class="card">
-                                <div class="card-header" id="uablogHeading${blog.blogID}">
-                                    <h5 class="mb-0">
-                                        <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapseuaBlog${blog.blogID}" aria-expanded="true" aria-controls="collapseuaBlog${blog.blogID}">
-                                            ${blog.title}
-                                        </a>
-                                    </h5>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PUBLISHED POSTS    BACKUP    -->  
+                <!--        <div class="col-lg-4">
+                            <div class="w3-card panel-default" id="pblogAccordion">
+                                <div class="panel-heading form-control">
+                                    <i class="glyphicon glyphicon-edit fa-fw"></i> Published Blogs
+                                    <select name="categorySelect" class="">
+                                        <option value="all">Filter Published</option>
+                                        <option value="all">Filter Unapproved</option>
+                                        <option value="all">Filter Request: Edit</option>
+                                        <option value="all">Filter Request: Delete</option>
+                                        <option value="all">Filter All</option>
+                                    </select>
                                 </div>
+                                 /.panel-heading 
+                                <div class="panel-body">  
+                <c:forEach var="blog" items="${publishedBlogs}">
+                    <div class="card">
+                        <div class="card-header" id="pblogHeading${blog.blogID}">
+                            <h5 class="mb-0">
+                                <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapsepBlog${blog.blogID}" aria-expanded="true" aria-controls="collapsepBlog${blog.blogID}">
+                    ${blog.title}
+                </a>
+            </h5>
+        </div>
+        
+        <div id="collapsepBlog${blog.blogID}" class="collapse" aria-labelledby="pblogHeading${blog.blogID}" data-parent="#pblogAccordion">
+            <div class="card-body"> 
+                <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View</a>
+                <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
+                <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        
+        </div>
+                </c:forEach>
+            </div>
+        
+             /.list-group 
+            <a href="${pageContext.request.contextPath}/createPost" class="btn btn-default btn-block">Add New Blog Post</a>
+        </div>
+         /.panel-body 
+        </div>-->
 
-                                <div id="collapseuaBlog${blog.blogID}" class="collapse" aria-labelledby="uablogHeading${blog.blogID}" data-parent="#uablogAccordion">
-                                    <div class="card-body"> 
-                                        <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View</a>
-                                        <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
-                                        <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
-                                        <a href="${pageContext.request.contextPath}/approvePost?postID=${blog.blogID}" class="btn btn-primary">Approve Post</a>
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UNAPPROVED POSTS        -->  
+                <!--            <div class="col-lg-4">
+                                <div class="w3-card panel-default" id="uablogAccordion">
+                                    <div class="panel-heading">
+                                        <i class="glyphicon glyphicon-edit fa-fw"></i> Unapproved Blogs
                                     </div>
-                                </div>
-
-                            </div>
-                        </c:forEach>
-                    </div>
-
-                    <!-- /.list-group -->
-                    <a href="${pageContext.request.contextPath}/createPost" class="btn btn-default btn-block">Add New Blog Post</a>
-                </div>
-                <!-- /.panel-body -->
+                                     /.panel-heading 
+                                    <div class="panel-body">  
+                <c:forEach var="blog" items="${unapprovedBlogs}">
+                    <div class="card">
+                        <div class="card-header" id="uablogHeading${blog.blogID}">
+                            <h5 class="mb-0">
+                                <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapseuaBlog${blog.blogID}" aria-expanded="true" aria-controls="collapseuaBlog${blog.blogID}">
+                    ${blog.title}
+                </a>
+            </h5>
+        </div>
+    
+        <div id="collapseuaBlog${blog.blogID}" class="collapse" aria-labelledby="uablogHeading${blog.blogID}" data-parent="#uablogAccordion">
+            <div class="card-body"> 
+                <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View</a>
+                <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
+                <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
+                <a href="${pageContext.request.contextPath}/approvePost?postID=${blog.blogID}" class="btn btn-primary">Approve Post</a>
             </div>
+        </div>
+    
+    </div>
+                </c:forEach>
+            </div>
+    
+             /.list-group 
+            <a href="${pageContext.request.contextPath}/createPost" class="btn btn-default btn-block">Add New Blog Post</a>
+        </div>
+         /.panel-body 
+    </div>-->
 
 
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~STATIC PAGES         -->  
-            <div class="col-lg-4">
-                <div class="w3-card panel-default" id="pageAccordion">
-                    <div class="panel-heading">
-                        <i class="fa fa-files-o fa-fw"></i> Static Pages
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">  
-                        <c:forEach var="currentPage" items="${pages}">
-                            <div class="card">
-                                <div class="card-header" id="pageHeading${currentPage.staticID}">
-                                    <h5 class="mb-0">
-                                        <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapsePage${currentPage.staticID}" aria-expanded="true" aria-controls="collapsePage${currentPage.staticID}">
-                                            ${currentPage.title}
-                                        </a>
-                                    </h5>
-                                </div>
-
-                                <div id="collapsePage${currentPage.staticID}" class="collapse" aria-labelledby="pageHeading${currentPage.staticID}" data-parent="#pageAccordion">
-                                    <div class="card-body"> 
-                                        <a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}" class="btn btn-danger">View</a>
-                                        <a href="${pageContext.request.contextPath}/displayEditPage?pageID=${currentPage.staticID}" class="btn btn-danger">Edit</a>  
-                                        <a href="${pageContext.request.contextPath}/deletePage?pageID=${currentPage.staticID}" class="btn btn-danger">Delete</a>
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~STATIC PAGES         -->  
+                <div class="col-lg-4">
+                    <div class="w3-card panel-default" id="pageAccordion">
+                        <div class="panel-heading">
+                            <i class="fa fa-files-o fa-fw"></i> Static Pages
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">  
+                            <c:forEach var="currentPage" items="${pages}">
+                                <div class="card">
+                                    <div class="card-header" id="pageHeading${currentPage.staticID}">
+                                        <h5 class="mb-0">
+                                            <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapsePage${currentPage.staticID}" aria-expanded="true" aria-controls="collapsePage${currentPage.staticID}">
+                                                ${currentPage.title}
+                                            </a>
+                                        </h5>
                                     </div>
+
+                                    <div id="collapsePage${currentPage.staticID}" class="collapse" aria-labelledby="pageHeading${currentPage.staticID}" data-parent="#pageAccordion">
+                                        <div class="card-body"> 
+                                            <a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}" class="btn btn-danger">View</a>
+                                            <a href="${pageContext.request.contextPath}/displayEditPage?pageID=${currentPage.staticID}" class="btn btn-danger">Edit</a>  
+                                            <a href="${pageContext.request.contextPath}/deletePage?pageID=${currentPage.staticID}" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+
                                 </div>
+                            </c:forEach>
+                        </div>
 
-                            </div>
-                        </c:forEach>
+                        <!-- /.list-group -->
+                        <a href="${pageContext.request.contextPath}/displayCreatePage" class="btn btn-default btn-block">Add New Static Page</a>
                     </div>
-
-                    <!-- /.list-group -->
-                    <a href="${pageContext.request.contextPath}/displayCreatePage" class="btn btn-default btn-block">Add New Static Page</a>
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel-body -->
-            </div>
 
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CATEGORIES         -->    
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CATEGORIES         -->    
 
-            <div class="col-lg-4">
-                <div class="w3-card panel-default" id="categoryAccordion">
-                    <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> Categories
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">  
-                        <c:forEach var="currentCategory" items="${categories}">
-                            <div class="card">
-                                <div class="card-header" id="catHeading${currentCategory.categoryID}">
-                                    <h5 class="mb-0">
-                                        <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapseCat${currentCategory.categoryID}" aria-expanded="true" aria-controls="collapseCat${currentCategory.categoryID}">
-                                            ${currentCategory.name}
-                                        </a>
-                                    </h5>
+                <div class="col-lg-4">
+                    <div class="w3-card panel-default" id="categoryAccordion">
+                        <div class="panel-heading">
+                            <i class="fa fa-bell fa-fw"></i> Categories
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">  
+                            <c:forEach var="currentCategory" items="${categories}">
+                                <div class="card">
+                                    <div class="card-header" id="catHeading${currentCategory.categoryID}">
+                                        <h5 class="mb-0">
+                                            <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapseCat${currentCategory.categoryID}" aria-expanded="true" aria-controls="collapseCat${currentCategory.categoryID}">
+                                                ${currentCategory.name}
+                                            </a>
+                                        </h5>
+                                    </div>
+
+                                    <div id="collapseCat${currentCategory.categoryID}" class="collapse" aria-labelledby="catHeading${currentCategory.categoryID}" data-parent="#categoryAccordion">
+                                        <div class="card-body"> 
+                                            <div id="collapseCatEdit${currentCategory.categoryID}" class="collapse" aria-labelledby="catHeading${currentCategory.categoryID}" data-parent="#categoryAccordion">
+                                                <form
+                                                    method="POST"
+                                                    action="editCategory"> 
+                                                    <input name="catID" value="${currentCategory.categoryID}" hidden>
+                                                    <div class="form-group">
+                                                        <label for="dashboard-catName${currentCategory.categoryID}">Category Name:</label>
+                                                        <input type="text" 
+                                                               class="form-control"
+                                                               placeholder="${currentCategory.name}"
+                                                               maxlength="50"
+                                                               required
+                                                               id="dashboard-catName${currentCategory.categoryID}"
+                                                               name="dashboard-catName${currentCategory.categoryID}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="dashboard-catDesc${currentCategory.categoryID}">Description:</label>
+                                                        <input type="text" 
+                                                               class="form-control"
+                                                               placeholder="${currentCategory.desc}"
+                                                               maxlength="50"
+                                                               id="dashboard-catDesc${currentCategory.categoryID}"
+                                                               name="dashboard-catDesc${currentCategory.categoryID}">
+                                                    </div> 
+
+                                                    <div class="form-group">
+                                                        <input type="submit" class ="btn btn-default" value="Confirm Edit"/>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+
+                                            <a data-toggle="collapse" data-target="#collapseCatEdit${currentCategory.categoryID}" aria-expanded="true" aria-controls="collapseCatEdit${currentCategory.categoryID}" class="btn btn-primary">Edit</a>   
+                                            <a href="${pageContext.request.contextPath}/deleteCategory?categoryID=${currentCategory.categoryID}" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </c:forEach>
+                        </div>
+
+                        <div id="collapseCatAdd" class="collapse" aria-labelledby="catHeading" data-parent="#categoryAccordion">
+                            <form
+                                method="POST"
+                                action="addCategory">  
+                                <div class="form-group">
+                                    <label for="dashboard-catNameAdd">Category Name:</label>
+                                    <input type="text" 
+                                           class="form-control"
+                                           placeholder="Name"
+                                           maxlength="50"
+                                           required
+                                           id="dashboard-catNameAdd"
+                                           name="dashboard-catNameAdd">
                                 </div>
 
-                                <div id="collapseCat${currentCategory.categoryID}" class="collapse" aria-labelledby="catHeading${currentCategory.categoryID}" data-parent="#categoryAccordion">
-                                    <div class="card-body"> 
-                                        <div id="collapseCatEdit${currentCategory.categoryID}" class="collapse" aria-labelledby="catHeading${currentCategory.categoryID}" data-parent="#categoryAccordion">
-                                            <form
-                                                method="POST"
-                                                action="editCategory"> 
-                                                <input name="catID" value="${currentCategory.categoryID}" hidden>
-                                                <div class="form-group">
-                                                    <label for="dashboard-catName${currentCategory.categoryID}">Category Name:</label>
-                                                    <input type="text" 
-                                                           class="form-control"
-                                                           placeholder="${currentCategory.name}"
-                                                           maxlength="50"
-                                                           required
-                                                           id="dashboard-catName${currentCategory.categoryID}"
-                                                           name="dashboard-catName${currentCategory.categoryID}">
-                                                </div>
+                                <div class="form-group">
+                                    <label for="dashboard-catDescAdd">Description:</label>
+                                    <input type="text" 
+                                           class="form-control"
+                                           placeholder="Description"
+                                           maxlength="50"
+                                           id="dashboard-catDescAdd"
+                                           name="dashboard-catDescAdd">
+                                </div> 
 
-                                                <div class="form-group">
-                                                    <label for="dashboard-catDesc${currentCategory.categoryID}">Description:</label>
-                                                    <input type="text" 
-                                                           class="form-control"
-                                                           placeholder="${currentCategory.desc}"
-                                                           maxlength="50"
-                                                           id="dashboard-catDesc${currentCategory.categoryID}"
-                                                           name="dashboard-catDesc${currentCategory.categoryID}">
-                                                </div> 
+                                <div class="form-group">
+                                    <input type="submit" class ="btn btn-default" value="Add Category"/>
+                                </div>
 
-                                                <div class="form-group">
-                                                    <input type="submit" class ="btn btn-default" value="Confirm Edit"/>
-                                                </div>
+                            </form>
 
-                                            </form>
+                        </div>
+                        <!-- /.list-group -->
+                        <a data-toggle="collapse" data-target="#collapseCatAdd" aria-expanded="true" aria-controls="collapseCatAdd" class="btn btn-default btn-block">Add New Category</a>
+                    </div>
+                    <!-- /.panel-body -->
+                </div> 
+
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER MANAGEMENT PANEL -->           
+                <div class="col-lg-4">
+                    <div class="w3-card panel-default" id="userAccordion">
+                        <div class="panel-heading">
+                            <i class="fa fa-users fa-fw"> </i> User Management
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">  
+                            <c:forEach var="currentUser" items="${users}">
+                                <div class="card">
+                                    <div class="card-header" id="userHeading${currentUser.userID}">
+                                        <h5 class="mb-0">
+                                            <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapseUsr${currentUser.userID}" aria-expanded="true" aria-controls="collapseUsr${currentUser.userID}">
+                                                ${currentUser.userName}
+                                            </a>
+                                        </h5>
+                                    </div>
+
+                                    <div id="collapseUsr${currentUser.userID}" class="collapse" aria-labelledby="userHeading${currentUser.userID}" data-parent="#userAccordion">
+                                        <div class="card-body">
+                                            <c:set var="testRoles" value="${currentUser.roles}"/>
+                                            <c:set var="role" value="${roleVerification}"/>
+                                            <spring:eval var="containsValue" expression="testRoles.contains(role)" />
+                                            <c:choose>
+                                                <c:when test="${containsValue}">
+                                                    <a href="${pageContext.request.contextPath}/demoteUser?userID=${currentUser.userID}" class="btn btn-danger">Demote</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="${pageContext.request.contextPath}/promoteUser?userID=${currentUser.userID}" class="btn btn-primary">Promote</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test = "${currentUser.enabled == true}">
+                                                    <a href="${pageContext.request.contextPath}/disableUser?userID=${currentUser.userID}" class="btn btn-danger">Disable</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="${pageContext.request.contextPath}/enableUser?userID=${currentUser.userID}" class="btn btn-primary">Enable</a>
+                                                </c:otherwise>
+                                            </c:choose>
 
                                         </div>
-
-                                        <a data-toggle="collapse" data-target="#collapseCatEdit${currentCategory.categoryID}" aria-expanded="true" aria-controls="collapseCatEdit${currentCategory.categoryID}" class="btn btn-primary">Edit</a>   
-                                        <a href="${pageContext.request.contextPath}/deleteCategory?categoryID=${currentCategory.categoryID}" class="btn btn-danger">Delete</a>
                                     </div>
                                 </div>
 
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                        </div>
+                        <!-- /.list-group -->
+                        <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                     </div>
+                    <!-- /.panel-body -->
+                </div> 
+            </sec:authorize>
 
-                    <div id="collapseCatAdd" class="collapse" aria-labelledby="catHeading" data-parent="#categoryAccordion">
-                        <form
-                            method="POST"
-                            action="addCategory">  
-                            <div class="form-group">
-                                <label for="dashboard-catNameAdd">Category Name:</label>
-                                <input type="text" 
-                                       class="form-control"
-                                       placeholder="Name"
-                                       maxlength="50"
-                                       required
-                                       id="dashboard-catNameAdd"
-                                       name="dashboard-catNameAdd">
-                            </div>
 
-                            <div class="form-group">
-                                <label for="dashboard-catDescAdd">Description:</label>
-                                <input type="text" 
-                                       class="form-control"
-                                       placeholder="Description"
-                                       maxlength="50"
-                                       id="dashboard-catDescAdd"
-                                       name="dashboard-catDescAdd">
-                            </div> 
-
-                            <div class="form-group">
-                                <input type="submit" class ="btn btn-default" value="Add Category"/>
-                            </div>
-
-                        </form>
-
-                    </div>
-                    <!-- /.list-group -->
-                    <a data-toggle="collapse" data-target="#collapseCatAdd" aria-expanded="true" aria-controls="collapseCatAdd" class="btn btn-default btn-block">Add New Category</a>
-                </div>
-                <!-- /.panel-body -->
-            </div> 
-
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER MANAGEMENT PANEL -->           
-            <div class="col-lg-4">
-                <div class="w3-card panel-default" id="userAccordion">
-                    <div class="panel-heading">
-                        <i class="fa fa-users fa-fw"> </i> User Management
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">  
-                        <c:forEach var="currentUser" items="${users}">
-                            <div class="card">
-                                <div class="card-header" id="userHeading${currentUser.userID}">
-                                    <h5 class="mb-0">
-                                        <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapseUsr${currentUser.userID}" aria-expanded="true" aria-controls="collapseUsr${currentUser.userID}">
-                                            ${currentUser.userName}
-                                        </a>
-                                    </h5>
-                                </div>
-
-                                <div id="collapseUsr${currentUser.userID}" class="collapse" aria-labelledby="userHeading${currentUser.userID}" data-parent="#userAccordion">
-                                    <div class="card-body">
-                                        <c:set var="testRoles" value="${currentUser.roles}"/>
-                                        <c:set var="role" value="${roleVerification}"/>
-                                        <spring:eval var="containsValue" expression="testRoles.contains(role)" />
-                                        <c:choose>
-                                            <c:when test="${containsValue}">
-                                                <a href="${pageContext.request.contextPath}/demoteUser?userID=${currentUser.userID}" class="btn btn-danger">Demote</a>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a href="${pageContext.request.contextPath}/promoteUser?userID=${currentUser.userID}" class="btn btn-primary">Promote</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <c:choose>
-                                            <c:when test = "${currentUser.enabled == true}">
-                                                <a href="${pageContext.request.contextPath}/disableUser?userID=${currentUser.userID}" class="btn btn-danger">Disable</a>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a href="${pageContext.request.contextPath}/enableUser?userID=${currentUser.userID}" class="btn btn-primary">Enable</a>
-                                            </c:otherwise>
-                                        </c:choose>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </c:forEach>
-                    </div>
-                    <!-- /.list-group -->
-                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                </div>
-                <!-- /.panel-body -->
-            </div> 
         </div>
+
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <footer class="container-fluid text-center main-footer">
             <p>	&copy; codeKages </p>

@@ -7,6 +7,7 @@ package com.sg.blog.controller;
 
 import com.sg.blog.dao.UserDao;
 import com.sg.blog.model.Blog;
+import com.sg.blog.model.Request;
 import com.sg.blog.model.Role;
 import com.sg.blog.model.User;
 import com.sg.blog.service.BlogService;
@@ -64,19 +65,45 @@ public class UserController {
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String displayDashboard(Model model) {
+    public String displayDashboard(HttpServletRequest request, Model model) {
+
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("tags", tagService.getAllTags());
         model.addAttribute("requests", requestService.getAllRequests());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("pages", staticPageService.getAllStaticPages());
         List<Blog> allPosts = blogService.getAllBlogs();
+        List<Request> allRequests = requestService.getAllRequests();
         List<Blog> publishedBlogs = allPosts.stream()
                 .filter(b -> (LocalDate.now().isEqual(b.getPublishDate()) || LocalDate.now().isAfter(b.getPublishDate())) && LocalDate.now().isBefore(b.getExpirationDate()) && b.getIsApproved() == true)
                 .collect(Collectors.toList());
         List<Blog> unapprovedBlogs = allPosts.stream()
                 .filter(b -> b.getIsApproved() == false)
                 .collect(Collectors.toList());
+        List<Request> editRequests = allRequests.stream()
+                .filter(r -> (r.getRequestType().getRequestType().equals("edit")))
+                .collect(Collectors.toList());
+        List<Request> deleteRequests = allRequests.stream()
+                .filter(r -> (r.getRequestType().getRequestType().equals("delete")))
+                .collect(Collectors.toList());
+
+        String filter = request.getParameter("filter");
+        
+
+        if (filter == null || "".equals(filter) || "all".equals(filter)) {
+            model.addAttribute("blogs", allPosts);
+        } else if ("published".equals(filter)) {
+            model.addAttribute("blogs", publishedBlogs);  
+        } else if ("unapproved".equals(filter)) {
+            model.addAttribute("blogs", unapprovedBlogs);
+        } else if ("edit".equals(filter)) {
+            model.addAttribute("blogs", editRequests);
+        } else if ("delete".equals(filter)) {
+            model.addAttribute("blogs", deleteRequests);
+        }
+        
+        model.addAttribute("filter", filter);
+
         model.addAttribute("publishedBlogs", publishedBlogs);
         model.addAttribute("unapprovedBlogs", unapprovedBlogs);
         model.addAttribute("roleVerification", roleService.getRoleByName("ROLE_ADMIN"));
@@ -145,7 +172,7 @@ public class UserController {
     @RequestMapping(value = "deleteUser", method = RequestMethod.GET)
     public String deleteUser(HttpServletRequest request, Principal principal) {
         User user = userService.getUserByUserName(principal.getName());
-        userService.deleteUser(user);
+        userService.deleteUser(user.getUserID());
 
         //log user out of current session
         HttpSession session = request.getSession(false);
@@ -192,6 +219,12 @@ public class UserController {
         user.setEnabled(false);
         userService.editUser(user);
         return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "filterPosts", method = RequestMethod.POST)
+    public String filterPosts(HttpServletRequest request) {
+        String filter = request.getParameter("postSelect");
+        return "redirect:/dashboard?filter=" + filter;
     }
 
 }
