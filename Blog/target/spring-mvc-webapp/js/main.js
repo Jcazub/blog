@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     $('#search-posts-btn').click(function (event) {
         
-        window.location.replace("http://localhost:8080/Blog/");
+        
         
         $.ajax({
             type: 'POST',
@@ -134,7 +134,7 @@ function filterPosts(data) {
                 '</div>';
 
         postList.append(appending);
-    })
+    });
 }
 
 var acc = document.getElementsByClassName("accordion");

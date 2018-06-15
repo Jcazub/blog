@@ -178,7 +178,7 @@
                         <input type="submit" 
                                class="btn btn-default" 
                                value="Edit Account"/>
-                        <a class="col-md-offset-2 btn btn-default" 
+                        <a href="${pageContext.request.contextPath}/deleteUser?userID=${User.userID}" class="col-md-offset-2 btn btn-default" 
                                >Delete Account</a>
                     </div>
                     <div class="col-md-offset-2 col-md-4">

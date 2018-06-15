@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -105,7 +106,7 @@ public class PostController {
 
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public String displayPost(HttpServletRequest request, Model model) {
-        
+
         Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
 
         model.addAttribute("post", b);
@@ -177,11 +178,20 @@ public class PostController {
         Map<SearchTerm, String> criteriaMap = new HashMap<>();
 
         String currentTerm = searchMap.get("title");
+        
         if (currentTerm != null && !currentTerm.isEmpty()) {
             criteriaMap.put(SearchTerm.TITLE, currentTerm);
         }
+        
+        currentTerm = searchMap.get("content");
+        
+        
 
-        return blogService.searchBlogs(criteriaMap);
+        List<Blog> tempBlogs = blogService.searchBlogs(criteriaMap);
+
+        return tempBlogs.stream()
+                .filter(b -> (LocalDate.now().isEqual(b.getPublishDate()) || LocalDate.now().isAfter(b.getPublishDate())) && LocalDate.now().isBefore(b.getExpirationDate()) && b.getIsApproved() == true)
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/approvePost", method = RequestMethod.GET)
