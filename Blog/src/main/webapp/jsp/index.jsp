@@ -48,8 +48,8 @@
                             <ul class="dropdown-menu">
                                 <c:forEach var="currentPage" items="${pages}">
                                     <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
-                                </c:forEach>
-                                
+                                    </c:forEach>
+
                             </ul>
                         </li>
                     </ul>
@@ -135,7 +135,9 @@
                             <c:forEach var="currentBlog" items="${posts}" >
                                 <div class="col-lg-6 col-md-6">
                                     <aside>
-                                        <img src="https://lh3.googleusercontent.com/-ndZJOGgvYQ4/WM1ZI8dH86I/AAAAAAAADeo/l67ZqZnRUO8QXIQi38bEXuxqHfVX0TV2gCJoC/w424-h318-n-rw/thumbnail8.jpg" class="img-responsive">
+                                        <a href="${pageContext.request.contextPath}/post?postID=${currentBlog.blogID}">
+                                            <img src="https://lh3.googleusercontent.com/-ndZJOGgvYQ4/WM1ZI8dH86I/AAAAAAAADeo/l67ZqZnRUO8QXIQi38bEXuxqHfVX0TV2gCJoC/w424-h318-n-rw/thumbnail8.jpg" class="img-responsive">
+                                        </a>
                                         <div class="content-title">
                                             <div class="text-center">
                                                 <h3><a href="${pageContext.request.contextPath}/post?postID=${currentBlog.blogID}">${currentBlog.title}</a></h3>
@@ -163,7 +165,7 @@
                                                     <a href="#"><i class="fa fa-github" data-toggle="tooltip" data-placement="bottom" title="Github"></i></a>				
                                                 </div>
                                             </div>
-                                                    
+
                                         </div>
                                     </aside>
                                 </div>
@@ -183,7 +185,9 @@
                                     <c:forEach var="currentRecentPost" items="${recentPosts}">
                                         <li class="recent-post">
                                             <div class="post-img">
-                                                <img src="https://lh3.googleusercontent.com/-ndZJOGgvYQ4/WM1ZI8dH86I/AAAAAAAADeo/l67ZqZnRUO8QXIQi38bEXuxqHfVX0TV2gCJoC/w424-h318-n-rw/thumbnail8.jpg" class="img-responsive">
+                                                <a href="${pageContext.request.contextPath}/post?postID=${currentRecentPost.blogID}">
+                                                    <img src="https://lh3.googleusercontent.com/-ndZJOGgvYQ4/WM1ZI8dH86I/AAAAAAAADeo/l67ZqZnRUO8QXIQi38bEXuxqHfVX0TV2gCJoC/w424-h318-n-rw/thumbnail8.jpg" class="img-responsive">
+                                                </a>
                                             </div>
                                             <a href="${pageContext.request.contextPath}/post?postID=${currentRecentPost.blogID}"><h5>${currentRecentPost.title}</h5></a>
                                             <p><small><i class="fa fa-calendar" data-original-title="" title=""></i>${currentRecentPost.publishDate}</small></p>
@@ -252,7 +256,7 @@
         <script src="${pageContext.request.contextPath}/tags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
-        
+
     </body>
 
 </html>
