@@ -119,7 +119,7 @@
                     <!-- Author -->
                     <p class="lead">
                         by
-                        <a href="#">${post.user.userName}</a>
+                        <a href="${pageContext.request.contextPath}/?user-search=${post.user.userID}">${post.user.userName}</a>
                     </p>
 
                     <hr>

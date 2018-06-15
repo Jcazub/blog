@@ -43,6 +43,7 @@ public class IndexController {
         
         String postSearch = request.getParameter("post-search");
         String categorySearch = request.getParameter("category-search");
+        String userSearch = request.getParameter("user-search");
         
         List<Blog> allPosts = blogService.getAllBlogs();
         List<Blog> publishedBlogs = allPosts.stream()
@@ -68,6 +69,11 @@ public class IndexController {
                     .filter(b -> Integer.parseInt(categorySearch) == b.getCategory().getCategoryID())
                     .collect(Collectors.toList());
             model.addAttribute("posts", categoryBlogs);
+        } else if (userSearch != null && !"".equals(userSearch)) {
+            List<Blog> userBlogs = publishedBlogs.stream()
+                    .filter(b -> Integer.parseInt(userSearch) == b.getUser().getUserID())
+                    .collect(Collectors.toList());
+            model.addAttribute("posts", userBlogs);
         } else {
             model.addAttribute("posts", publishedBlogs);
         }
