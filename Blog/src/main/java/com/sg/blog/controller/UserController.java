@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String displayDashboard(HttpServletRequest request, Model model) {
+    public String displayDashboard(HttpServletRequest request, Model model, Principal principal) {
 
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("tags", tagService.getAllTags());
@@ -74,38 +74,49 @@ public class UserController {
         model.addAttribute("pages", staticPageService.getAllStaticPages());
         List<Blog> allPosts = blogService.getAllBlogs();
         List<Request> allRequests = requestService.getAllRequests();
-        List<Blog> publishedBlogs = allPosts.stream()
-                .filter(b -> (LocalDate.now().isEqual(b.getPublishDate()) || LocalDate.now().isAfter(b.getPublishDate())) && LocalDate.now().isBefore(b.getExpirationDate()) && b.getIsApproved() == true)
-                .collect(Collectors.toList());
-        List<Blog> unapprovedBlogs = allPosts.stream()
-                .filter(b -> b.getIsApproved() == false)
-                .collect(Collectors.toList());
-        List<Request> editRequests = allRequests.stream()
-                .filter(r -> (r.getRequestType().getRequestType().equals("edit")))
-                .collect(Collectors.toList());
-        List<Request> deleteRequests = allRequests.stream()
-                .filter(r -> (r.getRequestType().getRequestType().equals("delete")))
-                .collect(Collectors.toList());
+        User user = userService.getUserByUserName(principal.getName());
 
         String filter = request.getParameter("filter");
-        
 
-        if (filter == null || "".equals(filter) || "all".equals(filter)) {
-            model.addAttribute("blogs", allPosts);
+        if (filter == null || "".equals(filter) || "personal".equals(filter)) {
+            List<Blog> personalBlogs = allPosts.stream()
+                    .filter(b -> b.getUser().getUserID() == user.getUserID())
+                    .collect(Collectors.toList());
+            model.addAttribute("blogs", personalBlogs);
         } else if ("published".equals(filter)) {
-            model.addAttribute("blogs", publishedBlogs);  
+            List<Blog> publishedBlogs = allPosts.stream()
+                    .filter(b -> (LocalDate.now().isEqual(b.getPublishDate()) || LocalDate.now().isAfter(b.getPublishDate())) && LocalDate.now().isBefore(b.getExpirationDate()) && b.getIsApproved() == true)
+                    .collect(Collectors.toList());
+            model.addAttribute("blogs", publishedBlogs);
         } else if ("unapproved".equals(filter)) {
+            List<Blog> unapprovedBlogs = allPosts.stream()
+                    .filter(b -> b.getIsApproved() == false)
+                    .collect(Collectors.toList());
             model.addAttribute("blogs", unapprovedBlogs);
         } else if ("edit".equals(filter)) {
+            List<Request> editRequests = allRequests.stream()
+                    .filter(r -> (r.getRequestType().getRequestType().equals("edit")))
+                    .collect(Collectors.toList());
             model.addAttribute("blogs", editRequests);
         } else if ("delete".equals(filter)) {
+            List<Request> deleteRequests = allRequests.stream()
+                    .filter(r -> (r.getRequestType().getRequestType().equals("delete")))
+                    .collect(Collectors.toList());
             model.addAttribute("blogs", deleteRequests);
+        } else if ("expired".equals(filter)) {
+            List<Blog> expiredBlogs = allPosts.stream()
+                    .filter(b -> LocalDate.now().isAfter(b.getExpirationDate()) && b.getIsApproved() == true)
+                    .collect(Collectors.toList());
+            model.addAttribute("blogs", expiredBlogs);
+        } else if ("upcoming".equals(filter)) {
+            List<Blog> upcomingBlogs = allPosts.stream()
+                    .filter(b -> LocalDate.now().isBefore(b.getPublishDate()) && LocalDate.now().isBefore(b.getExpirationDate()) && b.getIsApproved() == true)
+                    .collect(Collectors.toList());
+            model.addAttribute("blogs", upcomingBlogs);
         }
-        
+
         model.addAttribute("filter", filter);
 
-        model.addAttribute("publishedBlogs", publishedBlogs);
-        model.addAttribute("unapprovedBlogs", unapprovedBlogs);
         model.addAttribute("roleVerification", roleService.getRoleByName("ROLE_ADMIN"));
         return "dashboard";
     }

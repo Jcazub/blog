@@ -168,11 +168,13 @@
                                 <div class="form-group">
                                     <i class="glyphicon glyphicon-edit fa-fw"></i> Blogs
                                     <select name="postSelect" id="postSelect" class="">
+                                        <option <c:if test="${filter == 'personal'}">selected</c:if> value="personal">Personal</option>
                                         <option <c:if test="${filter == 'published'}">selected</c:if> value="published">Published</option>
                                         <option <c:if test="${filter == 'unapproved'}">selected</c:if> value="unapproved">Unapproved</option>
                                         <option <c:if test="${filter == 'edit'}">selected</c:if> value="edit">Request: Edit</option>
                                         <option <c:if test="${filter == 'delete'}">selected</c:if> value="delete">Request: Delete</option>
-                                        <option <c:if test="${filter == 'all'}">selected</c:if> value="all">All</option>
+                                        <option <c:if test="${filter == 'expired'}">selected</c:if> value="expired">Expired</option>
+                                        <option <c:if test="${filter == 'upcoming'}">selected</c:if> value="upcoming">Upcoming</option>
                                         </select>
 
                                         <input type="submit" class ="btn btn-default" value="Filter"/> 
@@ -233,87 +235,6 @@
             </div>
 
             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PUBLISHED POSTS    BACKUP    -->  
-                <!--        <div class="col-lg-4">
-                            <div class="w3-card panel-default" id="pblogAccordion">
-                                <div class="panel-heading form-control">
-                                    <i class="glyphicon glyphicon-edit fa-fw"></i> Published Blogs
-                                    <select name="categorySelect" class="">
-                                        <option value="all">Filter Published</option>
-                                        <option value="all">Filter Unapproved</option>
-                                        <option value="all">Filter Request: Edit</option>
-                                        <option value="all">Filter Request: Delete</option>
-                                        <option value="all">Filter All</option>
-                                    </select>
-                                </div>
-                                 /.panel-heading 
-                                <div class="panel-body">  
-                <c:forEach var="blog" items="${publishedBlogs}">
-                    <div class="card">
-                        <div class="card-header" id="pblogHeading${blog.blogID}">
-                            <h5 class="mb-0">
-                                <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapsepBlog${blog.blogID}" aria-expanded="true" aria-controls="collapsepBlog${blog.blogID}">
-                    ${blog.title}
-                </a>
-            </h5>
-        </div>
-        
-        <div id="collapsepBlog${blog.blogID}" class="collapse" aria-labelledby="pblogHeading${blog.blogID}" data-parent="#pblogAccordion">
-            <div class="card-body"> 
-                <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View</a>
-                <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
-                <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
-            </div>
-        </div>
-        
-        </div>
-                </c:forEach>
-            </div>
-        
-             /.list-group 
-            <a href="${pageContext.request.contextPath}/createPost" class="btn btn-default btn-block">Add New Blog Post</a>
-        </div>
-         /.panel-body 
-        </div>-->
-
-                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UNAPPROVED POSTS        -->  
-                <!--            <div class="col-lg-4">
-                                <div class="w3-card panel-default" id="uablogAccordion">
-                                    <div class="panel-heading">
-                                        <i class="glyphicon glyphicon-edit fa-fw"></i> Unapproved Blogs
-                                    </div>
-                                     /.panel-heading 
-                                    <div class="panel-body">  
-                <c:forEach var="blog" items="${unapprovedBlogs}">
-                    <div class="card">
-                        <div class="card-header" id="uablogHeading${blog.blogID}">
-                            <h5 class="mb-0">
-                                <a class="list-group-item collapsed" data-toggle="collapse" data-target="#collapseuaBlog${blog.blogID}" aria-expanded="true" aria-controls="collapseuaBlog${blog.blogID}">
-                    ${blog.title}
-                </a>
-            </h5>
-        </div>
-    
-        <div id="collapseuaBlog${blog.blogID}" class="collapse" aria-labelledby="uablogHeading${blog.blogID}" data-parent="#uablogAccordion">
-            <div class="card-body"> 
-                <a href="${pageContext.request.contextPath}/post?postID=${blog.blogID}" class="btn btn-danger">View</a>
-                <a href="${pageContext.request.contextPath}/displayEditPost?postID=${blog.blogID}" class="btn btn-danger">Edit</a>  
-                <a href="${pageContext.request.contextPath}/deletePost?postID=${blog.blogID}" class="btn btn-danger">Delete</a>
-                <a href="${pageContext.request.contextPath}/approvePost?postID=${blog.blogID}" class="btn btn-primary">Approve Post</a>
-            </div>
-        </div>
-    
-    </div>
-                </c:forEach>
-            </div>
-    
-             /.list-group 
-            <a href="${pageContext.request.contextPath}/createPost" class="btn btn-default btn-block">Add New Blog Post</a>
-        </div>
-         /.panel-body 
-    </div>-->
-
-
                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~STATIC PAGES         -->  
                 <div class="col-lg-4">
                     <div class="w3-card panel-default" id="pageAccordion">

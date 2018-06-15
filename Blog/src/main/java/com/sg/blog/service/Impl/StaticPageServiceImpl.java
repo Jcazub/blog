@@ -8,7 +8,6 @@ package com.sg.blog.service.Impl;
 import com.sg.blog.dao.RoleDao;
 import com.sg.blog.dao.StaticPageDao;
 import com.sg.blog.model.StaticPage;
-import com.sg.blog.model.User;
 import com.sg.blog.service.Service;
 import com.sg.blog.service.StaticPageService;
 import java.util.List;

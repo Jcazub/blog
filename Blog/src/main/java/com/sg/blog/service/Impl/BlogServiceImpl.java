@@ -31,9 +31,7 @@ public class BlogServiceImpl extends Service implements BlogService {
     @Override
     public Blog addBlog(Blog blog) {
         if (dataValidation(blog)) {
-            blog.setIsApproved(true);
-            blogDao.addBlog(blog);
-            return blog;
+            return blogDao.addBlog(blog);
         }
         return null;
     }
@@ -42,8 +40,7 @@ public class BlogServiceImpl extends Service implements BlogService {
     public Blog editBlog(Blog blog) {
         if (verifyIfBlogExists(blog.getBlogID())) {
             if (dataValidation(blog)) {
-                blogDao.editBlog(blog);
-                return blog;
+                return blogDao.editBlog(blog);
             }
         }
         return null;
