@@ -20,8 +20,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" id="bootstrap-css">
-        <!-- Tags CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.css">
         <!-- Main CSS -->  
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
@@ -148,8 +146,6 @@
         <!-- Bootstrap 3 scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- Tags scripts -->
-        <script src="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script> 
     </body>

@@ -13,8 +13,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" id="bootstrap-css">
-        <!-- Tags CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.css">
         <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
@@ -250,8 +248,6 @@
         <!-- Bootstrap 3 scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- Tags scripts -->
-        <script src="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
 

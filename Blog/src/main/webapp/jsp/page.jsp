@@ -114,8 +114,6 @@
         <!-- Bootstrap 3 scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- Tags scripts -->
-        <script src="${pageContext.request.contextPath}/blogstags/bootstrap-tagsinput.min.js"></script>
         <!-- Personal Scripts -->
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
     </body>
