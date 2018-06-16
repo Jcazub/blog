@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,13 +16,13 @@ import java.util.Objects;
  */
 public class Blog {
 
-    int blogID;
-    LocalDate creationDate, publishDate, approvedDate;
-    Boolean isApproved;
-    String title, content;
-    Category category;
-    User user;
-    List<Tag> tags;
+    private int blogID;
+    private LocalDate creationDate, publishDate, approvedDate, expirationDate;
+    private Boolean isApproved;
+    private String title, content;
+    private Category category;
+    private User user;
+    private List<Tag> tags;
 
     public int getBlogID() {
         return blogID;
@@ -53,6 +54,14 @@ public class Blog {
 
     public void setApprovedDate(LocalDate approvedDate) {
         this.approvedDate = approvedDate;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public Boolean getIsApproved() {
@@ -106,16 +115,17 @@ public class Blog {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.blogID;
-        hash = 79 * hash + Objects.hashCode(this.creationDate);
-        hash = 79 * hash + Objects.hashCode(this.publishDate);
-        hash = 79 * hash + Objects.hashCode(this.approvedDate);
-        hash = 79 * hash + Objects.hashCode(this.isApproved);
-        hash = 79 * hash + Objects.hashCode(this.title);
-        hash = 79 * hash + Objects.hashCode(this.content);
-        hash = 79 * hash + Objects.hashCode(this.category);
-        hash = 79 * hash + Objects.hashCode(this.user);
-        hash = 79 * hash + Objects.hashCode(this.tags);
+        hash = 37 * hash + this.blogID;
+        hash = 37 * hash + Objects.hashCode(this.creationDate);
+        hash = 37 * hash + Objects.hashCode(this.publishDate);
+        hash = 37 * hash + Objects.hashCode(this.approvedDate);
+        hash = 37 * hash + Objects.hashCode(this.expirationDate);
+        hash = 37 * hash + Objects.hashCode(this.isApproved);
+        hash = 37 * hash + Objects.hashCode(this.title);
+        hash = 37 * hash + Objects.hashCode(this.content);
+        hash = 37 * hash + Objects.hashCode(this.category);
+        hash = 37 * hash + Objects.hashCode(this.user);
+        hash = 37 * hash + Objects.hashCode(this.tags);
         return hash;
     }
 
@@ -149,6 +159,9 @@ public class Blog {
         if (!Objects.equals(this.approvedDate, other.approvedDate)) {
             return false;
         }
+        if (!Objects.equals(this.expirationDate, other.expirationDate)) {
+            return false;
+        }
         if (!Objects.equals(this.isApproved, other.isApproved)) {
             return false;
         }
@@ -164,5 +177,6 @@ public class Blog {
         return true;
     }
 
+    
     
 }

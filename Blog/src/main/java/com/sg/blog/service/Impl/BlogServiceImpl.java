@@ -29,37 +29,28 @@ public class BlogServiceImpl extends Service implements BlogService {
     }
 
     @Override
-    public Blog addBlog(Blog blog, User user) {
-        if (adminValidation(user)) {
+    public Blog addBlog(Blog blog) {
+        if (dataValidation(blog)) {
+            return blogDao.addBlog(blog);
+        }
+        return null;
+    }
+
+    @Override
+    public Blog editBlog(Blog blog) {
+        if (verifyIfBlogExists(blog.getBlogID())) {
             if (dataValidation(blog)) {
-                blog.setIsApproved(true);
-                blogDao.addBlog(blog);
-                return blog;
+                return blogDao.editBlog(blog);
             }
         }
         return null;
     }
 
     @Override
-    public Blog editBlog(Blog blog, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfBlogExists(blog.getBlogID())) {
-                if (dataValidation(blog)) {
-                    blogDao.editBlog(blog);
-                    return blog;
-                }     
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void deleteBlog(int blogID, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfBlogExists(blogID)) {
+    public void deleteBlog(int blogID) {
+        if (verifyIfBlogExists(blogID)) {
                 blogDao.deleteBlog(blogID);
             }
-        }
     }
 
     @Override
@@ -86,6 +77,7 @@ public class BlogServiceImpl extends Service implements BlogService {
     public boolean dataValidation(Blog blog) {
         if ((blog.getCreationDate() == null)
                 || (blog.getPublishDate() == null)
+                || (blog.getExpirationDate() == null)
                 || (blog.getTitle() == null)
                 || ("".equals(blog.getTitle()))
                 || (blog.getContent() == null)

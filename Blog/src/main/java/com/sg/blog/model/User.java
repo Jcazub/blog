@@ -14,10 +14,10 @@ import java.util.Objects;
  */
 public class User {
 
-    int userID;
-    String firstName, lastName, email, userName, password;
-    Boolean enabled;
-    List<Role> roles;
+    private int userID;
+    private String firstName, lastName, email, userName, password;
+    private Boolean enabled;
+    private List<Role> roles;
 
     public int getUserID() {
         return userID;

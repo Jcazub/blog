@@ -52,7 +52,7 @@ public class UserDaoDBImpl implements UserDao {
     
     private static final String SELECT_USER_BY_BLOG = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join Blogs b on u.userID = b.userID where b.BlogID = ?";;
     
-    private static final String SELECT_USER_BY_REQUEST = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join Requests r on u.userID = r.userID where r.RequestID = ?";;
+    private static final String SELECT_USER_BY_REQUEST = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join Requests r on u.userID = r.userID where r.BlogID = ?";;
 
     private static final String SELECT_ALL_USERS = "select * from Users";
 

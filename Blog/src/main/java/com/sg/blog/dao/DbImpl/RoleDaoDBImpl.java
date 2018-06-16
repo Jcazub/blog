@@ -36,7 +36,7 @@ public class RoleDaoDBImpl implements RoleDao {
     
     private static final String SELECT_ROLE = "select * from Roles where RoleID = ?";
     
-    private static final String SELECT_ROLE_BY_NAME = "select * from Roles where roleName = ?";
+    private static final String SELECT_ROLE_BY_NAME = "select * from Roles where roleType = ?";
     
     private static final String SELECT_ALL_ROLES = "select * from Roles";
     

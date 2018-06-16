@@ -18,8 +18,8 @@ import java.util.List;
 public interface TagService {
     
     public Tag addTag(Tag tag);
-    public Tag editTag(Tag tag, User user);
-    public void deleteTag(int tagID, User user);
+    public Tag editTag(Tag tag);
+    public void deleteTag(int tagID);
     public Tag getTagByID(int tagID);
     public List<Tag> getAllTags();
     public Tag getTagByName(String tagName);

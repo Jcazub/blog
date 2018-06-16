@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class Role {
     
-    int roleID;
-    String role;
+    private int roleID;
+    private String role;
 
     public int getRoleID() {
         return roleID;

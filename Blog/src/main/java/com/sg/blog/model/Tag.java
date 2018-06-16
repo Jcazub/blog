@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class Tag {
     
-    int tagID;
-String name;
+    private int tagID;
+    private String name;
 
     public int getTagID() {
         return tagID;

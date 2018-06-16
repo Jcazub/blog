@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
     lastName VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL, 
     userName VARCHAR(50) NOT NULL, 
-    `password` VARCHAR(50) NOT NULL,
+    `password` VARCHAR(100) NOT NULL,
+    enabled boolean NOT NULL,
     PRIMARY KEY (UserID));
     
 CREATE TABLE IF NOT EXISTS roles (
@@ -49,7 +50,8 @@ CREATE TABLE IF NOT EXISTS blogs (
     categoryID INT (11) NOT NULL, 
     creationDate DATETIME NOT NULL, 
     publishDate DATETIME NOT NULL, 
-    approvedDate DATETIME NOT NULL, 
+    approvedDate DATETIME NOT NULL,
+    expirationDate DATETIME NOT NULL,
     isApproved BOOL NOT NULL, 
     title VARCHAR(50) NOT NULL, 
     content LONGTEXT NOT NULL,
@@ -89,6 +91,7 @@ CREATE TABLE IF NOT EXISTS requests (
     isApproved BOOL NOT NULL, 
     title VARCHAR(50) NOT NULL, 
     content LONGTEXT NOT NULL,
+    expirationDate DATETIME,
     PRIMARY KEY (blogID), 
     FOREIGN KEY (userID)
 		REFERENCES users(userID) ON DELETE CASCADE,

@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class Category {
     
-    int categoryID;
-String name, desc;
+    private int categoryID;
+    private String name, desc;
 
     public int getCategoryID() {
         return categoryID;

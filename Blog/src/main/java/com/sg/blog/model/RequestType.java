@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class RequestType {
     
-    int requestTypeID;
-    String requestType;
+    private int requestTypeID;
+    private String requestType;
 
     public int getRequestTypeID() {
         return requestTypeID;

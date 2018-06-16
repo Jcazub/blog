@@ -17,9 +17,9 @@ import java.util.Map;
  */
 public interface BlogService {
     
-    public Blog addBlog(Blog blog, User user);
-    public Blog editBlog(Blog blog, User user);
-    public void deleteBlog(int blogID, User user);
+    public Blog addBlog(Blog blog);
+    public Blog editBlog(Blog blog);
+    public void deleteBlog(int blogID);
     public Blog getBlogByBlogID(int blogID);
     public List<Blog> getAllBlogs();
     public List<Blog> searchBlogs(Map<SearchTerm, String> criteria);

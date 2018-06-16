@@ -29,36 +29,30 @@ public class CategoryServiceImpl extends Service implements CategoryService {
     }
 
     @Override
-    public Category addCategory(Category category, User user) {
-        if (adminValidation(user)) {
-            if (dataValidation(category)) {
+    public Category addCategory(Category category) {
+        if (dataValidation(category)) {
                 categoryDao.addCategory(category);
                 return category;
             }
-        }
         return null;
     }
 
     @Override
-    public Category editCategory(Category category, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfCategoryExists(category.getCategoryID())) {
+    public Category editCategory(Category category) {
+        if (verifyIfCategoryExists(category.getCategoryID())) {
                 if (dataValidation(category)) {
                     categoryDao.editCategory(category);
                     return category;
                 }
             }
-        }
         return null;
     }
 
     @Override
-    public void deleteCategory(int categoryID, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfCategoryExists(categoryID)) {
+    public void deleteCategory(int categoryID) {
+        if (verifyIfCategoryExists(categoryID)) {
                 categoryDao.deleteCategory(categoryID);
             }
-        }
     }
 
     @Override

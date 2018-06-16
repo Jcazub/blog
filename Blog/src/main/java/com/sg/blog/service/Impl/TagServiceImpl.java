@@ -18,7 +18,7 @@ import java.util.List;
  * @author Jesse
  */
 public class TagServiceImpl extends Service implements TagService {
-    
+
     TagDao tagDao;
 
     public TagServiceImpl(TagDao tagDao, RoleDao roleDao) {
@@ -36,24 +36,20 @@ public class TagServiceImpl extends Service implements TagService {
     }
 
     @Override
-    public Tag editTag(Tag tag, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfTagExists(tag.getTagID())) {
-                if (dataValidation(tag)) {
-                    tagDao.editTag(tag);
-                    return tag;
-                }
+    public Tag editTag(Tag tag) {
+        if (verifyIfTagExists(tag.getTagID())) {
+            if (dataValidation(tag)) {
+                tagDao.editTag(tag);
+                return tag;
             }
         }
         return tag;
     }
 
     @Override
-    public void deleteTag(int tagID, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfTagExists(tagID)) {
-                tagDao.deleteTag(tagID);
-            }
+    public void deleteTag(int tagID) {
+        if (verifyIfTagExists(tagID)) {
+            tagDao.deleteTag(tagID);
         }
     }
 
@@ -79,13 +75,11 @@ public class TagServiceImpl extends Service implements TagService {
 
     @Override
     public boolean dataValidation(Tag tag) {
-        if (tag.getName() == null ||
-                "".equals(tag.getName())) {
+        if (tag.getName() == null
+                || "".equals(tag.getName())) {
             return false;
         }
         return true;
     }
-    
-    
-    
+
 }

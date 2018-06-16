@@ -8,7 +8,6 @@ package com.sg.blog.service.Impl;
 import com.sg.blog.dao.RoleDao;
 import com.sg.blog.dao.StaticPageDao;
 import com.sg.blog.model.StaticPage;
-import com.sg.blog.model.User;
 import com.sg.blog.service.Service;
 import com.sg.blog.service.StaticPageService;
 import java.util.List;
@@ -27,34 +26,28 @@ public class StaticPageServiceImpl extends Service implements StaticPageService 
     }
 
     @Override
-    public StaticPage addStaticPage(StaticPage page, User user) {
-        if (adminValidation(user)) {
-            if (dataValidation(page)) {
+    public StaticPage addStaticPage(StaticPage page) {
+        if (dataValidation(page)) {
                 return staticPageDao.addStaticPage(page);
             }
-        }
         return null;
     }
 
     @Override
-    public StaticPage editStaticPage(StaticPage page, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfStaticPageExists(page.getStaticID())) {
+    public StaticPage editStaticPage(StaticPage page) {
+        if (verifyIfStaticPageExists(page.getStaticID())) {
                 if (dataValidation(page)) {
                     return staticPageDao.editStaticPage(page);
                 }
             }
-        }
         return null;
     }
 
     @Override
-    public void deleteStaticPage(int pageID, User user) {
-        if (adminValidation(user)) {
-            if (verifyIfStaticPageExists(pageID)) {
+    public void deleteStaticPage(int pageID) {
+        if (verifyIfStaticPageExists(pageID)) {
                 staticPageDao.deleteStaticPage(pageID);
             }
-        }
     }
 
     @Override
