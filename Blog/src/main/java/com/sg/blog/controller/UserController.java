@@ -170,7 +170,7 @@ public class UserController {
 //        u.setRoles(roles);
         userService.editUser(u);
 
-//        //resets principal
+        //resets principal
         Collection<SimpleGrantedAuthority> nowAuthorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
                 .getContext().getAuthentication().getAuthorities();
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(u.getUserName(), u.getPassword(), nowAuthorities);
