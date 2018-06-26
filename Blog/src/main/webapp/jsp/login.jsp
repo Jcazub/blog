@@ -12,7 +12,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap 3 core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" id="bootstrap-css">
-
         <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" >
@@ -28,7 +27,7 @@
 
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-<nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -47,8 +46,8 @@
                             <ul class="dropdown-menu">
                                 <c:forEach var="currentPage" items="${pages}">
                                     <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
-                                </c:forEach>
-                                
+                                    </c:forEach>
+
                             </ul>
                         </li>
                     </ul>
@@ -99,7 +98,7 @@
         <%--<jsp:include page="navbar.jsp"/>--%>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
         <div class="w3-container">
-             <h2 style="text-align:center;">Log In</h2>
+            <h2 style="text-align:center;">Log In</h2>
             <c:if test="${param.login_error == 1}">
                 <h3 style="text-align:center;">Wrong id or password!</h3>
             </c:if>
