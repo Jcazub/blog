@@ -19,6 +19,7 @@
     <http pattern="/css/**" security="none" />
     <http pattern="/js/**" security="none" />
     <http pattern="/img/**" security="none" />
+    <http pattern="/blogstags/**" security="none" />
 
     <http auto-config="true" use-expressions="false">
         <form-login login-processing-url="/j_spring_security_check"
