@@ -17,6 +17,7 @@ import com.sg.blog.service.RequestTypeService;
 import com.sg.blog.service.StaticPageService;
 import com.sg.blog.service.TagService;
 import com.sg.blog.service.UserService;
+import java.io.File;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,7 +33,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -69,7 +72,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
-    public String addPost(HttpServletRequest request, Principal principal) {
+    public String addPost(HttpServletRequest request, Principal principal, @RequestParam("picture") MultipartFile picture) {
 
         //create new Blog
         Blog b = new Blog();
@@ -119,6 +122,8 @@ public class PostController {
         b.setTags(tags);
 
         blogService.addBlog(b);
+        
+        addPicture(picture, request, b);
 
         return "redirect:/";
     }
@@ -313,6 +318,31 @@ public class PostController {
         String postType = "request";
 
         return "redirect:/post?postID=" + postID + "&postType=" + postType;
+    }
+    
+    private void addPicture(MultipartFile picture, HttpServletRequest request, Blog b) {
+        
+        //check if a picture was uploaded
+        if (!picture.isEmpty()) {
+            
+            try {
+                //gets the directory path to save the file
+                String savePath = request.getSession().getServletContext().getRealPath("/img/") + "blogImages";
+                File dir = new File(savePath);
+                
+                //create dir blogImages if it doesn't exist
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                
+                String filename = "blogimg" + b.getBlogID();
+                
+                
+                
+            } catch (Exception e) {
+                
+            }
+        }
     }
 
 }
