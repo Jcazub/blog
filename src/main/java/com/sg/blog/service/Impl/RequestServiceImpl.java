@@ -1,0 +1,102 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.sg.blog.service.Impl;
+
+import com.sg.blog.dao.RequestDao;
+import com.sg.blog.model.Request;
+import com.sg.blog.model.User;
+import com.sg.blog.service.RequestService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ *
+ * @author Jesse
+ */
+@Service
+public class RequestServiceImpl implements RequestService {
+
+    RequestDao requestDao;
+
+    @Autowired
+    public RequestServiceImpl(RequestDao requestDao) {
+        this.requestDao = requestDao;
+    }
+
+    @Override
+    public Request addRequest(Request request) {
+        if (!verifyIfRequestExists(request.getBlogID())) {
+            if (dataValidation(request)) {
+                return requestDao.addRequest(request);
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public Request editRequest(Request request) {
+        if (verifyIfRequestExists(request.getBlogID())) {
+            if (dataValidation(request)) {
+                return requestDao.editRequest(request);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteRequest(int requestID) {
+        if (verifyIfRequestExists(requestID)) {
+            requestDao.deleteRequest(requestID);
+        }
+    }
+
+    @Override
+    public Request getRequestByRequestID(int requestID) {
+        return requestDao.getRequestByRequestID(requestID);
+    }
+
+    @Override
+    public List<Request> getAllRequests() {
+        return requestDao.getAllRequests();
+    }
+
+    @Override
+    public boolean userVerification(Request request, User user) {
+        return request.getUser().getUserID() == user.getUserID();
+    }
+
+    @Override
+    public boolean verifyIfRequestExists(int requestID) {
+        return requestDao.getRequestByRequestID(requestID) != null;
+    }
+
+    @Override
+    public boolean dataValidation(Request blog) {
+
+        if ((blog.getUser() == null)
+                || (blog.getBlogID() == 0)
+                || (blog.getRequestType() == null)) {
+            return false;
+        }
+
+        if (blog.getRequestType().getRequestType().equals("edit")) {
+            if ((blog.getCreationDate() == null)
+                    || (blog.getPublishDate() == null)
+                    || (blog.getExpirationDate() == null)
+                    || (blog.getTitle() == null)
+                    || ("".equals(blog.getTitle()))
+                    || (blog.getContent() == null)
+                    || ("".equals(blog.getContent()))
+                    || (blog.getCategory() == null)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}

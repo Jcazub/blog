@@ -1,0 +1,347 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.sg.blog.controller;
+
+import com.sg.blog.model.Blog;
+import com.sg.blog.model.Request;
+import com.sg.blog.model.SearchTerm;
+import com.sg.blog.model.Tag;
+import com.sg.blog.model.User;
+import com.sg.blog.service.BlogService;
+import com.sg.blog.service.CategoryService;
+import com.sg.blog.service.RequestService;
+import com.sg.blog.service.RequestTypeService;
+import com.sg.blog.service.StaticPageService;
+import com.sg.blog.service.TagService;
+import com.sg.blog.service.UserService;
+import java.io.File;
+import java.security.Principal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+/**
+ *
+ * @author chxxch
+ */
+@Controller
+public class PostController {
+
+    private BlogService blogService;
+    private CategoryService categoryService;
+    private TagService tagService;
+    private UserService userService;
+    private RequestService requestService;
+    private StaticPageService staticPageService;
+    private RequestTypeService requestTypeService;
+
+    @Autowired
+    public PostController(BlogService blogService, CategoryService categoryService, TagService tagService,
+            UserService userService, RequestService requestService, StaticPageService staticPageService, RequestTypeService requestTypeService) {
+        this.blogService = blogService;
+        this.categoryService = categoryService;
+        this.tagService = tagService;
+        this.userService = userService;
+        this.requestService = requestService;
+        this.staticPageService = staticPageService;
+        this.requestTypeService = requestTypeService;
+    }
+
+    @RequestMapping(value = "/createPost", method = RequestMethod.GET)
+    public String createPost(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
+        return "createPost";
+    }
+
+    @RequestMapping(value = "/addPost", method = RequestMethod.POST)
+    public String addPost(HttpServletRequest request, Principal principal/*, @RequestParam("picture") MultipartFile picture*/) {
+
+        //create new Blog
+        Blog b = new Blog();
+        //get user
+        User user = userService.getUserByUserName(principal.getName());
+        b.setUser(user);
+        b.setCreationDate(LocalDate.now());
+
+        //check user credentials
+        SecurityContextHolderAwareRequestWrapper authChecker = new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+
+        if (authChecker.isUserInRole("ADMIN")) {
+            b.setIsApproved(true);
+            b.setApprovedDate(LocalDate.now());
+        } else {
+            b.setIsApproved(false);
+            b.setApprovedDate(LocalDate.parse("2199-01-01"));
+        }
+
+        //pulled from page
+        b.setTitle(request.getParameter("title"));
+        b.setContent(request.getParameter("content"));
+        b.setPublishDate(LocalDate.parse(request.getParameter("publishDate")));
+        b.setExpirationDate(LocalDate.parse(request.getParameter("expirationDate")));
+
+        //get category
+        b.setCategory(categoryService.getCategoryByID(Integer.parseInt(request.getParameter("categorySelect"))));
+
+        //get and/or create tag
+        List<Tag> tags = new ArrayList();
+        String[] tagsFromPage = request.getParameterValues("tagsSelect");
+
+        //check to make sure tags were added
+        if (tagsFromPage != null && tagsFromPage.length > 0) {
+            for (String currentTag : tagsFromPage) {
+                if (tagService.getTagByName(currentTag) == null) {
+                    Tag t = new Tag();
+                    t.setName(currentTag);
+                    tagService.addTag(t);
+                    tags.add(t);
+                } else {
+                    tags.add(tagService.getTagByName(currentTag));
+                }
+            }
+        }
+
+        b.setTags(tags);
+
+        blogService.addBlog(b);
+        
+        //addPicture(picture, request, b);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/post", method = RequestMethod.GET)
+    public String displayPost(HttpServletRequest request, Model model) {
+
+        String postType = request.getParameter("postType");
+
+        if (postType != null && "request".equals(postType)) {
+            model.addAttribute("post", requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID"))));
+        } else {
+            model.addAttribute("post", blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID"))));
+        }
+
+        model.addAttribute("postType", postType);
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
+
+        return "post";
+    }
+
+    @RequestMapping(value = "/displayEditPost", method = RequestMethod.GET)
+    public String displayEditPost(HttpServletRequest request, Model model) {
+        Integer i = Integer.parseInt(request.getParameter("postID"));
+        model.addAttribute("post", blogService.getBlogByBlogID(i));
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("pages", staticPageService.getAllStaticPages());
+        return "editPost";
+    }
+
+    @RequestMapping(value = "/editPost", method = RequestMethod.POST)
+    public String editPost(HttpServletRequest request, Model model) {
+
+        SecurityContextHolderAwareRequestWrapper authChecker = new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+
+        Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+
+        if (title != null && !"".equals(title)) {
+            b.setTitle(title);
+        }
+
+        if (content != null && !"".equals(content)) {
+            b.setContent(content);
+        }
+
+        b.setPublishDate(LocalDate.parse(request.getParameter("publishDate")));
+        b.setExpirationDate(LocalDate.parse(request.getParameter("expirationDate")));
+
+        b.setCategory(categoryService.getCategoryByID(Integer.parseInt(request.getParameter("categorySelect"))));
+
+        List<Tag> tags = new ArrayList();
+        String[] tagsFromPage = request.getParameterValues("tagsSelect");
+
+        //check to make sure tags were added
+        if (tagsFromPage != null && tagsFromPage.length > 0) {
+            for (String currentTag : tagsFromPage) {
+                if (tagService.getTagByName(currentTag) == null) {
+                    Tag t = new Tag();
+                    t.setName(currentTag);
+                    tagService.addTag(t);
+                    tags.add(t);
+                } else {
+                    tags.add(tagService.getTagByName(currentTag));
+                }
+            }
+        }
+
+        b.setTags(tags);
+
+        if (authChecker.isUserInRole("ADMIN")) {
+            blogService.editBlog(b);
+        } else {
+            Request r = new Request();
+            r.setApprovedDate(b.getApprovedDate());
+            r.setBlogID(b.getBlogID());
+            r.setCategory(b.getCategory());
+            r.setContent(b.getContent());
+            r.setCreationDate(b.getCreationDate());
+            r.setExpirationDate(b.getExpirationDate());
+            r.setIsApproved(b.getIsApproved());
+            r.setPublishDate(b.getPublishDate());
+            r.setTags(b.getTags());
+            r.setTitle(b.getTitle());
+            r.setUser(b.getUser());
+            r.setRequestType(requestTypeService.getRequestTypeByName("edit"));
+            requestService.addRequest(r);
+        }
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/deletePost", method = RequestMethod.GET)
+    public String deletePost(HttpServletRequest request, Principal principal) {
+
+        SecurityContextHolderAwareRequestWrapper authChecker = new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+
+        if (authChecker.isUserInRole("ADMIN")) {
+            blogService.deleteBlog(Integer.parseInt(request.getParameter("postID")));
+        } else {
+            Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+            Request r = new Request();
+            r.setApprovedDate(b.getApprovedDate());
+            r.setBlogID(b.getBlogID());
+            r.setCategory(b.getCategory());
+            r.setContent(b.getContent());
+            r.setCreationDate(b.getCreationDate());
+            r.setExpirationDate(b.getExpirationDate());
+            r.setIsApproved(b.getIsApproved());
+            r.setPublishDate(b.getPublishDate());
+            r.setTags(b.getTags());
+            r.setTitle(b.getTitle());
+            r.setUser(b.getUser());
+            r.setRequestType(requestTypeService.getRequestTypeByName("delete"));
+            requestService.addRequest(r);
+        }
+
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/search/posts", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Blog> searchPosts(@RequestBody Map<String, String> searchMap) {
+
+        Map<SearchTerm, String> criteriaMap = new HashMap<>();
+
+        String currentTerm = searchMap.get("title");
+
+        if (currentTerm != null && !currentTerm.isEmpty()) {
+            criteriaMap.put(SearchTerm.TITLE, currentTerm);
+        }
+
+        currentTerm = searchMap.get("content");
+
+        List<Blog> tempBlogs = blogService.searchBlogs(criteriaMap);
+
+        return tempBlogs.stream()
+                .filter(b -> (LocalDate.now().isEqual(b.getPublishDate()) || LocalDate.now().isAfter(b.getPublishDate())) && LocalDate.now().isBefore(b.getExpirationDate()) && b.getIsApproved() == true)
+                .collect(Collectors.toList());
+    }
+
+    @RequestMapping(value = "/approvePost", method = RequestMethod.GET)
+    public String approvePost(HttpServletRequest request) {
+        Blog b = blogService.getBlogByBlogID(Integer.parseInt(request.getParameter("postID")));
+
+        b.setApprovedDate(LocalDate.now());
+        b.setIsApproved(true);
+
+        blogService.editBlog(b);
+
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/approveEdit", method = RequestMethod.GET)
+    public String approveEdit(HttpServletRequest request) {
+
+        Blog b = requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID")));
+
+        blogService.editBlog(b);
+
+        requestService.deleteRequest(b.getBlogID());
+
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/approveDelete", method = RequestMethod.GET)
+    public String approveDelete(HttpServletRequest request) {
+
+        Blog b = requestService.getRequestByRequestID(Integer.parseInt(request.getParameter("postID")));
+
+        blogService.deleteBlog(b.getBlogID());
+
+        requestService.deleteRequest(b.getBlogID());
+
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/denyRequest", method = RequestMethod.GET)
+    public String denyRequest(HttpServletRequest request, Model model) {
+
+        requestService.deleteRequest(Integer.parseInt(request.getParameter("postID")));
+
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/viewEditRequest", method = RequestMethod.GET)
+    public String viewEditRequest(HttpServletRequest request) {
+
+        String postID = request.getParameter("postID");
+        String postType = "request";
+
+        return "redirect:/post?postID=" + postID + "&postType=" + postType;
+    }
+    
+    private void addPicture(MultipartFile picture, HttpServletRequest request, Blog b) {
+        
+        //check if a picture was uploaded
+        if (!picture.isEmpty()) {
+            
+            try {
+                //gets the directory path to save the file
+                String savePath = request.getSession().getServletContext().getRealPath("/img/") + "blogImages";
+                File dir = new File(savePath);
+                
+                //create dir blogImages if it doesn't exist
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                
+                String filename = "blogimg" + b.getBlogID();
+                
+                
+                
+            } catch (Exception e) {
+                
+            }
+        }
+    }
+
+}
