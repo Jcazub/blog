@@ -105,8 +105,7 @@
             <form id="getpostform" 
                   method="POST"
                   action="addPost"
-                  class="form-horizontal"
-                  enctype="multipart/form-data">
+                  class="form-horizontal">
                 <div class="form-group">
                     <label for="title" class="col-md-2 control-label">Title:</label>
                     <div class="col-md-2">
@@ -150,10 +149,10 @@
                 <!-- tags -->
                 <div class="bs-example">         
                     
-                    <label for="pictureUpload" class="col-md-2 control-label">Image:</label>
+<!--                    <label for="pictureUpload" class="col-md-2 control-label">Image:</label>
                     <div class="col-md-4">
                         <input type="file" id="pictureUpload" name="pictureUpload" class="form-control" />
-                    </div>
+                    </div>-->
                     <label for="tagsSelect" class="col-md-2 control-label">Tags:</label>
                     <select multiple data-role="tagsinput" name="tagsSelect">
                     </select> 

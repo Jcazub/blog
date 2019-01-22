@@ -6,23 +6,23 @@
 package com.sg.blog.service.Impl;
 
 import com.sg.blog.dao.RequestTypeDao;
-import com.sg.blog.dao.RoleDao;
 import com.sg.blog.model.RequestType;
-import com.sg.blog.model.User;
 import com.sg.blog.service.RequestTypeService;
-import com.sg.blog.service.Service;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jesse
  */
-public class RequestTypeServiceImpl extends Service implements RequestTypeService {
+@Service
+public class RequestTypeServiceImpl implements RequestTypeService {
 
     RequestTypeDao requestTypeDao;
 
-    public RequestTypeServiceImpl(RequestTypeDao requestTypeDao, RoleDao roleDao) {
-        super(roleDao);
+    @Autowired
+    public RequestTypeServiceImpl(RequestTypeDao requestTypeDao) {
         this.requestTypeDao = requestTypeDao;
     }
 

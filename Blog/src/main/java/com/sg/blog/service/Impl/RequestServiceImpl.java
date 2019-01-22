@@ -6,23 +6,24 @@
 package com.sg.blog.service.Impl;
 
 import com.sg.blog.dao.RequestDao;
-import com.sg.blog.dao.RoleDao;
 import com.sg.blog.model.Request;
 import com.sg.blog.model.User;
 import com.sg.blog.service.RequestService;
-import com.sg.blog.service.Service;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jesse
  */
-public class RequestServiceImpl extends Service implements RequestService {
+@Service
+public class RequestServiceImpl implements RequestService {
 
     RequestDao requestDao;
 
-    public RequestServiceImpl(RequestDao requestDao, RoleDao roleDao) {
-        super(roleDao);
+    @Autowired
+    public RequestServiceImpl(RequestDao requestDao) {
         this.requestDao = requestDao;
     }
 

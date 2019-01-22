@@ -14,8 +14,11 @@ import com.sg.blog.dao.UserDao;
 import com.sg.blog.model.Request;
 import com.sg.blog.model.Tag;
 import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Jesse
  */
+@Repository
 public class RequestDaoDBImpl implements RequestDao {
 
     JdbcTemplate jdbcTemplate;
@@ -31,8 +35,9 @@ public class RequestDaoDBImpl implements RequestDao {
     TagDao tagDao;
     RequestTypeDao requestTypeDao;
 
-    public RequestDaoDBImpl(JdbcTemplate jdbcTemplate, UserDao userDao, CategoryDao categoryDao, TagDao tagDao, RequestTypeDao requestTypeDao) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Autowired
+    public RequestDaoDBImpl(DataSource dataSource, UserDao userDao, CategoryDao categoryDao, TagDao tagDao, RequestTypeDao requestTypeDao) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.userDao = userDao;
         this.categoryDao = categoryDao;
         this.tagDao = tagDao;
@@ -40,20 +45,20 @@ public class RequestDaoDBImpl implements RequestDao {
     }
 
     //Request SQL
-    private static final String INSERT_REQUEST = "insert into Requests (blogID, userID, categoryID, creationDate, publishDate, approvedDate, expirationDate, isApproved, title, content, requestTypeID) values (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT_REQUEST = "insert into ebdb.requests (blogID, userID, categoryID, creationDate, publishDate, approvedDate, expirationDate, isApproved, title, content, requestTypeID) values (?,?,?,?,?,?,?,?,?,?,?)";
 
-    private static final String DELETE_REQUEST = "delete from Requests where BlogID = ?";
+    private static final String DELETE_REQUEST = "delete from ebdb.requests where blogID = ?";
 
-    private static final String EDIT_REQUEST = "update Request set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, expirationDate = ?, isApproved = ?, title = ?, content = ?, requestTypeID = ? where BlogID = ?";
+    private static final String EDIT_REQUEST = "update ebdb.requests set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, expirationDate = ?, isApproved = ?, title = ?, content = ?, requestTypeID = ? where blogID = ?";
 
-    private static final String SELECT_REQUEST = "select * from Requests where BlogID = ?";
+    private static final String SELECT_REQUEST = "select * from ebdb.requests where blogID = ?";
 
-    private static final String SELECT_ALL_REQUESTS = "select * from Requests";
+    private static final String SELECT_ALL_REQUESTS = "select * from ebdb.requests";
 
     //Request_Tags SQL
-    private static final String INSERT_INTO_REQUESTS_TAGS = "insert into Requests_Tags (BlogID, TagID) values (?,?)";
+    private static final String INSERT_INTO_REQUESTS_TAGS = "insert into ebdb.requests_tags (blogID, tagID) values (?,?)";
 
-    private static final String DELETE_FROM_REQUESTS_TAGS = "delete from Requests_Tags where BlogID = ?";
+    private static final String DELETE_FROM_REQUESTS_TAGS = "delete from ebdb.requests_tags where blogID = ?";
 
     //Request Helper Methods
     private Request getMembersForRequest(Request request) {

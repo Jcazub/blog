@@ -12,8 +12,8 @@ import com.sg.blog.service.StaticPageService;
 import com.sg.blog.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +31,9 @@ public class LoginController {
     UserService userService;
     RoleService roleService;
     StaticPageService staticPageService;
-    private PasswordEncoder encoder;
+    PasswordEncoder encoder;
 
-    @Inject
+    @Autowired
     public LoginController(UserService userService, RoleService roleService, StaticPageService staticPageService, PasswordEncoder encoder) {
         this.userService = userService;
         this.roleService = roleService;
@@ -45,6 +45,11 @@ public class LoginController {
     public String showLoginForm(Model model) {
         model.addAttribute("pages", staticPageService.getAllStaticPages());
         return "login";
+    }
+    
+    @RequestMapping(value = "/conn", method = RequestMethod.GET)
+    public String showConn() {
+        return "conn";
     }
     
     @RequestMapping(value = "/signup", method = RequestMethod.GET)

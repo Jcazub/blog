@@ -7,19 +7,23 @@ package com.sg.blog.service.Impl;
 
 import com.sg.blog.dao.RoleDao;
 import com.sg.blog.model.Role;
-import com.sg.blog.model.User;
 import com.sg.blog.service.RoleService;
-import com.sg.blog.service.Service;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jesse
  */
-public class RoleServiceImpl extends Service implements RoleService {
+@Service
+public class RoleServiceImpl implements RoleService {
+    
+    RoleDao roleDao;
 
+    @Autowired
     public RoleServiceImpl(RoleDao roleDao) {
-        super(roleDao);
+        this.roleDao = roleDao;
     }
 
     @Override

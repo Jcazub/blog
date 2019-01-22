@@ -11,8 +11,11 @@ import com.sg.blog.model.Blog;
 import com.sg.blog.model.Request;
 import com.sg.blog.model.Tag;
 import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,35 +23,37 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Jesse
  */
+@Repository
 public class TagDaoDBImpl implements TagDao {
 
     JdbcTemplate jdbcTemplate;
 
-    public TagDaoDBImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Autowired
+    public TagDaoDBImpl(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     //Tag SQL
-    private static final String INSERT_TAG = "insert into Tags (tagName) values (?)";
+    private static final String INSERT_TAG = "insert into ebdb.tags (tagName) values (?)";
 
-    private static final String DELETE_TAG = "delete from Tags where TagID = ?";
+    private static final String DELETE_TAG = "delete from ebdb.tags where tagID = ?";
 
-    private static final String EDIT_TAG = "update Tags set TagName = ? where TagID = ?";
+    private static final String EDIT_TAG = "update ebdb.tags set tagName = ? where tagID = ?";
 
-    private static final String SELECT_TAG = "select * from Tags where TagID = ?";
+    private static final String SELECT_TAG = "select * from ebdb.tags where tagID = ?";
 
-    private static final String SELECT_TAG_BY_NAME = "select * from Tags where tagName = ?";
+    private static final String SELECT_TAG_BY_NAME = "select * from ebdb.tags where tagName = ?";
 
-    private static final String SELECT_TAGS_BY_BLOG = "select t.tagID, t.tagName from Tags t join Blogs_Tags bt on bt.tagID = t.tagID where bt.blogID = ?";
+    private static final String SELECT_TAGS_BY_BLOG = "select t.tagID, t.tagName from ebdb.tags t join ebdb.blogs_tags bt on bt.tagID = t.tagID where bt.blogID = ?";
 
-    private static final String SELECT_TAGS_BY_REQUEST = "select t.tagID, t.tagName from Tags t join Requests_Tags rt on rt.tagID = t.tagID where rt.blogID = ?";
+    private static final String SELECT_TAGS_BY_REQUEST = "select t.tagID, t.tagName from ebdb.tags t join ebdb.requests_tags rt on rt.tagID = t.tagID where rt.blogID = ?";
 
-    private static final String SELECT_ALL_TAGS = "select * from Tags";
+    private static final String SELECT_ALL_TAGS = "select * from ebdb.tags";
 
     //Post_Tag_SQL
-    private static final String DELETE_FROM_BLOGS_TAGS = "delete from Blogs_Tags where TagID = ?";
+    private static final String DELETE_FROM_BLOGS_TAGS = "delete from ebdb.blogs_tags where tagID = ?";
 
-    private static final String DELETE_FROM_REQUESTS_TAGS = "delete from Requests_Tags where TagID = ?";
+    private static final String DELETE_FROM_REQUESTS_TAGS = "delete from ebdb.requests_tags where tagID = ?";
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)

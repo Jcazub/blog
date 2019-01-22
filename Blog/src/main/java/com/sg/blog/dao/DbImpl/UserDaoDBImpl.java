@@ -18,8 +18,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,39 +30,41 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Jesse
  */
+@Repository
 public class UserDaoDBImpl implements UserDao {
 
     JdbcTemplate jdbcTemplate;
     RoleDao roleDao;
 
-    public UserDaoDBImpl(JdbcTemplate jdbcTemplate, RoleDao roleDao) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Autowired
+    public UserDaoDBImpl(DataSource dataSource, RoleDao roleDao) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.roleDao = roleDao;
     }
 
     //User SQL
-    private static final String INSERT_USER = "insert into Users (firstName, lastName, email, userName, password, enabled) values (?,?,?,?,?,?)";
+    private static final String INSERT_USER = "insert into ebdb.users (firstName, lastName, email, userName, password, enabled) values (?,?,?,?,?,?)";
 
-    private static final String DELETE_USER = "delete from Users where UserID = ?";
+    private static final String DELETE_USER = "delete from ebdb.users where userID = ?";
 
-    private static final String EDIT_USER = "update Users set firstName = ?, lastName = ?, email = ?, userName = ?, password = ?, enabled = ? where UserID = ?";
+    private static final String EDIT_USER = "update ebdb.users set firstName = ?, lastName = ?, email = ?, userName = ?, password = ?, enabled = ? where userID = ?";
 
-    private static final String SELECT_USER = "select * from Users where UserID = ?";
+    private static final String SELECT_USER = "select * from ebdb.users where userID = ?";
     
-    private static final String SELECT_USER_BY_NAME = "select * from Users where userName = ?";
+    private static final String SELECT_USER_BY_NAME = "select * from ebdb.users where userName = ?";
     
-    private static final String SELECT_USER_BY_STATIC_PAGE = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join StaticPages s on u.userID = s.userID where s.staticPageID = ?";
+    private static final String SELECT_USER_BY_STATIC_PAGE = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from ebdb.users u join ebdb.staticPages s on u.userID = s.userID where s.staticPageID = ?";
     
-    private static final String SELECT_USER_BY_BLOG = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join Blogs b on u.userID = b.userID where b.BlogID = ?";;
+    private static final String SELECT_USER_BY_BLOG = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from ebdb.users u join ebdb.blogs b on u.userID = b.userID where b.blogID = ?";;
     
-    private static final String SELECT_USER_BY_REQUEST = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from Users u join Requests r on u.userID = r.userID where r.BlogID = ?";;
+    private static final String SELECT_USER_BY_REQUEST = "select u.userID, u.firstName, u.lastName, u.email, u.userName, u.password, u.enabled from ebdb.users u join ebdb.requests r on u.userID = r.userID where r.blogID = ?";;
 
-    private static final String SELECT_ALL_USERS = "select * from Users";
+    private static final String SELECT_ALL_USERS = "select * from ebdb.users";
 
     //Users_Roles SQL
-    private static final String INSERT_INTO_USERS_ROLES = "insert into Users_Roles values (?,?)";
+    private static final String INSERT_INTO_USERS_ROLES = "insert into ebdb.users_roles values (?,?)";
 
-    private static final String DELETE_FROM_USERS_ROLES = "delete from Users_Roles where userID = ?";
+    private static final String DELETE_FROM_USERS_ROLES = "delete from ebdb.users_roles where userID = ?";
 
     //User Helper Methods
     private User findRolesForUser(User user) {

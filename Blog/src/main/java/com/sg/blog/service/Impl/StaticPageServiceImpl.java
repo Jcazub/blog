@@ -5,23 +5,24 @@
  */
 package com.sg.blog.service.Impl;
 
-import com.sg.blog.dao.RoleDao;
 import com.sg.blog.dao.StaticPageDao;
 import com.sg.blog.model.StaticPage;
-import com.sg.blog.service.Service;
 import com.sg.blog.service.StaticPageService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jesse
  */
-public class StaticPageServiceImpl extends Service implements StaticPageService {
+@Service
+public class StaticPageServiceImpl implements StaticPageService {
     
     StaticPageDao staticPageDao;
 
-    public StaticPageServiceImpl(StaticPageDao staticPageDao, RoleDao roleDao) {
-        super(roleDao);
+    @Autowired
+    public StaticPageServiceImpl(StaticPageDao staticPageDao) {
         this.staticPageDao = staticPageDao;
     }
 

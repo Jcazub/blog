@@ -6,25 +6,25 @@
 package com.sg.blog.service.Impl;
 
 import com.sg.blog.dao.CategoryDao;
-import com.sg.blog.dao.RoleDao;
 import com.sg.blog.model.Category;
 import com.sg.blog.model.SearchTerm;
-import com.sg.blog.model.User;
 import com.sg.blog.service.CategoryService;
-import com.sg.blog.service.Service;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jesse
  */
-public class CategoryServiceImpl extends Service implements CategoryService {
+@Service
+public class CategoryServiceImpl implements CategoryService {
     
     CategoryDao categoryDao;
 
-    public CategoryServiceImpl(CategoryDao categoryDao, RoleDao roleDao) {
-        super(roleDao);
+    @Autowired
+    public CategoryServiceImpl(CategoryDao categoryDao) {
         this.categoryDao = categoryDao;
     }
 

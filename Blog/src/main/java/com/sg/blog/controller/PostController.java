@@ -25,15 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,7 +51,7 @@ public class PostController {
     private StaticPageService staticPageService;
     private RequestTypeService requestTypeService;
 
-    @Inject
+    @Autowired
     public PostController(BlogService blogService, CategoryService categoryService, TagService tagService,
             UserService userService, RequestService requestService, StaticPageService staticPageService, RequestTypeService requestTypeService) {
         this.blogService = blogService;
@@ -72,7 +71,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
-    public String addPost(HttpServletRequest request, Principal principal, @RequestParam("picture") MultipartFile picture) {
+    public String addPost(HttpServletRequest request, Principal principal/*, @RequestParam("picture") MultipartFile picture*/) {
 
         //create new Blog
         Blog b = new Blog();
@@ -123,7 +122,7 @@ public class PostController {
 
         blogService.addBlog(b);
         
-        addPicture(picture, request, b);
+        //addPicture(picture, request, b);
 
         return "redirect:/";
     }

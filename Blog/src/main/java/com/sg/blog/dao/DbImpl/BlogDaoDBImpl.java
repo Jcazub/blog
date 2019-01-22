@@ -17,8 +17,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Al Rahman
  */
+@Repository
 public class BlogDaoDBImpl implements BlogDao {
 
     JdbcTemplate jdbcTemplate;
@@ -33,28 +37,29 @@ public class BlogDaoDBImpl implements BlogDao {
     CategoryDao categoryDao;
     TagDao tagDao;
 
-    public BlogDaoDBImpl(JdbcTemplate jdbcTemplate, UserDao userDao, CategoryDao categoryDao, TagDao tagDao) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Autowired
+    public BlogDaoDBImpl(DataSource dataSource, UserDao userDao, CategoryDao categoryDao, TagDao tagDao) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.userDao = userDao;
         this.categoryDao = categoryDao;
         this.tagDao = tagDao;
     }
     
     //Blog SQL
-    private static final String INSERT_BLOG = "insert into Blogs (userID, categoryID, creationDate, publishDate, approvedDate, isApproved, title, content, expirationDate) values (?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT_BLOG = "insert into ebdb.blogs (userID, categoryID, creationDate, publishDate, approvedDate, isApproved, title, content, expirationDate) values (?,?,?,?,?,?,?,?,?)";
     
-    private static final String DELETE_BLOG = "delete from Blogs where BlogID = ?";
+    private static final String DELETE_BLOG = "delete from ebdb.blogs where blogID = ?";
     
-    private static final String EDIT_BLOG = "update Blogs set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, isApproved = ?, title = ?, content = ?, expirationDate = ? where BlogID = ?";
+    private static final String EDIT_BLOG = "update ebdb.blogs set userID = ?, categoryID = ?, creationDate = ?, publishDate = ?, approvedDate = ?, isApproved = ?, title = ?, content = ?, expirationDate = ? where blogID = ?";
     
-    private static final String SELECT_BLOG = "select * from Blogs where BlogID = ?";
+    private static final String SELECT_BLOG = "select * from ebdb.blogs where blogID = ?";
     
-    private static final String SELECT_ALL_BLOGS = "select * from Blogs ORDER BY publishDate ASC";
+    private static final String SELECT_ALL_BLOGS = "select * from ebdb.blogs ORDER BY publishDate ASC";
     
     //Blog_Tags SQL
-    private static final String INSERT_INTO_BLOGS_TAGS = "insert into Blogs_Tags (BlogID, TagID) values (?,?)";
+    private static final String INSERT_INTO_BLOGS_TAGS = "insert into ebdb.blogs_tags (blogID, tagID) values (?,?)";
     
-    private static final String DELETE_FROM_BLOGS_TAGS = "delete from Blogs_Tags where BlogID = ?";
+    private static final String DELETE_FROM_BLOGS_TAGS = "delete from ebdb.blogs_tags where blogID = ?";
     
     //Blog Helper Methods
     private Blog getMembersForBlog(Blog blog) {

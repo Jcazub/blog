@@ -3,9 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-              xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aws-context="http://www.springframework.org/schema/cloud/aws/context"
+       xmlns:aws-jdbc="http://www.springframework.org/schema/cloud/aws/jdbc"       
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/cloud/aws/context
+                           http://www.springframework.org/schema/cloud/spring-cloud-aws-context.xsd
+                           http://www.springframework.org/schema/cloud/aws/jdbc
+                           http://www.springframework.org/schema/cloud/spring-cloud-aws-jdbc.xsd
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd
                            http://www.springframework.org/schema/tx 
@@ -13,34 +19,50 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"> 
-
-    <!-- Bean definitions go here -->
-    <tx:annotation-driven/>
-
-    <context:component-scan base-package="com.sg.blog" />
-    <bean id="dataSource"
-          class="org.apache.commons.dbcp2.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url"
-                  value="jdbc:mysql://localhost:3306/CodeKages_Database"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
-        <property name="initialSize" value="5"/>
-        <property name="maxTotal" value="10"/>
-    </bean>
     
-    <bean id="transactionManager"
-      class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <!-- Spring Cloud AWS Configuration -->
+<!--    <aws-context:context-credentials>
+        <aws-context:instance-profile-credentials/>
+    </aws-context:context-credentials>
+    
+    
+    <aws-context:context-region region="${ec2-region}"/>
+    
+    <aws-context:context-instance-data />
+    
+    <aws-jdbc:data-source
+        db-instance-identifier="${dbinstance}"
+        password="${dbpassword}">
+    </aws-jdbc:data-source>-->
+    
+<!--     Bean definitions go here -->
+        <tx:annotation-driven/>
+
+        <context:component-scan base-package="com.sg.blog" />
+        
+        <bean id="dataSource"
+              class="org.apache.commons.dbcp2.BasicDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+            <property name="url"
+                      value="jdbc:mysql://localhost:3306"/>
+            <property name="username" value="root"/>
+            <property name="password" value="root"/>
+            <property name="initialSize" value="5"/>
+            <property name="maxTotal" value="10"/>
+        </bean>
+      
+<!--    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean id="jdbcTemplate"
           class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
     
     <!-- DAO Beans -->
-    <bean id="categoryDao"
+<!--    <bean id="categoryDao"
           class="com.sg.blog.dao.DbImpl.CategoryDaoDBImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
@@ -89,17 +111,15 @@
         <constructor-arg ref="requestTypeDao"/>
     </bean>
     
-    <!--Service Layer Beans -->
+        Service Layer Beans 
     <bean id="categoryService"
           class="com.sg.blog.service.Impl.CategoryServiceImpl">
         <constructor-arg ref="categoryDao"/>
-        <constructor-arg ref="roleDao"/>
     </bean>
     
     <bean id="tagService"
           class="com.sg.blog.service.Impl.TagServiceImpl">
         <constructor-arg ref="tagDao"/>
-        <constructor-arg ref="roleDao"/>
     </bean>
     
     <bean id="roleService"
@@ -110,31 +130,26 @@
     <bean id="requestTypeService"
           class="com.sg.blog.service.Impl.RequestTypeServiceImpl">
         <constructor-arg ref="requestTypeDao"/>
-        <constructor-arg ref="roleDao"/>
     </bean>
     
     <bean id="userServiceimpl"
           class="com.sg.blog.service.Impl.UserServiceImpl">
         <constructor-arg ref="userDao"/>
-        <constructor-arg ref="roleDao"/>
     </bean>
     
     <bean id="staticPageService"
           class="com.sg.blog.service.Impl.StaticPageServiceImpl">
         <constructor-arg ref="staticPageDao"/>
-        <constructor-arg ref="roleDao"/>
     </bean>
     
     <bean id="blogService"
           class="com.sg.blog.service.Impl.BlogServiceImpl">
         <constructor-arg ref="blogDao"/>
-        <constructor-arg ref="roleDao"/>
     </bean>
     
     <bean id="requestService"
           class="com.sg.blog.service.Impl.RequestServiceImpl">
         <constructor-arg ref="requestDao"/>
-        <constructor-arg ref="roleDao"/>
-    </bean>
+    </bean>-->
     
 </beans>

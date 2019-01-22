@@ -5,24 +5,24 @@
  */
 package com.sg.blog.service.Impl;
 
-import com.sg.blog.dao.RoleDao;
 import com.sg.blog.dao.TagDao;
 import com.sg.blog.model.Tag;
-import com.sg.blog.model.User;
-import com.sg.blog.service.Service;
 import com.sg.blog.service.TagService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jesse
  */
-public class TagServiceImpl extends Service implements TagService {
+@Service
+public class TagServiceImpl implements TagService {
 
     TagDao tagDao;
 
-    public TagServiceImpl(TagDao tagDao, RoleDao roleDao) {
-        super(roleDao);
+    @Autowired
+    public TagServiceImpl(TagDao tagDao) {
         this.tagDao = tagDao;
     }
 

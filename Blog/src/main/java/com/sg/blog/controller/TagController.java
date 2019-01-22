@@ -6,7 +6,7 @@
 package com.sg.blog.controller;
 
 import com.sg.blog.service.TagService;
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -16,7 +16,7 @@ public class TagController {
     
     TagService tagService;
     
-    @Inject
+    @Autowired
     public TagController(TagService tagService) {
         this.tagService = tagService;
     }

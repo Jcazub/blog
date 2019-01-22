@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,7 +42,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
 
-    private UserDao userDao;
     private UserService userService;
     private CategoryService categoryService;
     private TagService tagService;
@@ -50,9 +49,10 @@ public class UserController {
     private RoleService roleService;
     private StaticPageService staticPageService;
     private BlogService blogService;
+    private PasswordEncoder encoder;
 
-    @Inject
-    public UserController(UserService userService, CategoryService categoryService, TagService tagService, RequestService requestService, RoleService roleService, StaticPageService staticPageService, BlogService blogService) {
+    @Autowired
+    public UserController(UserService userService, CategoryService categoryService, TagService tagService, RequestService requestService, RoleService roleService, StaticPageService staticPageService, BlogService blogService, PasswordEncoder encoder) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.tagService = tagService;
@@ -60,6 +60,7 @@ public class UserController {
         this.roleService = roleService;
         this.staticPageService = staticPageService;
         this.blogService = blogService;
+        this.encoder = encoder;
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -159,7 +160,7 @@ public class UserController {
 
         String password = request.getParameter("password");
         if (password != null || !"".equals(password)) {
-            u.setPassword(password);
+            u.setPassword(encoder.encode(password));
         }
 
 //        u.setEnabled(true);

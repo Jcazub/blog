@@ -27,7 +27,7 @@
 
     <body>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NAV BAR--> 
-<nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -46,8 +46,8 @@
                             <ul class="dropdown-menu">
                                 <c:forEach var="currentPage" items="${pages}">
                                     <li><a href="${pageContext.request.contextPath}/page?pageID=${currentPage.staticID}">${currentPage.title}</a></li>  
-                                </c:forEach>
-                                
+                                    </c:forEach>
+
                             </ul>
                         </li>
                     </ul>
@@ -94,7 +94,7 @@
         <%--<sec:authorize access="hasRole('ROLE_USER')">--%>
 
         <%--</sec:authorize>--%>
-        
+
         <%--<jsp:include page="navbar.jsp"/>--%>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NAV END -->
 
@@ -106,7 +106,7 @@
                   role="form" 
                   method="post" 
                   action="addUser">
-                
+
                 <div class="form-group">
                     <label for="firstname" class="col-md-4 control-label">First Name:</label>
                     <div class="col-md-4">
@@ -118,7 +118,7 @@
                                required/>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="lastname" class="col-md-4 control-label">Last Name:</label>
                     <div class="col-md-4">
@@ -130,7 +130,7 @@
                                required/>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="email" class="col-md-4 control-label">Email:</label>
                     <div class="col-md-4">
@@ -142,7 +142,7 @@
                                required/>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="username" class="col-md-4 control-label">Username:</label>
                     <div class="col-md-4">
@@ -154,7 +154,7 @@
                                required/>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password" class="col-md-4 control-label">Password:</label>
                     <div class="col-md-4">
@@ -166,7 +166,7 @@
                                required/>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" 
@@ -181,9 +181,9 @@
 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FOOTER-->
         <div class="w3-container">
-        <footer class="container-fluid text-center main-footer"> 
-            <p>	&copy; codeKages </p>
-        </footer>
+            <footer class="container-fluid text-center main-footer"> 
+                <p>	&copy; codeKages </p>
+            </footer>
         </div>
 
         <!-- Placed at the end of the document so the pages load faster -->

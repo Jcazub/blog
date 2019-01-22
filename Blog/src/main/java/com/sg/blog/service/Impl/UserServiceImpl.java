@@ -5,25 +5,26 @@
  */
 package com.sg.blog.service.Impl;
 
-import com.sg.blog.dao.RoleDao;
 import com.sg.blog.dao.UserDao;
 import com.sg.blog.model.SearchTerm;
 import com.sg.blog.model.User;
-import com.sg.blog.service.Service;
 import com.sg.blog.service.UserService;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jesse
  */
-public class UserServiceImpl extends Service implements UserService {
+@Service
+public class UserServiceImpl implements UserService {
 
     UserDao userDao;
 
-    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
-        super(roleDao);
+    @Autowired
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 

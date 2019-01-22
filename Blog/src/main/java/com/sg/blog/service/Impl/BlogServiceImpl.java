@@ -6,25 +6,25 @@
 package com.sg.blog.service.Impl;
 
 import com.sg.blog.dao.BlogDao;
-import com.sg.blog.dao.RoleDao;
 import com.sg.blog.model.Blog;
 import com.sg.blog.model.SearchTerm;
-import com.sg.blog.model.User;
 import com.sg.blog.service.BlogService;
-import com.sg.blog.service.Service;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jesse
  */
-public class BlogServiceImpl extends Service implements BlogService {
+@Service
+public class BlogServiceImpl implements BlogService {
 
     BlogDao blogDao;
 
-    public BlogServiceImpl(BlogDao blogDao, RoleDao roleDao) {
-        super(roleDao);
+    @Autowired
+    public BlogServiceImpl(BlogDao blogDao) {
         this.blogDao = blogDao;
     }
 

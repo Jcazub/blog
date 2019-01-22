@@ -15,8 +15,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,28 +27,30 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Jesse
  */
+@Repository
 public class CategoryDaoDBImpl implements CategoryDao {
 
     JdbcTemplate jdbcTemplate;
 
-    public CategoryDaoDBImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Autowired
+    public CategoryDaoDBImpl(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     //Category SQL
-    private static final String INSERT_CATEGORY = "insert into Categories (categoryName, description) values (?,?)";
+    private static final String INSERT_CATEGORY = "insert into ebdb.categories (categoryName, description) values (?,?)";
 
-    private static final String DELETE_CATEGORY = "delete from Categories where CategoryID = ?";
+    private static final String DELETE_CATEGORY = "delete from ebdb.categories where categoryID = ?";
 
-    private static final String EDIT_CATEGORY = "update Categories set categoryName = ?, description = ? where CategoryID = ?";
+    private static final String EDIT_CATEGORY = "update ebdb.categories set categoryName = ?, description = ? where categoryID = ?";
 
-    private static final String SELECT_CATEGORY = "select * from Categories where CategoryID = ?";
+    private static final String SELECT_CATEGORY = "select * from ebdb.categories where categoryID = ?";
     
-    private static final String SELECT_CATEGORY_FOR_BLOG = "select c.categoryID, c.categoryName, c.description from Categories c join Blogs b on b.categoryID = c.categoryID where b.blogID = ?";
+    private static final String SELECT_CATEGORY_FOR_BLOG = "select c.categoryID, c.categoryName, c.description from ebdb.categories c join ebdb.blogs b on b.categoryID = c.categoryID where b.blogID = ?";
     
-    private static final String SELECT_CATEGORY_FOR_REQUEST = "select c.categoryID, c.categoryName, c.description from Categories c join Requests r on r.categoryID = c.categoryID where r.blogID = ?";
+    private static final String SELECT_CATEGORY_FOR_REQUEST = "select c.categoryID, c.categoryName, c.description from ebdb.categories c join ebdb.requests r on r.categoryID = c.categoryID where r.blogID = ?";
 
-    private static final String SELECT_ALL_CATEGORIES = "select * from Categories";
+    private static final String SELECT_ALL_CATEGORIES = "select * from ebdb.categories";
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)

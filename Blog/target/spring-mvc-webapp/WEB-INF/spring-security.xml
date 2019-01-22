@@ -16,6 +16,7 @@
     <http pattern="/login" security="none" />
     <http pattern="/signup" security="none" />
     <http pattern="/error" security="none" />
+    <http pattern="/conn" security="none" />
     <http pattern="/css/**" security="none" />
     <http pattern="/js/**" security="none" />
     <http pattern="/img/**" security="none" />
@@ -28,7 +29,7 @@
        
         <intercept-url pattern="/" 
                        access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <intercept-url pattern="/index.jsp" 
+        <intercept-url pattern="/index" 
                        access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/post" 
                        access="IS_AUTHENTICATED_ANONYMOUSLY" />
@@ -37,7 +38,7 @@
         <intercept-url pattern="/addUser" 
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         
-        <!--Post related -->
+<!--        Post related -->
         <intercept-url pattern="/createPost" 
                        access="ROLE_USER" />
         <intercept-url pattern="/deletePost" 
@@ -56,9 +57,9 @@
             <jdbc-user-service id="userService"
                                data-source-ref="dataSource"
                                users-by-username-query=
- "select username, password, enabled from users where username=?"
+ "select userName, password, enabled from ebdb.users where userName=?"
                                authorities-by-username-query=
- "select u.username, r.roletype from users u join users_roles ur on u.userID = ur.userID join roles r on r.roleID = ur.roleID where u.username=?" />
+ "select u.userName, r.roleType from ebdb.users u join ebdb.users_roles ur on u.userID = ur.userID join ebdb.roles r on r.roleID = ur.roleID where u.userName=?" />
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

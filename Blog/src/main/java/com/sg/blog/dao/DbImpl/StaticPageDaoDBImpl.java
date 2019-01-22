@@ -11,7 +11,10 @@ import com.sg.blog.dao.UserDao;
 import com.sg.blog.model.StaticPage;
 import com.sg.blog.model.User;
 import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,26 +22,28 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Jesse
  */
+@Repository
 public class StaticPageDaoDBImpl implements StaticPageDao {
     
     JdbcTemplate jdbcTemplate;
     UserDao userDao;
 
-    public StaticPageDaoDBImpl(JdbcTemplate jdbcTemplate, UserDao userDao) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Autowired
+    public StaticPageDaoDBImpl(DataSource dataSource, UserDao userDao) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.userDao = userDao;
     }
     
     //StaticPage SQL
-    private static final String INSERT_STATIC_PAGE = "insert into StaticPages (userID, title, content, creationDate) values (?,?,?,?)";
+    private static final String INSERT_STATIC_PAGE = "insert into ebdb.staticPages (userID, title, content, creationDate) values (?,?,?,?)";
     
-    private static final String DELETE_STATIC_PAGE = "delete from StaticPages where StaticPageID = ?";
+    private static final String DELETE_STATIC_PAGE = "delete from ebdb.staticPages where staticPageID = ?";
     
-    private static final String EDIT_STATIC_PAGE = "update StaticPages set UserID = ?, title = ?, content = ?, creationDate = ? where StaticPageID = ?";
+    private static final String EDIT_STATIC_PAGE = "update ebdb.staticPages set userID = ?, title = ?, content = ?, creationDate = ? where staticPageID = ?";
     
-    private static final String SELECT_STATIC_PAGE = "select * from StaticPages where StaticPageID = ?";
+    private static final String SELECT_STATIC_PAGE = "select * from ebdb.staticPages where staticPageID = ?";
     
-    private static final String SELECT_ALL_STATIC_PAGES = "select * from StaticPages";
+    private static final String SELECT_ALL_STATIC_PAGES = "select * from ebdb.staticPages";
     
     //Static Page Helper Methods
     private StaticPage getUserForStaticPage(StaticPage page) {

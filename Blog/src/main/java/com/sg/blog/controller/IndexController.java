@@ -13,8 +13,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +31,7 @@ public class IndexController {
     CategoryService categoryService;
     StaticPageService staticPageService;
 
-    @Inject
+    @Autowired
     public IndexController(BlogService blogService, CategoryService categoryService, StaticPageService staticPageService) {
         this.blogService = blogService;
         this.categoryService = categoryService;
@@ -49,6 +49,7 @@ public class IndexController {
         List<Blog> publishedBlogs = allPosts.stream()
                 .filter(b -> (LocalDate.now().isEqual(b.getPublishDate()) || LocalDate.now().isAfter(b.getPublishDate())) && LocalDate.now().isBefore(b.getExpirationDate()) && b.getIsApproved() == true)
                 .collect(Collectors.toList());
+        
         List<Blog> recentBlogs = new ArrayList<>();
         
         //Straight up milestone 1
@@ -81,6 +82,7 @@ public class IndexController {
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("recentPosts", recentBlogs);
         model.addAttribute("pages", staticPageService.getAllStaticPages());
+        
         return "index";
     }
 }

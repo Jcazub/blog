@@ -10,8 +10,11 @@ import com.sg.blog.dao.RequestTypeDao;
 import com.sg.blog.model.Request;
 import com.sg.blog.model.RequestType;
 import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,28 +22,30 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Jesse
  */
+@Repository
 public class RequestTypeDaoDBImpl implements RequestTypeDao {
     
     JdbcTemplate jdbcTemplate;
 
-    public RequestTypeDaoDBImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    @Autowired
+    public RequestTypeDaoDBImpl(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
     
     //Request Type SQL
-    private static final String INSERT_REQUEST_TYPE = "insert into RequestTypes (requestType) values (?)";
+    private static final String INSERT_REQUEST_TYPE = "insert into ebdb.requestTypes (requestType) values (?)";
     
-    private static final String DELETE_REQUEST_TYPE = "delete from RequestTypes where RequestTypeID = ?";
+    private static final String DELETE_REQUEST_TYPE = "delete from ebdb.requestTypes where requestTypeID = ?";
     
-    private static final String EDIT_REQUEST_TYPE = "update RequestTypes set RequestType = ? where RequestTypeID = ?";
+    private static final String EDIT_REQUEST_TYPE = "update ebdb.requestTypes set requestType = ? where requestTypeID = ?";
     
-    private static final String SELECT_REQUEST_TYPE = "select * from RequestTypes where RequestTypeID = ?";
+    private static final String SELECT_REQUEST_TYPE = "select * from ebdb.requestTypes where requestTypeID = ?";
     
-    private static final String SELECT_REQUEST_TYPE_BY_NAME = "select * from RequestTypes where RequestType = ?";
+    private static final String SELECT_REQUEST_TYPE_BY_NAME = "select * from ebdb.requestTypes where requestType = ?";
     
-    private static final String SELECT_REQUEST_TYPE_BY_REQUEST = "select rt.requestTypeID, rt.requestType from RequestTypes rt join Requests re on re.requestTypeID = rt.requestTypeID where re.blogID = ?";
+    private static final String SELECT_REQUEST_TYPE_BY_REQUEST = "select rt.requestTypeID, rt.requestType from ebdb.requestTypes rt join ebdb.requests re on re.requestTypeID = rt.requestTypeID where re.blogID = ?";
     
-    private static final String SELECT_ALL_REQUEST_TYPES = "select * from RequestTypes";
+    private static final String SELECT_ALL_REQUEST_TYPES = "select * from ebdb.requestTypes";
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
